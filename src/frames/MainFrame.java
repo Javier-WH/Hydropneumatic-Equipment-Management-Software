@@ -3,28 +3,40 @@ package frames;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 import net.miginfocom.swing.MigLayout;
 import java.awt.Color;
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.UIManager;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.SystemColor;
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
+import javax.swing.border.MatteBorder;
+import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
+//Frames
+	private RegisterFrame registerFrame  = new RegisterFrame();
+	
 
+	//Functrions
+	
+	//close all frames
+	private void closeAllFrames() {
+		
+		registerFrame.setVisible(false);
+		
+	}
 
 	public MainFrame() {
+		getContentPane().setBackground(SystemColor.text);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/img/icono.png")));
 		setTitle("Hydropneumatic Equipment Management Software");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -33,78 +45,93 @@ public class MainFrame extends JFrame {
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelMenu = new JPanel();
-		panelMenu.setBackground(SystemColor.menu);
+		panelMenu.setBackground(SystemColor.text);
 		getContentPane().add(panelMenu, BorderLayout.WEST);
 		panelMenu.setLayout(new MigLayout("", "[236.00]", "[][][][][][][][]"));
 		
-		JButton btnNewButton = new JButton("Registrar Equipo");
-		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setFont(new Font("Verdana", Font.BOLD, 16));
-		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton.setIcon(new ImageIcon(MainFrame.class.getResource("/img/add.png")));
-		btnNewButton.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnNewButton, "cell 0 0,growx");
+		JButton btnRegister = new JButton("Registrar Equipo");
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeAllFrames();
+				registerFrame.setLocationRelativeTo(getContentPane());
+				registerFrame.setVisible(true);
+			}
+		});
+	
+			
+		btnRegister.setForeground(new Color(255, 255, 255));
+		btnRegister.setFont(new Font("Verdana", Font.BOLD, 16));
+		btnRegister.setHorizontalAlignment(SwingConstants.LEFT);
+		btnRegister.setIcon(new ImageIcon(MainFrame.class.getResource("/img/add.png")));
+		btnRegister.setBackground(new Color(0, 102, 204));
+		panelMenu.add(btnRegister, "cell 0 0,growx");
 		
-		JButton btnNewButton_1 = new JButton("Mantenimiento");
-		btnNewButton_1.setIcon(new ImageIcon(MainFrame.class.getResource("/img/wrench.png")));
-		btnNewButton_1.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton_1.setForeground(Color.WHITE);
-		btnNewButton_1.setFont(new Font("Verdana", Font.BOLD, 16));
-		btnNewButton_1.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnNewButton_1, "cell 0 1,growx");
+		JButton btnMaintenance = new JButton("Mantenimiento");
+		btnMaintenance.setIcon(new ImageIcon(MainFrame.class.getResource("/img/wrench.png")));
+		btnMaintenance.setHorizontalAlignment(SwingConstants.LEFT);
+		btnMaintenance.setForeground(Color.WHITE);
+		btnMaintenance.setFont(new Font("Verdana", Font.BOLD, 16));
+		btnMaintenance.setBackground(new Color(0, 102, 204));
+		panelMenu.add(btnMaintenance, "cell 0 1,growx");
 		
-		JButton btnNewButton_1_1 = new JButton("Equipos registrados");
-		btnNewButton_1_1.setIcon(new ImageIcon(MainFrame.class.getResource("/img/list.png")));
-		btnNewButton_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton_1_1.setForeground(Color.WHITE);
-		btnNewButton_1_1.setFont(new Font("Verdana", Font.BOLD, 16));
-		btnNewButton_1_1.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnNewButton_1_1, "cell 0 2,grow");
+		JButton btnList = new JButton("Equipos registrados");
+		btnList.setIcon(new ImageIcon(MainFrame.class.getResource("/img/list.png")));
+		btnList.setHorizontalAlignment(SwingConstants.LEFT);
+		btnList.setForeground(Color.WHITE);
+		btnList.setFont(new Font("Verdana", Font.BOLD, 16));
+		btnList.setBackground(new Color(0, 102, 204));
+		panelMenu.add(btnList, "cell 0 2,grow");
 		
-		JButton btnNewButton_1_1_2 = new JButton("Cronograma");
-		btnNewButton_1_1_2.setIcon(new ImageIcon(MainFrame.class.getResource("/img/calendar.png")));
-		btnNewButton_1_1_2.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton_1_1_2.setForeground(Color.WHITE);
-		btnNewButton_1_1_2.setFont(new Font("Verdana", Font.BOLD, 16));
-		btnNewButton_1_1_2.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnNewButton_1_1_2, "cell 0 3,grow");
+		JButton btnCalendar = new JButton("Cronograma");
+		btnCalendar.setIcon(new ImageIcon(MainFrame.class.getResource("/img/calendar.png")));
+		btnCalendar.setHorizontalAlignment(SwingConstants.LEFT);
+		btnCalendar.setForeground(Color.WHITE);
+		btnCalendar.setFont(new Font("Verdana", Font.BOLD, 16));
+		btnCalendar.setBackground(new Color(0, 102, 204));
+		panelMenu.add(btnCalendar, "cell 0 3,grow");
 		
-		JButton btnNewButton_1_1_1_1 = new JButton("Configuración");
-		btnNewButton_1_1_1_1.setIcon(new ImageIcon(MainFrame.class.getResource("/img/options.png")));
-		btnNewButton_1_1_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton_1_1_1_1.setForeground(Color.WHITE);
-		btnNewButton_1_1_1_1.setFont(new Font("Verdana", Font.BOLD, 16));
-		btnNewButton_1_1_1_1.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnNewButton_1_1_1_1, "cell 0 4,grow");
+		JButton btnConfig = new JButton("Configuración");
+		btnConfig.setIcon(new ImageIcon(MainFrame.class.getResource("/img/options.png")));
+		btnConfig.setHorizontalAlignment(SwingConstants.LEFT);
+		btnConfig.setForeground(Color.WHITE);
+		btnConfig.setFont(new Font("Verdana", Font.BOLD, 16));
+		btnConfig.setBackground(new Color(0, 102, 204));
+		panelMenu.add(btnConfig, "cell 0 4,grow");
 		
-		JButton btnNewButton_1_1_1_2 = new JButton("Reportes");
-		btnNewButton_1_1_1_2.setIcon(new ImageIcon(MainFrame.class.getResource("/img/reports.png")));
-		btnNewButton_1_1_1_2.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton_1_1_1_2.setForeground(Color.WHITE);
-		btnNewButton_1_1_1_2.setFont(new Font("Verdana", Font.BOLD, 16));
-		btnNewButton_1_1_1_2.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnNewButton_1_1_1_2, "cell 0 5,grow");
+		JButton btnReport = new JButton("Reportes");
+		btnReport.setIcon(new ImageIcon(MainFrame.class.getResource("/img/reports.png")));
+		btnReport.setHorizontalAlignment(SwingConstants.LEFT);
+		btnReport.setForeground(Color.WHITE);
+		btnReport.setFont(new Font("Verdana", Font.BOLD, 16));
+		btnReport.setBackground(new Color(0, 102, 204));
+		panelMenu.add(btnReport, "cell 0 5,grow");
 		
-		JButton btnNewButton_1_1_1 = new JButton("Salir");
-		btnNewButton_1_1_1.setIcon(new ImageIcon(MainFrame.class.getResource("/img/exit.png")));
-		btnNewButton_1_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton_1_1_1.setForeground(Color.WHITE);
-		btnNewButton_1_1_1.setFont(new Font("Verdana", Font.BOLD, 16));
-		btnNewButton_1_1_1.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnNewButton_1_1_1, "cell 0 6,grow");
+		JButton btnExit = new JButton("Salir");
+		btnExit.setIcon(new ImageIcon(MainFrame.class.getResource("/img/exit.png")));
+		btnExit.setHorizontalAlignment(SwingConstants.LEFT);
+		btnExit.setForeground(Color.WHITE);
+		btnExit.setFont(new Font("Verdana", Font.BOLD, 16));
+		btnExit.setBackground(new Color(0, 102, 204));
+		panelMenu.add(btnExit, "cell 0 6,grow");
 		
 		JPanel panelWarning = new JPanel();
-		panelWarning.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panelWarning.setBackground(SystemColor.text);
+		panelWarning.setForeground(SystemColor.textHighlight);
+		panelWarning.setBorder(new TitledBorder(new MatteBorder(0, 2, 0, 0, (Color) new Color(0, 120, 215)), "Alertas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 120, 215)));
 		getContentPane().add(panelWarning, BorderLayout.CENTER);
 		
 		JPanel panelMessage = new JPanel();
-		panelMessage.setBackground(SystemColor.menu);
+		panelMessage.setBackground(SystemColor.text);
 		getContentPane().add(panelMessage, BorderLayout.NORTH);
 		panelMessage.setLayout(new MigLayout("", "[119.00px][381.00]", "[41.00px]"));
 		
 		JPanel panelEstado = new JPanel();
-		panelEstado.setBackground(SystemColor.menu);
+		panelEstado.setBackground(SystemColor.text);
 		getContentPane().add(panelEstado, BorderLayout.SOUTH);
 		panelEstado.setLayout(new MigLayout("", "[]", "[42.00]"));
 	}
+	
+
+	
+	
 }
