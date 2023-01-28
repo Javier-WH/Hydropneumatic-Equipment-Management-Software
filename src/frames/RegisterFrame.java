@@ -19,6 +19,8 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
+import sql.RegisterPump;
+
 import javax.swing.UIManager;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,6 +30,9 @@ import java.awt.Image;
 
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import actors.WaterPump;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Cursor;
@@ -58,9 +63,9 @@ public class RegisterFrame extends JDialog {
 	private JTextField textImpulsor;
 	private JTextField textMechanicSeal;
 	private JTextField textBearing;
-	
+
 	///
-	
+	String filePath = null;
 	private JLabel lblPhoto = new JLabel("");
 
 	public RegisterFrame() {
@@ -197,15 +202,13 @@ public class RegisterFrame extends JDialog {
 			}
 			{
 				lblPhoto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		
+
 				lblPhoto.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						
-					changePicture(lblPhoto);
-						
-						
-						
+
+						changePicture(lblPhoto);
+
 					}
 				});
 				lblPhoto.setBounds(34, 39, 232, 252);
@@ -490,6 +493,47 @@ public class RegisterFrame extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			{
 				JButton btnAccept = new JButton("Aceptar");
+				btnAccept.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+
+						if (areDataComplete()) {
+							WaterPump pump = new WaterPump();
+							pump.setCode(textCode.getText());
+							pump.setName(textName.getText());
+							pump.setArea(textArea.getText());
+							pump.setMark(textMark.getText());
+							pump.setModel(textModel.getText());
+							pump.setFunction(textFunction.getText());
+							pump.setYear(textYear.getText());
+							pump.setProtectionGrade(textProtectionGrade.getText());
+							pump.setIsolationClass(textIsolation.getText());
+							pump.setPotencty(textPotency.getText());
+							pump.setSuccionPipe(textSuccionPipe.getText());
+							pump.setDischagePipe(textDischargePipe.getText());
+							pump.setFlowsTo(textFlowsTo.getText());
+							pump.setMaxHeight(textMaxHeigth.getText());
+							pump.setRotation(textRotation.getText());
+							pump.setSuccionPresureTo(textSuccionPresureTo.getText());
+							pump.setWorkingTempTo(textWorkingTempTo.getText());
+							pump.setMotor(textMotor.getText());
+							pump.setOthers(textOthers.getText());
+							pump.setPictureAddress(filePath);
+							
+							boolean isRegistered = RegisterPump.register(pump);
+							
+							if(isRegistered) {
+								JOptionPane.showMessageDialog(contentPanel, "Se ha registrado correctamente el equipo", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+								cleanAllFields();
+							}else {
+								JOptionPane.showMessageDialog(contentPanel, "Ocurrió un error al intentar registrar el equipo", "ERROR", JOptionPane.ERROR_MESSAGE);
+							}
+							
+						} else {
+							JOptionPane.showMessageDialog(contentPanel, "Debe llenar todos los campos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+						}
+
+					}
+				});
 				btnAccept.setForeground(SystemColor.text);
 				btnAccept.setBackground(SystemColor.textHighlight);
 				btnAccept.setActionCommand("OK");
@@ -512,34 +556,34 @@ public class RegisterFrame extends JDialog {
 	}
 
 	private void closeWindow() {
-	
-		if(!areAllFieldsClean()) {
-			int opt = JOptionPane.showConfirmDialog(this, "¿Desea descartar los cambios?", "No ha terminado con el registro", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-			
-			if(opt == JOptionPane.YES_OPTION) {
+
+		if (!areAllFieldsClean()) {
+			int opt = JOptionPane.showConfirmDialog(this, "¿Desea descartar los cambios?",
+					"No ha terminado con el registro", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+			if (opt == JOptionPane.YES_OPTION) {
 				putPlaceHolderPicture();
 				cleanAllFields();
 				dispose();
 			}
-		}else {
+		} else {
 			putPlaceHolderPicture();
 			cleanAllFields();
 			dispose();
 		}
-		
+
 	}
 /////////////////////////////
-	
+
 	private void putPlaceHolderPicture() {
-		
+
 		ImageIcon placeHolderIcon = new ImageIcon(new ImageIcon("src/img/WaterPumpPlaceHolder.png").getImage()
 				.getScaledInstance(lblPhoto.getWidth(), lblPhoto.getHeight(), Image.SCALE_SMOOTH));
 		lblPhoto.setIcon(placeHolderIcon);
 	}
-	
-	
+
 	/////
-	// revisa que todos los campos esten limpios
+	// revisa que todos los campos esten limpios por si existe informacion por guardar
 	private boolean areAllFieldsClean() {
 		if (!textCode.getText().isEmpty() || !textArea.getText().isEmpty() || !textMark.getText().isEmpty()
 				|| !textFunction.getText().isEmpty() || !textName.getText().isEmpty() || !textModel.getText().isEmpty()
@@ -558,8 +602,28 @@ public class RegisterFrame extends JDialog {
 		return true;
 	}
 ////////////////////////
+
+	//revisa que todos los datos esten completos
+	private boolean areDataComplete() {
+		if (!textCode.getText().isEmpty() && !textArea.getText().isEmpty() && !textMark.getText().isEmpty()
+				&& !textFunction.getText().isEmpty() && !textName.getText().isEmpty() && !textModel.getText().isEmpty()
+				&& !textYear.getText().isEmpty() && !textProtectionGrade.getText().isEmpty()
+				&& !textIsolation.getText().isEmpty() && !textPotency.getText().isEmpty()
+				&& !textSuccionPipe.getText().isEmpty() && !textDischargePipe.getText().isEmpty()
+				&& !textFlowsTo.getText().isEmpty() && !textMaxHeigth.getText().isEmpty()
+				&& !textRotation.getText().isEmpty() && !textSuccionPresureTo.getText().isEmpty()
+				&& !textWorkingTempTo.getText().isEmpty() && !textMotor.getText().isEmpty()
+				&& !textOthers.getText().isEmpty() && !textImpulsor.getText().isEmpty()
+				&& !textMechanicSeal.getText().isEmpty() && !textBearing.getText().isEmpty()) {
+
+			return true;
+		}
+
+		return false;
+	}
 	
-	//limpia todos los campos
+	
+	// limpia todos los campos
 	private void cleanAllFields() {
 
 		textCode.setText("");
@@ -586,25 +650,24 @@ public class RegisterFrame extends JDialog {
 		textBearing.setText("");
 
 	}
-	
-	//////////////
-	
-	private void changePicture(JLabel lblPhoto) {
-		
-	     JFileChooser chooser = new JFileChooser();
-	        chooser.showOpenDialog(contentPanel);
-	        try {
-	            File file = chooser.getSelectedFile();
-	            String filePath = file.getAbsolutePath();
-	            
-	            ImageIcon newPicture = new ImageIcon(new ImageIcon(filePath).getImage().getScaledInstance(lblPhoto.getWidth(), lblPhoto.getHeight(), Image.SCALE_SMOOTH));
-				lblPhoto.setIcon(newPicture);
 
-	        } catch (Exception error) {
-	        	System.out.println(error.getMessage());
-	        }
+	//////////////
+
+	private void changePicture(JLabel lblPhoto) {
+
+		JFileChooser chooser = new JFileChooser();
+		chooser.showOpenDialog(contentPanel);
+		try {
+			File file = chooser.getSelectedFile();
+			filePath = file.getAbsolutePath();
+
+			ImageIcon newPicture = new ImageIcon(new ImageIcon(filePath).getImage()
+					.getScaledInstance(lblPhoto.getWidth(), lblPhoto.getHeight(), Image.SCALE_SMOOTH));
+			lblPhoto.setIcon(newPicture);
+
+		} catch (Exception error) {
+			System.out.println(error.getMessage());
+		}
 	}
 
-	
-	
 }

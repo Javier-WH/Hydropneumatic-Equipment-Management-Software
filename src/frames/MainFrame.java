@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 public class MainFrame extends JFrame {
 //Frames
 	private RegisterFrame registerFrame  = new RegisterFrame();
+	private ListEquipament listFrame = new ListEquipament();
 	
 
 	//Functrions
@@ -31,6 +32,7 @@ public class MainFrame extends JFrame {
 	private void closeAllFrames() {
 		
 		registerFrame.setVisible(false);
+		listFrame.setVisible(false);
 		
 	}
 
@@ -75,6 +77,15 @@ public class MainFrame extends JFrame {
 		panelMenu.add(btnMaintenance, "cell 0 1,growx");
 		
 		JButton btnList = new JButton("Equipos registrados");
+		btnList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				closeAllFrames();
+				listFrame.setLocationRelativeTo(getContentPane());
+				listFrame.loadList();
+				listFrame.setVisible(true);
+			}
+		});
 		btnList.setIcon(new ImageIcon(MainFrame.class.getResource("/img/list.png")));
 		btnList.setHorizontalAlignment(SwingConstants.LEFT);
 		btnList.setForeground(Color.WHITE);
