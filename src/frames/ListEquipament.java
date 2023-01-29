@@ -18,16 +18,20 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Container;
 
 
 
 @SuppressWarnings("serial")
 public class ListEquipament extends JDialog {
-	private int elementsCounter = 0;
-	private JPanel listPanel = new JPanel();
-	private JLabel lblInfo = new JLabel("New label");
+	private static int elementsCounter = 0;
+	private static JPanel listPanel = new JPanel();
+	private static JLabel lblInfo = new JLabel("New label");
+	
+	private static Container container = null;
 	
 	public ListEquipament() {
+		container = getContentPane();
 		getContentPane().setBackground(new Color(255, 255, 255));
 		setResizable(false);
 		setAlwaysOnTop(true);
@@ -54,13 +58,15 @@ public class ListEquipament extends JDialog {
 
 	}
 
-	public void addItem(WaterPump pump) {
+	public static void addItem(WaterPump pump) {
 			
-		listPanel.add(new PumpPanel(pump));
+		listPanel.add(new PumpPanel(pump, container));
 		elementsCounter ++;
 	}
 	
-	public void loadList() {
+
+	
+	public static void loadList() {
 		//limpia la lista antes de agregar nuevos elementos
 		listPanel.removeAll();
 		listPanel.revalidate();
@@ -72,7 +78,6 @@ public class ListEquipament extends JDialog {
 			while (list.next()) {
 				
 				WaterPump pump = new WaterPump();
-				
 				pump.setCode(list.getString("code"));
 				pump.setName(list.getString("name"));
 				pump.setModel(list.getString("model"));

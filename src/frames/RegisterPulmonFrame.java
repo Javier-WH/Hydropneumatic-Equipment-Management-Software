@@ -38,7 +38,7 @@ import java.awt.event.MouseEvent;
 import java.awt.Cursor;
 
 @SuppressWarnings("serial")
-public class RegisterFrame extends JDialog {
+public class RegisterPulmonFrame extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textCode;
@@ -47,29 +47,21 @@ public class RegisterFrame extends JDialog {
 	private JTextField textFunction;
 	private JTextField textName;
 	private JTextField textModel;
+	private JTextField textSerial;
+	private JTextField textTestPresure;
 	private JTextField textYear;
-	private JTextField textProtectionGrade;
-	private JTextField textIsolation;
-	private JTextField textPotency;
-	private JTextField textSuccionPipe;
-	private JTextField textDischargePipe;
-	private JTextField textFlowsTo;
-	private JTextField textMaxHeigth;
-	private JTextField textRotation;
-	private JTextField textSuccionPresureTo;
-	private JTextField textWorkingTempTo;
-	private JTextField textMotor;
-	private JTextField textOthers;
+	private JTextField textServicePresure;
+	private JTextField textCapacity;
 
 	///
-	String filePath = "src/img/WaterPumpPlaceHolder.png";
+	String filePath = "src/img/pulmonPlaceHolder.png";
 	private JLabel lblPhoto = new JLabel("");
 
-	public RegisterFrame() {
+	public RegisterPulmonFrame() {
 		setResizable(false);
 		setAlwaysOnTop(true);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(RegisterFrame.class.getResource("/img/icono.png")));
-		setTitle("Registrar Bomba Hidraulica");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegisterPulmonFrame.class.getResource("/img/icono.png")));
+		setTitle("Registrar Pulmón Hidroneumático");
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		setSize(800, 744);
 		getContentPane().setLayout(new BorderLayout());
@@ -237,10 +229,25 @@ public class RegisterFrame extends JDialog {
 			contentPanel.add(midlePanel);
 			midlePanel.setLayout(new MigLayout("", "[][grow]", "[][][][][][][][][][][][][][]"));
 			{
-				JLabel lblAo = new JLabel("Año:");
+				JLabel lblAo = new JLabel("Serial:");
 				lblAo.setForeground(SystemColor.textHighlight);
 				lblAo.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
 				midlePanel.add(lblAo, "cell 0 0,alignx left,growy");
+			}
+			{
+				textSerial = new JTextField();
+				textSerial.setForeground(SystemColor.textHighlight);
+				textSerial.setFont(new Font("Arial Narrow", Font.BOLD, 18));
+				textSerial.setColumns(10);
+				textSerial.setCaretColor(SystemColor.textHighlight);
+				textSerial.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
+				midlePanel.add(textSerial, "cell 1 0,growx");
+			}
+			{
+				JLabel lblGradoDeProteccin = new JLabel("Año:");
+				lblGradoDeProteccin.setForeground(SystemColor.textHighlight);
+				lblGradoDeProteccin.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
+				midlePanel.add(lblGradoDeProteccin, "cell 0 1,alignx left,aligny center");
 			}
 			{
 				textYear = new JTextField();
@@ -249,181 +256,52 @@ public class RegisterFrame extends JDialog {
 				textYear.setColumns(10);
 				textYear.setCaretColor(SystemColor.textHighlight);
 				textYear.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
-				midlePanel.add(textYear, "cell 1 0,growx");
+				midlePanel.add(textYear, "cell 1 1,growx");
 			}
 			{
-				JLabel lblGradoDeProteccin = new JLabel("Grado de Protección:");
-				lblGradoDeProteccin.setForeground(SystemColor.textHighlight);
-				lblGradoDeProteccin.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
-				midlePanel.add(lblGradoDeProteccin, "cell 0 1,alignx left,aligny center");
-			}
-			{
-				textProtectionGrade = new JTextField();
-				textProtectionGrade.setForeground(SystemColor.textHighlight);
-				textProtectionGrade.setFont(new Font("Arial Narrow", Font.BOLD, 18));
-				textProtectionGrade.setColumns(10);
-				textProtectionGrade.setCaretColor(SystemColor.textHighlight);
-				textProtectionGrade.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
-				midlePanel.add(textProtectionGrade, "cell 1 1,growx");
-			}
-			{
-				JLabel lblAislamientoClase = new JLabel("Aislamiento Clase:");
+				JLabel lblAislamientoClase = new JLabel("Presión de Servicio:");
 				lblAislamientoClase.setForeground(SystemColor.textHighlight);
 				lblAislamientoClase.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
 				midlePanel.add(lblAislamientoClase, "cell 0 2,alignx left,aligny center");
 			}
 			{
-				textIsolation = new JTextField();
-				textIsolation.setForeground(SystemColor.textHighlight);
-				textIsolation.setFont(new Font("Arial Narrow", Font.BOLD, 18));
-				textIsolation.setColumns(10);
-				textIsolation.setCaretColor(SystemColor.textHighlight);
-				textIsolation.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
-				midlePanel.add(textIsolation, "cell 1 2,growx");
+				textServicePresure = new JTextField();
+				textServicePresure.setForeground(SystemColor.textHighlight);
+				textServicePresure.setFont(new Font("Arial Narrow", Font.BOLD, 18));
+				textServicePresure.setColumns(10);
+				textServicePresure.setCaretColor(SystemColor.textHighlight);
+				textServicePresure.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
+				midlePanel.add(textServicePresure, "cell 1 2,growx");
 			}
 			{
-				JLabel lblPotecy = new JLabel("Potencia:");
+				JLabel lblPotecy = new JLabel("Presión de Prueba:");
 				lblPotecy.setForeground(SystemColor.textHighlight);
 				lblPotecy.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
 				midlePanel.add(lblPotecy, "cell 0 3,alignx left,aligny center");
 			}
 			{
-				textPotency = new JTextField();
-				textPotency.setForeground(SystemColor.textHighlight);
-				textPotency.setFont(new Font("Arial Narrow", Font.BOLD, 18));
-				textPotency.setColumns(10);
-				textPotency.setCaretColor(SystemColor.textHighlight);
-				textPotency.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
-				midlePanel.add(textPotency, "cell 1 3,growx");
+				textTestPresure = new JTextField();
+				textTestPresure.setForeground(SystemColor.textHighlight);
+				textTestPresure.setFont(new Font("Arial Narrow", Font.BOLD, 18));
+				textTestPresure.setColumns(10);
+				textTestPresure.setCaretColor(SystemColor.textHighlight);
+				textTestPresure.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
+				midlePanel.add(textTestPresure, "cell 1 3,growx");
 			}
 			{
-				JLabel lblTuberaDeSuccin = new JLabel("Tubería de Succión:");
-				lblTuberaDeSuccin.setForeground(SystemColor.textHighlight);
-				lblTuberaDeSuccin.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
-				midlePanel.add(lblTuberaDeSuccin, "cell 0 4,alignx left,aligny center");
+				JLabel lblCapacity = new JLabel("Capacidad:");
+				lblCapacity.setForeground(SystemColor.textHighlight);
+				lblCapacity.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
+				midlePanel.add(lblCapacity, "cell 0 4,alignx left,aligny center");
 			}
 			{
-				textSuccionPipe = new JTextField();
-				textSuccionPipe.setForeground(SystemColor.textHighlight);
-				textSuccionPipe.setFont(new Font("Arial Narrow", Font.BOLD, 18));
-				textSuccionPipe.setColumns(10);
-				textSuccionPipe.setCaretColor(SystemColor.textHighlight);
-				textSuccionPipe.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
-				midlePanel.add(textSuccionPipe, "cell 1 4,growx");
-			}
-			{
-				JLabel lblCdigo = new JLabel("Tubería de Descarga:");
-				lblCdigo.setForeground(SystemColor.textHighlight);
-				lblCdigo.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
-				midlePanel.add(lblCdigo, "cell 0 5,alignx left,aligny center");
-			}
-			{
-				textDischargePipe = new JTextField();
-				textDischargePipe.setForeground(SystemColor.textHighlight);
-				textDischargePipe.setFont(new Font("Arial Narrow", Font.BOLD, 18));
-				textDischargePipe.setColumns(10);
-				textDischargePipe.setCaretColor(SystemColor.textHighlight);
-				textDischargePipe.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
-				midlePanel.add(textDischargePipe, "cell 1 5,growx");
-			}
-			{
-				JLabel lblCaudalesHasta = new JLabel("Caudales Hasta:");
-				lblCaudalesHasta.setForeground(SystemColor.textHighlight);
-				lblCaudalesHasta.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
-				midlePanel.add(lblCaudalesHasta, "cell 0 6,alignx left,aligny center");
-			}
-			{
-				textFlowsTo = new JTextField();
-				textFlowsTo.setForeground(SystemColor.textHighlight);
-				textFlowsTo.setFont(new Font("Arial Narrow", Font.BOLD, 18));
-				textFlowsTo.setColumns(10);
-				textFlowsTo.setCaretColor(SystemColor.textHighlight);
-				textFlowsTo.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
-				midlePanel.add(textFlowsTo, "cell 1 6,growx");
-			}
-
-			JLabel lblAlturaMax = new JLabel("Altura Max:");
-			lblAlturaMax.setForeground(SystemColor.textHighlight);
-			lblAlturaMax.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
-			midlePanel.add(lblAlturaMax, "cell 0 7,alignx left,aligny center");
-			{
-				textMaxHeigth = new JTextField();
-				textMaxHeigth.setForeground(SystemColor.textHighlight);
-				textMaxHeigth.setFont(new Font("Arial Narrow", Font.BOLD, 18));
-				textMaxHeigth.setColumns(10);
-				textMaxHeigth.setCaretColor(SystemColor.textHighlight);
-				textMaxHeigth.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
-				midlePanel.add(textMaxHeigth, "cell 1 7,growx");
-			}
-
-			JLabel lblRotacin = new JLabel("Rotación:");
-			lblRotacin.setForeground(SystemColor.textHighlight);
-			lblRotacin.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
-			midlePanel.add(lblRotacin, "cell 0 8,alignx left,aligny center");
-			{
-				textRotation = new JTextField();
-				textRotation.setForeground(SystemColor.textHighlight);
-				textRotation.setFont(new Font("Arial Narrow", Font.BOLD, 18));
-				textRotation.setColumns(10);
-				textRotation.setCaretColor(SystemColor.textHighlight);
-				textRotation.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
-				midlePanel.add(textRotation, "cell 1 8,growx");
-			}
-
-			JLabel lblPrecinDeAspiracin = new JLabel("Preción de Aspiración Hasta:");
-			lblPrecinDeAspiracin.setForeground(SystemColor.textHighlight);
-			lblPrecinDeAspiracin.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
-			midlePanel.add(lblPrecinDeAspiracin, "cell 0 9,alignx left,aligny center");
-			{
-				textSuccionPresureTo = new JTextField();
-				textSuccionPresureTo.setForeground(SystemColor.textHighlight);
-				textSuccionPresureTo.setFont(new Font("Arial Narrow", Font.BOLD, 18));
-				textSuccionPresureTo.setColumns(10);
-				textSuccionPresureTo.setCaretColor(SystemColor.textHighlight);
-				textSuccionPresureTo.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
-				midlePanel.add(textSuccionPresureTo, "cell 1 9,growx");
-			}
-
-			JLabel lblCode_3 = new JLabel("Temp de Funcionamiento Hasta:");
-			lblCode_3.setForeground(SystemColor.textHighlight);
-			lblCode_3.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
-			midlePanel.add(lblCode_3, "cell 0 10,alignx left,aligny center");
-			{
-				textWorkingTempTo = new JTextField();
-				textWorkingTempTo.setForeground(SystemColor.textHighlight);
-				textWorkingTempTo.setFont(new Font("Arial Narrow", Font.BOLD, 18));
-				textWorkingTempTo.setColumns(10);
-				textWorkingTempTo.setCaretColor(SystemColor.textHighlight);
-				textWorkingTempTo.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
-				midlePanel.add(textWorkingTempTo, "cell 1 10,growx");
-			}
-
-			JLabel lblCode_4 = new JLabel("Motor (monofásico):");
-			lblCode_4.setForeground(SystemColor.textHighlight);
-			lblCode_4.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
-			midlePanel.add(lblCode_4, "cell 0 11,alignx left,aligny center");
-			{
-				textMotor = new JTextField();
-				textMotor.setForeground(SystemColor.textHighlight);
-				textMotor.setFont(new Font("Arial Narrow", Font.BOLD, 18));
-				textMotor.setColumns(10);
-				textMotor.setCaretColor(SystemColor.textHighlight);
-				textMotor.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
-				midlePanel.add(textMotor, "cell 1 11,growx");
-			}
-
-			JLabel lblCode_5 = new JLabel("Otros:");
-			lblCode_5.setForeground(SystemColor.textHighlight);
-			lblCode_5.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
-			midlePanel.add(lblCode_5, "cell 0 12,alignx left,aligny center");
-			{
-				textOthers = new JTextField();
-				textOthers.setForeground(SystemColor.textHighlight);
-				textOthers.setFont(new Font("Arial Narrow", Font.BOLD, 18));
-				textOthers.setColumns(10);
-				textOthers.setCaretColor(SystemColor.textHighlight);
-				textOthers.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
-				midlePanel.add(textOthers, "cell 1 12,growx");
+				textCapacity = new JTextField();
+				textCapacity.setForeground(SystemColor.textHighlight);
+				textCapacity.setFont(new Font("Arial Narrow", Font.BOLD, 18));
+				textCapacity.setColumns(10);
+				textCapacity.setCaretColor(SystemColor.textHighlight);
+				textCapacity.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
+				midlePanel.add(textCapacity, "cell 1 4,growx");
 			}
 		}
 		{
@@ -436,22 +314,22 @@ public class RegisterFrame extends JDialog {
 			contentPanel.add(botPanel);
 			botPanel.setLayout(new MigLayout("", "[67.00][grow]", "[26.00][28.00][][]"));
 			{
-				JLabel lblImpulsor = new JLabel("Impulsor");
+				JLabel lblImpulsor = new JLabel("Pintura Anticorrosiva");
 				lblImpulsor.setForeground(SystemColor.textHighlight);
 				lblImpulsor.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
-				botPanel.add(lblImpulsor, "cell 0 0,alignx trailing");
+				botPanel.add(lblImpulsor, "cell 0 0,alignx left");
 			}
 			{
-				JLabel lblSelloMecnico = new JLabel("Sello Mecánico");
+				JLabel lblSelloMecnico = new JLabel("Presostato 60/80 PSI");
 				lblSelloMecnico.setForeground(SystemColor.textHighlight);
 				lblSelloMecnico.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
-				botPanel.add(lblSelloMecnico, "cell 0 1,alignx trailing");
+				botPanel.add(lblSelloMecnico, "cell 0 1,alignx left");
 			}
 			{
-				JLabel lblRodamientos = new JLabel("Rodamientos");
-				lblRodamientos.setForeground(SystemColor.textHighlight);
-				lblRodamientos.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
-				botPanel.add(lblRodamientos, "cell 0 2,alignx trailing");
+				JLabel lblManmetroPsi = new JLabel("Manómetro 90 PSI");
+				lblManmetroPsi.setForeground(SystemColor.textHighlight);
+				lblManmetroPsi.setFont(new Font("Arial Narrow", Font.PLAIN, 18));
+				botPanel.add(lblManmetroPsi, "cell 0 2");
 			}
 		}
 		{
@@ -474,20 +352,13 @@ public class RegisterFrame extends JDialog {
 							pump.setMark(textMark.getText());
 							pump.setModel(textModel.getText());
 							pump.setFunction(textFunction.getText());
-							pump.setYear(textYear.getText());
-							pump.setProtectionGrade(textProtectionGrade.getText());
-							pump.setIsolationClass(textIsolation.getText());
-							pump.setPotencty(textPotency.getText());
-							pump.setSuccionPipe(textSuccionPipe.getText());
-							pump.setDischagePipe(textDischargePipe.getText());
-							pump.setFlowsTo(textFlowsTo.getText());
-							pump.setMaxHeight(textMaxHeigth.getText());
-							pump.setRotation(textRotation.getText());
-							pump.setSuccionPresureTo(textSuccionPresureTo.getText());
-							pump.setWorkingTempTo(textWorkingTempTo.getText());
-							pump.setMotor(textMotor.getText());
-							pump.setOthers(textOthers.getText());
 							pump.setPictureAddress(filePath);
+							
+							pump.setSerial(textSerial.getText());
+							pump.setYear(textYear.getText());
+							pump.setServisePresure(textServicePresure.getText());
+							pump.setTestPresure(textTestPresure.getText());
+							pump.setCapacity(textCapacity.getText());
 							
 							boolean isRegistered = RegisterPump.register(pump);
 							
@@ -547,7 +418,7 @@ public class RegisterFrame extends JDialog {
 
 	private void putPlaceHolderPicture() {
 
-		ImageIcon placeHolderIcon = new ImageIcon(new ImageIcon("src/img/WaterPumpPlaceHolder.png").getImage()
+		ImageIcon placeHolderIcon = new ImageIcon(new ImageIcon("src/img/pulmonPlaceHolder.png").getImage()
 				.getScaledInstance(lblPhoto.getWidth(), lblPhoto.getHeight(), Image.SCALE_SMOOTH));
 		lblPhoto.setIcon(placeHolderIcon);
 	}
@@ -557,12 +428,8 @@ public class RegisterFrame extends JDialog {
 	private boolean areAllFieldsClean() {
 		if (!textCode.getText().isEmpty() || !textArea.getText().isEmpty() || !textMark.getText().isEmpty()
 				|| !textFunction.getText().isEmpty() || !textName.getText().isEmpty() || !textModel.getText().isEmpty()
-				|| !textYear.getText().isEmpty() || !textProtectionGrade.getText().isEmpty()
-				|| !textIsolation.getText().isEmpty() || !textPotency.getText().isEmpty()
-				|| !textSuccionPipe.getText().isEmpty() || !textDischargePipe.getText().isEmpty()
-				|| !textFlowsTo.getText().isEmpty() || !textMaxHeigth.getText().isEmpty()
-				|| !textRotation.getText().isEmpty() || !textSuccionPresureTo.getText().isEmpty()
-				|| !textWorkingTempTo.getText().isEmpty() || !textMotor.getText().isEmpty()) {
+				|| !textTestPresure.getText().isEmpty() || !textYear.getText().isEmpty()
+				|| !textServicePresure.getText().isEmpty() || !textTestPresure.getText().isEmpty() ){
 
 			return false;
 		}
@@ -575,12 +442,8 @@ public class RegisterFrame extends JDialog {
 	private boolean areDataComplete() {
 		if (!textCode.getText().isEmpty() && !textArea.getText().isEmpty() && !textMark.getText().isEmpty()
 				&& !textFunction.getText().isEmpty() && !textName.getText().isEmpty() && !textModel.getText().isEmpty()
-				&& !textYear.getText().isEmpty() && !textProtectionGrade.getText().isEmpty()
-				&& !textIsolation.getText().isEmpty() && !textPotency.getText().isEmpty()
-				&& !textSuccionPipe.getText().isEmpty() && !textDischargePipe.getText().isEmpty()
-				&& !textFlowsTo.getText().isEmpty() && !textMaxHeigth.getText().isEmpty()
-				&& !textRotation.getText().isEmpty() && !textSuccionPresureTo.getText().isEmpty()
-				&& !textWorkingTempTo.getText().isEmpty() && !textMotor.getText().isEmpty()) {
+				&& !textTestPresure.getText().isEmpty() && !textYear.getText().isEmpty()
+				&& !textServicePresure.getText().isEmpty() && !textTestPresure.getText().isEmpty()) {
 
 			return true;
 		}
@@ -598,20 +461,14 @@ public class RegisterFrame extends JDialog {
 		textFunction.setText("");
 		textName.setText("");
 		textModel.setText("");
+		textTestPresure.setText("");
 		textYear.setText("");
-		textProtectionGrade.setText("");
-		textIsolation.setText("");
-		textPotency.setText("");
-		textSuccionPipe.setText("");
-		textDischargePipe.setText("");
-		textFlowsTo.setText("");
-		textMaxHeigth.setText("");
-		textRotation.setText("");
-		textSuccionPresureTo.setText("");
-		textWorkingTempTo.setText("");
-		textMotor.setText("");
-		textOthers.setText("");
+		textServicePresure.setText("");
+		textTestPresure.setText("");
+		textCapacity.setText("");
+	
 
+	
 
 	}
 

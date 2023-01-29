@@ -6,9 +6,11 @@ import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 import actors.WaterPump;
+import frames.ListEquipament;
+import sql.DeleteEquipament;
 
-import java.awt.SystemColor;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -18,12 +20,13 @@ import javax.swing.ImageIcon;
 import javax.swing.border.MatteBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Cursor;
 
 public class PumpPanel extends JPanel {
 
 	private String defaultPictureAddress = "src/img/WaterPumpPlaceHolder.png";
 
-	public PumpPanel(WaterPump waterPump) {
+	public PumpPanel(WaterPump waterPump, Container panel) {
 		setBackground(new Color(255, 255, 255));
 		setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 102, 255)));
 		setLayout(null);
@@ -79,6 +82,8 @@ public class PumpPanel extends JPanel {
 		add(lblNewLabel_1_4);
 		
 		JButton btnNewButton = new JButton("");
+		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton.setBorder(null);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -86,10 +91,10 @@ public class PumpPanel extends JPanel {
 				
 			}
 		});
-		btnNewButton.setBackground(new Color(0, 102, 204));
-		btnNewButton.setIcon(new ImageIcon(PumpPanel.class.getResource("/img/search.png")));
+		btnNewButton.setBackground(new Color(255, 255, 255));
+		btnNewButton.setIcon(new ImageIcon(PumpPanel.class.getResource("/img/search-alt.png")));
 		btnNewButton.setForeground(new Color(0, 102, 204));
-		btnNewButton.setBounds(539, 19, 89, 81);
+		btnNewButton.setBounds(491, 11, 53, 94);
 		add(btnNewButton);
 
 		/////////////////////////
@@ -103,6 +108,27 @@ public class PumpPanel extends JPanel {
 		String picAddress = waterPump.getPictureAddress() == null ? defaultPictureAddress : waterPump.getPictureAddress();
 		ImageIcon placeHolderIcon = new ImageIcon(new ImageIcon(picAddress).getImage().getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH));
 		lblPicture.setIcon(placeHolderIcon);
+		
+		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int opt = JOptionPane.showConfirmDialog(panel, "¿Desea eliminar este registo?",
+						"ADVERTENCIA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				
+				if(opt == JOptionPane.YES_OPTION) {
+					DeleteEquipament.delete(waterPump.getId());
+					ListEquipament.loadList();					
+				}
+			}
+		});
+		btnNewButton_1.setIcon(new ImageIcon(PumpPanel.class.getResource("/img/trash.png")));
+		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton_1.setForeground(new Color(0, 102, 204));
+		btnNewButton_1.setBorder(null);
+		btnNewButton_1.setBackground(Color.WHITE);
+		btnNewButton_1.setBounds(554, 9, 53, 94);
+		add(btnNewButton_1);
 		
 		
 		

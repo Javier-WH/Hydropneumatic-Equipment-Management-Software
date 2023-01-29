@@ -24,7 +24,7 @@ public class MainFrame extends JFrame {
 //Frames
 	private RegisterFrame registerFrame  = new RegisterFrame();
 	private ListEquipament listFrame = new ListEquipament();
-	
+	private Selection selectionFrame = new Selection();
 
 	//Functrions
 	
@@ -33,6 +33,7 @@ public class MainFrame extends JFrame {
 		
 		registerFrame.setVisible(false);
 		listFrame.setVisible(false);
+		selectionFrame.dispose();
 		
 	}
 
@@ -55,8 +56,10 @@ public class MainFrame extends JFrame {
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeAllFrames();
-				registerFrame.setLocationRelativeTo(getContentPane());
-				registerFrame.setVisible(true);
+				selectionFrame.setLocationRelativeTo(getContentPane());
+				selectionFrame.setVisible(true);
+				//registerFrame.setLocationRelativeTo(getContentPane());
+				//registerFrame.setVisible(true);
 			}
 		});
 	
