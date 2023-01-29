@@ -7,21 +7,47 @@ import java.sql.SQLException;
 
 import actors.WaterPump;
 
-public class RegisterPump {
+public class UpdateEquipament {
 
-	public static boolean register(WaterPump pump) {
+	public static boolean update(WaterPump pump) {
+
 		Connection connection = SQLConnection.getConection();
 
 		try {
 
-			String SQL = "INSERT INTO pumpList (" + "code, " + "name, " + "area, " + "model, " + "mark, " + "function, "
-					+ "year, " + "protection_grade, " + "isolation_class, " + "potency, " + "succion_pipe, "
-					+ "discharge_pipe, " + "flow, " + "max_height, " + "rotation, " + "succion_presure, "
-					+ "working_temp, " + "motor, " + "other, " + "picture, "
-					//////////////
-					+ "max_presure, " + "frecuency, " + "rotation_speed, " + "tension_power, " + "enviroment_temp, "
-					+ "weigth, " + "serial, " + "service_presure, " + "test_presure, " + "capacity, "
-					+ "type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String SQL = "UPDATE pumpList SET "
+			+ "code = ?, "
+			+ "name = ?, "
+			+ "area = ?, " 
+			+ "model = ?, "
+			+ "mark = ?, "
+			+ "function = ?, "
+			+ "year = ?, " 
+			+ "protection_grade = ?, "
+			+ "isolation_class = ?, "
+			+ "potency = ?, " 
+			+ "succion_pipe = ?, "
+			+ "discharge_pipe = ?, "
+			+ "flow = ?, "
+			+ "max_height = ?, "
+			+ "rotation = ?, "
+			+ "succion_presure = ?, "
+			+ "working_temp = ?, "
+			+ "motor = ?, "
+			+ "other = ?, "
+			+ "picture = ?, "
+			//////////////
+			+ "max_presure = ?, "
+			+ "frecuency = ?, "
+			+ "rotation_speed = ?, "
+			+ "tension_power = ?, "
+			+ "enviroment_temp = ?, "
+			+ "weigth = ?, "
+			+ "serial=?, "
+			+ "service_presure = ?, "
+			+ "test_presure = ?," 
+			+ "capacity = ?, "
+			+ "type=? WHERE id = ?";
 
 			PreparedStatement statement = connection.prepareStatement(SQL);
 			statement.setString(1, pump.getCode());
@@ -55,6 +81,7 @@ public class RegisterPump {
 			statement.setString(29, pump.getTestPresure());
 			statement.setString(30, pump.getCapacity());
 			statement.setString(31, pump.getType());
+			statement.setString(32, pump.getId());
 			statement.execute();
 			statement.close();
 
@@ -74,6 +101,8 @@ public class RegisterPump {
 		}
 
 		return true;
+		
 	}
-
+	
+	
 }

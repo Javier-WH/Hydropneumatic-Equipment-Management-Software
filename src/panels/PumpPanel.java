@@ -7,7 +7,12 @@ import javax.swing.border.LineBorder;
 
 import actors.WaterPump;
 import frames.ListEquipament;
+import frames.RegisterCompresorFrame;
+import frames.RegisterControlBoard;
+import frames.RegisterFrame;
+import frames.RegisterPulmonFrame;
 import sql.DeleteEquipament;
+import sql.GetEquipamentById;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -19,6 +24,8 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.border.MatteBorder;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Cursor;
 
@@ -87,8 +94,35 @@ public class PumpPanel extends JPanel {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				System.out.println(waterPump.getId());
-				
+				ResultSet rs = GetEquipamentById.getById(waterPump.getId());
+				try {
+					rs.next();
+					String type = rs.getString("type");
+					
+					
+					if(type.equals("1")) {
+						RegisterFrame updatePump = new RegisterFrame(rs);
+						updatePump.setLocationRelativeTo(panel);
+						updatePump.setVisible(true);
+					}else if(type.equals("2")) {
+						RegisterCompresorFrame updateCompresor = new RegisterCompresorFrame(rs);
+						updateCompresor.setLocationRelativeTo(panel);
+						updateCompresor.setVisible(true);
+					}else if(type.equals("3")) {
+						RegisterPulmonFrame updatePulmon = new RegisterPulmonFrame(rs);
+						updatePulmon.setLocationRelativeTo(panel);
+						updatePulmon.setVisible(true);
+					}else if(type.equals("4")) {
+						RegisterControlBoard updateControl = new RegisterControlBoard(rs);
+						updateControl.setLocationRelativeTo(panel);
+						updateControl.setVisible(true);
+					}else {
+						JOptionPane.showMessageDialog(panel, "Equipo indeterminado", "error", JOptionPane.ERROR_MESSAGE);
+					}
+					
+				} catch (SQLException e1) {
+					System.out.println(e1.getMessage());
+				}
 			}
 		});
 		btnNewButton.setBackground(new Color(255, 255, 255));

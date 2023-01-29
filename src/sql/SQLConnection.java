@@ -10,7 +10,7 @@ public class SQLConnection {
 
 	public static Connection getConection() {
 
-		Icon errorIcon = UIManager.getIcon("OptionPane.errorIcon");
+		Icon errorIcon = UIManager.getIcon("OptionPane.errorIcon");//este es el icono de error
 		Connection connection = null;
 
 		try {
@@ -22,5 +22,7 @@ public class SQLConnection {
 
 		return connection;
 	}
+	
+	
 
 }

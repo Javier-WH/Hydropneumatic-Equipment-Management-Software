@@ -37,6 +37,8 @@ public class WaterPump {
 	private String servisePresure = "No Suministrado";
 	private String testPresure = "No Suministrado";
 	private String capacity = "No Suministrado";
+	
+	private String type = "1";
 	//////
 	public String getCode() {
 		return code;
@@ -224,6 +226,12 @@ public class WaterPump {
 	}
 	public void setCapacity(String capacity) {
 		this.capacity = capacity;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	

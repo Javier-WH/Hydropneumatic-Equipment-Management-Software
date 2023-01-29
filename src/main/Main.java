@@ -7,6 +7,7 @@
 package main;
 
 import frames.*;
+import sql.CreateTables;
 
 public class Main {
 
@@ -14,8 +15,12 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		CreateTables.createPump();
+		
 		mainFrame.setVisible(true);
 
 	}
 
 }
+
+

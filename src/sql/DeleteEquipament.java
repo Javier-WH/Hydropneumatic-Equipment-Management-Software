@@ -15,6 +15,7 @@ public class DeleteEquipament {
 			PreparedStatement st = conn.prepareStatement(SQL);
 			st.setString(1, id );
 			st.execute();
+			
 			return true;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
