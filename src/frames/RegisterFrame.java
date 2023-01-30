@@ -1013,6 +1013,10 @@ public class RegisterFrame extends JDialog {
 			textMotor.setText(equipament.getString("motor"));
 			textOthers.setText(equipament.getString("other"));
 			
+			ImageIcon savedIcon = new ImageIcon(new ImageIcon(equipament.getString("picture")).getImage()
+					.getScaledInstance(lblPhoto.getWidth(), lblPhoto.getHeight(), Image.SCALE_SMOOTH));
+			lblPhoto.setIcon(savedIcon);
+			
 		} catch (SQLException e1) {
 			System.out.println(e1.getMessage());
 		}

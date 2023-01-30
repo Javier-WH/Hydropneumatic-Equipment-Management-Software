@@ -622,7 +622,7 @@ public class RegisterControlBoard extends JDialog {
 			buttonPane.setBackground(new Color(255, 255, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			{
-				JButton btnAccept = new JButton("Aceptar");
+				JButton btnAccept = new JButton("Actualizarr");
 				btnAccept.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
@@ -689,8 +689,11 @@ public class RegisterControlBoard extends JDialog {
 			textModel.setText(equipament.getString("model"));
 			textMark.setText(equipament.getString("mark"));
 			textFunction.setText(equipament.getString("function"));
-			
 			textOthers.setText(equipament.getString("other"));
+			
+			ImageIcon savedIcon = new ImageIcon(new ImageIcon(equipament.getString("picture")).getImage()
+					.getScaledInstance(lblPhoto.getWidth(), lblPhoto.getHeight(), Image.SCALE_SMOOTH));
+			lblPhoto.setIcon(savedIcon);
 			
 		} catch (SQLException error) {
 			System.out.println(error.getMessage());

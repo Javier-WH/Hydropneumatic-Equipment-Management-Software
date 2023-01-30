@@ -844,6 +844,10 @@ public class RegisterCompresorFrame extends JDialog {
 			textWeigth.setText(equipament.getString("weigth"));
 			textOther.setText(equipament.getString("other"));
 			
+			ImageIcon savedIcon = new ImageIcon(new ImageIcon(equipament.getString("picture")).getImage()
+					.getScaledInstance(lblPhoto.getWidth(), lblPhoto.getHeight(), Image.SCALE_SMOOTH));
+			lblPhoto.setIcon(savedIcon);
+			
 			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

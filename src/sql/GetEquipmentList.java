@@ -15,7 +15,8 @@ public class GetEquipmentList {
 			String SQL = "SELECT * FROM pumpList";	
 			Statement st = connection.createStatement();
 			ResultSet rs = st.executeQuery(SQL);
-	
+			
+
 			return rs;
 			
 		} catch (SQLException e) {

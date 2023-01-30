@@ -2,16 +2,18 @@ package sql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 public class SQLConnection {
+	private static Connection connection = null;
 
 	public static Connection getConection() {
 
 		Icon errorIcon = UIManager.getIcon("OptionPane.errorIcon");//este es el icono de error
-		Connection connection = null;
 
 		try {
 			connection = DriverManager.getConnection("jdbc:sqlite:src/dataBase/data.db");
@@ -23,6 +25,18 @@ public class SQLConnection {
 		return connection;
 	}
 	
+	
+	public static void resetConection() {
+		
+		try {
+			connection.close();
+			connection = DriverManager.getConnection("jdbc:sqlite:src/dataBase/data.db");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+	}
 	
 
 }

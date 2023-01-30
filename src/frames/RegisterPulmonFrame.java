@@ -758,6 +758,12 @@ public class RegisterPulmonFrame extends JDialog {
 			textServicePresure.setText(equipament.getString("service_presure"));
 			textTestPresure.setText(equipament.getString("test_presure"));
 			textCapacity.setText(equipament.getString("capacity"));
+			
+			ImageIcon savedIcon = new ImageIcon(new ImageIcon(equipament.getString("picture")).getImage()
+					.getScaledInstance(lblPhoto.getWidth(), lblPhoto.getHeight(), Image.SCALE_SMOOTH));
+			lblPhoto.setIcon(savedIcon);
+			
+			
 		} catch (SQLException error) {
 			System.out.println(error.getMessage());
 		}

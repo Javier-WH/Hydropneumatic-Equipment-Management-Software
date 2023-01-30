@@ -3,6 +3,7 @@ package frames;
 import javax.swing.JDialog;
 
 import sql.GetEquipmentList;
+import sql.SQLConnection;
 
 import java.awt.Toolkit;
 import java.sql.ResultSet;
@@ -92,6 +93,8 @@ public class ListEquipament extends JDialog {
 			listPanel.setPreferredSize(new Dimension(800, elementsCounter * 120));
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			SQLConnection.resetConection();
 		}
 	}
 }

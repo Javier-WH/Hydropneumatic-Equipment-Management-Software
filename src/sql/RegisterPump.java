@@ -3,11 +3,14 @@ package sql;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import actors.WaterPump;
 
 public class RegisterPump {
+	
+	private static long insertedID = 0;
 
 	public static boolean register(WaterPump pump) {
 		Connection connection = SQLConnection.getConection();
@@ -23,7 +26,7 @@ public class RegisterPump {
 					+ "weigth, " + "serial, " + "service_presure, " + "test_presure, " + "capacity, "
 					+ "type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-			PreparedStatement statement = connection.prepareStatement(SQL);
+			PreparedStatement statement = connection.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
 			statement.setString(1, pump.getCode());
 			statement.setString(2, pump.getName());
 			statement.setString(3, pump.getArea());
@@ -56,21 +59,29 @@ public class RegisterPump {
 			statement.setString(30, pump.getCapacity());
 			statement.setString(31, pump.getType());
 			statement.execute();
+			ResultSet rs = statement.getGeneratedKeys();
 			statement.close();
+
+			if (rs.next()) {
+				insertedID = rs.getLong(1);
+				rs.close();
+				SQLConnection.resetConection();
+				
+				if(pump.getType().equals("1")) {
+					DailyBomb.createData(insertedID);
+					WeeklyBomb.createData(insertedID);
+					MonthlyBomb.createData(insertedID);
+				}else if(pump.getType().equals("2")) {
+					
+				}
+			}
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
 
 		} finally {
-			/// esto corrige el bug de sqlite busy
-			try {
-				connection.close();
-				connection = DriverManager.getConnection("jdbc:sqlite:src/dataBase/data.db");
-			} catch (SQLException e1) {
-				System.out.println(e1.getMessage());
-			}
-
+			SQLConnection.resetConection();
 		}
 
 		return true;

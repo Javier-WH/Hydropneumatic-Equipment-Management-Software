@@ -15,7 +15,7 @@ public class GetEquipamentById {
 			String SQL = "SELECT * FROM pumpList where id = "+ id;	
 			st = connection.createStatement();
 			rs = st.executeQuery(SQL);
-	
+			
 			return rs;	
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
