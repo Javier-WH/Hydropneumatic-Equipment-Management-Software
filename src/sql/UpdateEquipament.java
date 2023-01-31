@@ -89,16 +89,7 @@ public class UpdateEquipament {
 			System.out.println(e.getMessage());
 			return false;
 
-		} finally {
-			/// esto corrige el bug de sqlite busy
-			try {
-				connection.close();
-				connection = DriverManager.getConnection("jdbc:sqlite:src/dataBase/data.db");
-			} catch (SQLException e1) {
-				System.out.println(e1.getMessage());
-			}
-
-		}
+		} 
 
 		return true;
 		

@@ -1,7 +1,6 @@
 package sql;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -65,14 +64,22 @@ public class RegisterPump {
 			if (rs.next()) {
 				insertedID = rs.getLong(1);
 				rs.close();
-				SQLConnection.resetConection();
+				//SQLConnection.resetConection();
 				
 				if(pump.getType().equals("1")) {
 					DailyBomb.createData(insertedID);
 					WeeklyBomb.createData(insertedID);
 					MonthlyBomb.createData(insertedID);
 				}else if(pump.getType().equals("2")) {
-					
+					DailyCompresor.createData(insertedID);
+					WeeklyCompresor.createData(insertedID);
+					MonthlyCompresor.createData(insertedID);
+				}else if(pump.getType().equals("3")) {
+					DailyPulmon.createData(insertedID);
+				}else if(pump.getType().equals("4")) {
+					DailyBoard.createData(insertedID);
+					Weekly_board.createData(insertedID);
+					MonthyBoard.createData(insertedID);
 				}
 			}
 
@@ -81,7 +88,7 @@ public class RegisterPump {
 			return false;
 
 		} finally {
-			SQLConnection.resetConection();
+			//SQLConnection.resetConection();
 		}
 
 		return true;

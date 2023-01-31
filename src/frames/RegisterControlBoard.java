@@ -622,7 +622,7 @@ public class RegisterControlBoard extends JDialog {
 			buttonPane.setBackground(new Color(255, 255, 255));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			{
-				JButton btnAccept = new JButton("Actualizarr");
+				JButton btnAccept = new JButton("Actualizar");
 				btnAccept.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 

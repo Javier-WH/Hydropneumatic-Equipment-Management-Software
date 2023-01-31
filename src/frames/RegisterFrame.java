@@ -962,6 +962,7 @@ public class RegisterFrame extends JDialog {
 							if(isRegistered) {
 								JOptionPane.showMessageDialog(contentPanel, "Se ha actualizado correctamente el equipo", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 								ListEquipament.loadList();
+								MainFrame.loadAlerts();
 							}else {
 								JOptionPane.showMessageDialog(contentPanel, "Ocurrió un error al intentar registrar el equipo", "ERROR", JOptionPane.ERROR_MESSAGE);
 							}

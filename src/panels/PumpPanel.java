@@ -29,6 +29,7 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Cursor;
 
+@SuppressWarnings("serial")
 public class PumpPanel extends JPanel {
 
 	private String defaultPictureAddress = "src/img/WaterPumpPlaceHolder.png";

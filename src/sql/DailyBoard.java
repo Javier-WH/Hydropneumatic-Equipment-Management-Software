@@ -6,13 +6,10 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/*
- * APTAB = Ajustar pernos y tornillos de anclaje de la base
- * */
+public class DailyBoard {
 
-public class MonthlyBomb {
 	
-	public static boolean createData(long bombId) {
+	public static boolean createData(long boardId) {
 
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date date = new Date();
@@ -22,11 +19,13 @@ public class MonthlyBomb {
 
 		try {
 
-			String SQL = "INSERT INTO monthly_bomb (bombID, APTAB) VALUES (?, ?)";
+			String SQL = "INSERT INTO daily_board (boardID, MV, MA, VTTEC) VALUES (?, ?, ?, ?) ";
 
 			PreparedStatement st = connection.prepareStatement(SQL);
-			st.setString(1, String.valueOf(bombId));
+			st.setString(1, String.valueOf(boardId));
 			st.setString(2, timeStamp);
+			st.setString(3, timeStamp);
+			st.setString(4, timeStamp);
 			st.execute();
 			st.close();
 
@@ -36,8 +35,10 @@ public class MonthlyBomb {
 		}finally {
 			//SQLConnection.resetConection();
 		}
-
 		return true;
 	}
-
+	
+	
+	
+	
 }

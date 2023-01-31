@@ -3,10 +3,21 @@ package frames;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import net.miginfocom.swing.MigLayout;
+import panels.AlertPanel;
+import sql.SQLConnection;
+
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
+
+import actors.Alert;
+import auxiliar.CalculateDailyAlerts;
+
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -14,7 +25,9 @@ import java.awt.SystemColor;
 import javax.swing.border.MatteBorder;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 
 
@@ -25,7 +38,9 @@ public class MainFrame extends JFrame {
 	private RegisterFrame registerFrame  = new RegisterFrame();
 	private ListEquipament listFrame = new ListEquipament();
 	private Selection selectionFrame = new Selection();
-
+	private static JPanel panel = new JPanel();
+	private static int altertCounter = 0;
+	private static JLabel lblAlertMessage = new JLabel("Alertas Pendientes");
 	//Functrions
 	
 	//close all frames
@@ -38,17 +53,16 @@ public class MainFrame extends JFrame {
 	}
 
 	public MainFrame() {
-		getContentPane().setBackground(SystemColor.text);
+		getContentPane().setBackground(Color.WHITE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/img/icono.png")));
 		setTitle("Hydropneumatic Equipment Management Software");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setSize(800, 600);
+		setSize(1056, 600);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelMenu = new JPanel();
-		panelMenu.setBackground(SystemColor.text);
+		panelMenu.setBackground(Color.WHITE);
 		getContentPane().add(panelMenu, BorderLayout.WEST);
 		panelMenu.setLayout(new MigLayout("", "[236.00]", "[][][][][][][][]"));
 		
@@ -85,7 +99,7 @@ public class MainFrame extends JFrame {
 				
 				closeAllFrames();
 				listFrame.setLocationRelativeTo(getContentPane());
-				listFrame.loadList();
+				ListEquipament.loadList();
 				listFrame.setVisible(true);
 			}
 		});
@@ -129,23 +143,69 @@ public class MainFrame extends JFrame {
 		panelMenu.add(btnExit, "cell 0 6,grow");
 		
 		JPanel panelWarning = new JPanel();
-		panelWarning.setBackground(SystemColor.text);
+		panelWarning.setBackground(Color.WHITE);
 		panelWarning.setForeground(SystemColor.textHighlight);
 		panelWarning.setBorder(new TitledBorder(new MatteBorder(0, 2, 0, 0, (Color) new Color(0, 120, 215)), "Alertas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 120, 215)));
 		getContentPane().add(panelWarning, BorderLayout.CENTER);
+		panelWarning.setLayout(new BorderLayout(0, 0));
+		
+		
+		
+
+		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.PAGE_AXIS);
+		panel.setBackground(Color.WHITE);
+		panel.setLayout(boxlayout);
+	
+		JScrollPane scrollPane = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setBackground(Color.WHITE);
+	
+		panelWarning.add(scrollPane);
+
+		
+	
+
 		
 		JPanel panelMessage = new JPanel();
-		panelMessage.setBackground(SystemColor.text);
+		panelMessage.setBackground(Color.WHITE);
 		getContentPane().add(panelMessage, BorderLayout.NORTH);
-		panelMessage.setLayout(new MigLayout("", "[119.00px][381.00]", "[41.00px]"));
+		panelMessage.setLayout(new MigLayout("", "[119.00px][250.00][][][][][][201.00][311.00][381.00]", "[41.00px]"));
+		
+	
+		lblAlertMessage.setForeground(new Color(139, 0, 0));
+		lblAlertMessage.setFont(new Font("Vrinda", Font.ITALIC, 16));
+		lblAlertMessage.setHorizontalAlignment(SwingConstants.RIGHT);
+		panelMessage.add(lblAlertMessage, "cell 9 0,alignx right,aligny center");
 		
 		JPanel panelEstado = new JPanel();
-		panelEstado.setBackground(SystemColor.text);
+		panelEstado.setBackground(Color.WHITE);
 		getContentPane().add(panelEstado, BorderLayout.SOUTH);
 		panelEstado.setLayout(new MigLayout("", "[]", "[42.00]"));
+		
+		loadAlerts();
 	}
 	
 
+	public static void loadAlerts() {
+		panel.removeAll();
+		panel.revalidate();
+		panel.repaint();
+		altertCounter = 0;
+		
+		
+		ArrayList<Alert> alertList = CalculateDailyAlerts.getAlertList();
+		
+		for(int i = 0 ; i < alertList.size() ; i++) {
+			panel.add(new AlertPanel(alertList.get(i)));
+			altertCounter++;
+		}
+		
+		panel.setPreferredSize(new Dimension(1000, altertCounter * 125));
+		lblAlertMessage.setText(altertCounter + " Alertas Pendientes");
+		
+		
+	}
+
+	
 	
 	
 }

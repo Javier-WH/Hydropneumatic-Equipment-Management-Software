@@ -6,13 +6,18 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 /*
- * APTAB = Ajustar pernos y tornillos de anclaje de la base
+ * VFC = Validar el funcionamiento del compresor
+ * VFA = Verificar fugas de aceite
+ * IADRE = Inspección auditiva para determinar ruidos extraños
+ * AAJ = Aplicar agua jabonosa en uniones para determinar fugas de aire
+ * VFP = Verificar funcionamiento de presostato
  * */
 
-public class MonthlyBomb {
-	
-	public static boolean createData(long bombId) {
+public class DailyCompresor {
+
+	public static boolean createData(long compresorId) {
 
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date date = new Date();
@@ -22,11 +27,15 @@ public class MonthlyBomb {
 
 		try {
 
-			String SQL = "INSERT INTO monthly_bomb (bombID, APTAB) VALUES (?, ?)";
+			String SQL = "INSERT INTO daily_compresor (compresorID, VFC, VFA, IADRE, AAJ, VFP) VALUES (?, ?, ?, ?, ?, ?) ";
 
 			PreparedStatement st = connection.prepareStatement(SQL);
-			st.setString(1, String.valueOf(bombId));
+			st.setString(1, String.valueOf(compresorId));
 			st.setString(2, timeStamp);
+			st.setString(3, timeStamp);
+			st.setString(4, timeStamp);
+			st.setString(5, timeStamp);
+			st.setString(6, timeStamp);
 			st.execute();
 			st.close();
 
@@ -36,8 +45,9 @@ public class MonthlyBomb {
 		}finally {
 			//SQLConnection.resetConection();
 		}
-
 		return true;
 	}
-
+	
+	
+	
 }

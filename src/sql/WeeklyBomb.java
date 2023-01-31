@@ -39,7 +39,7 @@ public class WeeklyBomb {
 			System.out.println(e.getMessage());
 			return false;
 		}finally {
-			SQLConnection.resetConection();
+			//SQLConnection.resetConection();
 		}
 
 		return true;
