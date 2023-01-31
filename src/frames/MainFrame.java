@@ -16,6 +16,7 @@ import javax.swing.border.TitledBorder;
 
 import actors.Alert;
 import auxiliar.CalculateDailyAlerts;
+import maintenanceSheet.Sheet;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -38,6 +39,7 @@ public class MainFrame extends JFrame {
 	private RegisterFrame registerFrame  = new RegisterFrame();
 	private ListEquipament listFrame = new ListEquipament();
 	private Selection selectionFrame = new Selection();
+	private Sheet maintenance = new Sheet();
 	private static JPanel panel = new JPanel();
 	private static int altertCounter = 0;
 	private static JLabel lblAlertMessage = new JLabel("Alertas Pendientes");
@@ -49,6 +51,7 @@ public class MainFrame extends JFrame {
 		registerFrame.setVisible(false);
 		listFrame.setVisible(false);
 		selectionFrame.dispose();
+		maintenance.dispose();
 		
 	}
 
@@ -86,6 +89,14 @@ public class MainFrame extends JFrame {
 		panelMenu.add(btnRegister, "cell 0 0,growx");
 		
 		JButton btnMaintenance = new JButton("Mantenimiento");
+		btnMaintenance.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeAllFrames();
+				maintenance.setLocationRelativeTo(getContentPane());
+				maintenance.setVisible(true);
+				
+			}
+		});
 		btnMaintenance.setIcon(new ImageIcon(MainFrame.class.getResource("/img/wrench.png")));
 		btnMaintenance.setHorizontalAlignment(SwingConstants.LEFT);
 		btnMaintenance.setForeground(Color.WHITE);
