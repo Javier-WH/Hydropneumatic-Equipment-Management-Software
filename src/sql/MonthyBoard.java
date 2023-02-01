@@ -47,7 +47,7 @@ public class MonthyBoard {
 		
 		try {
 
-			String SQL = "UPDATE monthly_board VCS = ? WHERE boardID = ?";
+			String SQL = "UPDATE monthly_board SET VCS = ? WHERE boardID = ?";
 
 			PreparedStatement st = connection.prepareStatement(SQL);
 			st.setString(1, board.getVCS());

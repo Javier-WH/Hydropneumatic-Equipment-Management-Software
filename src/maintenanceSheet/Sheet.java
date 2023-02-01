@@ -213,6 +213,7 @@ public class Sheet extends JFrame {
 						if(enabledBoard) {
 							sql.Weekly_board.updateData(boardWeekly);
 						}
+						CreateMantenanceRegister.CreateWeeklyRegister(bombWeekly, compresorWeekly, boardWeekly, user);
 					
 					}else if(comboBox.getSelectedIndex() == 2) {
 					
@@ -225,8 +226,9 @@ public class Sheet extends JFrame {
 						if(enabledBoard) {
 							sql.MonthyBoard.updateData(boardMonthly);
 						}
-					
+						CreateMantenanceRegister.CreateMonthlyRegister(bombMonthly, compresorMonthly, boardMonthly, user);
 					}
+					JOptionPane.showMessageDialog(getContentPane(), "Se ha creado satisfactoriamente el registro del mantenimiento", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 				}else {
 					JOptionPane.showMessageDialog(getContentPane(), "Debe suministrar un coldigo para los equipos", "Advertencia", JOptionPane.WARNING_MESSAGE);
 				}
@@ -238,8 +240,189 @@ public class Sheet extends JFrame {
 		panelData.add(btnAceptar, "cell 1 8,alignx right");
 		
 	}
-	//end constructor
+	//end constructor 1
 		
+	public Sheet(User user, String Code) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Sheet.class.getResource("/img/icono.png")));
+		setTitle("Mantenimiento Preventivo");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 676, 762);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JPanel panelData = new JPanel();
+		panelData.setAlignmentY(Component.TOP_ALIGNMENT);
+		panelData.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panelData.setBackground(Color.WHITE);
+		contentPane.add(panelData);
+		panelData.setLayout(new MigLayout("", "[][grow]", "[][][][][][46.00][520.00][-53.00][30.00]"));
+		
+		JLabel lblNewLabel = new JLabel("Equipos:");
+		lblNewLabel.setForeground(new Color(0, 102, 255));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		panelData.add(lblNewLabel, "cell 0 0");
+		
+
+		lblEquipaments.setForeground(new Color(0, 102, 255));
+		lblEquipaments.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		panelData.add(lblEquipaments, "cell 1 0");
+		
+		JLabel lblJefeDeMantenimiento = new JLabel("Jefe de Mantenimiento:");
+		lblJefeDeMantenimiento.setForeground(new Color(0, 102, 255));
+		lblJefeDeMantenimiento.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		panelData.add(lblJefeDeMantenimiento, "cell 0 1,alignx left");
+		
+		textBoss = new JTextField();
+		textBoss.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 102, 255)));
+		textBoss.setForeground(new Color(0, 102, 255));
+		panelData.add(textBoss, "cell 1 1,growx");
+		textBoss.setColumns(10);
+		
+		JLabel lblOperador = new JLabel("Operador:");
+		lblOperador.setForeground(new Color(0, 102, 255));
+		lblOperador.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		panelData.add(lblOperador, "cell 0 2,alignx left");
+		
+		textOperator = new JTextField();
+		textOperator.setForeground(new Color(0, 102, 255));
+		textOperator.setColumns(10);
+		textOperator.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 102, 255)));
+		panelData.add(textOperator, "cell 1 2,growx");
+		
+		JLabel lblNmeroDeControl = new JLabel("Número de Control:");
+		lblNmeroDeControl.setForeground(new Color(0, 102, 255));
+		lblNmeroDeControl.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		panelData.add(lblNmeroDeControl, "cell 0 3,alignx left");
+		
+		textControlNumber = new JTextField();
+		textControlNumber.setForeground(new Color(0, 102, 255));
+		textControlNumber.setColumns(10);
+		textControlNumber.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 102, 255)));
+		panelData.add(textControlNumber, "cell 1 3,growx");
+		
+		JLabel lblFrecuencia = new JLabel("Frecuencia:");
+		lblFrecuencia.setForeground(new Color(0, 102, 255));
+		lblFrecuencia.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		panelData.add(lblFrecuencia, "cell 0 4,alignx left");
+		
+	
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				putDailyAlerts();
+				changeEquipaments();
+			}
+		});
+		comboBox.setBorder(null);
+		comboBox.setOpaque(false);
+		comboBox.setBackground(Color.WHITE);
+		comboBox.setForeground(new Color(0, 102, 255));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Diaria", "Semanal", "Mensual"}));
+		comboBox.setSelectedIndex(0);
+		panelData.add(comboBox, "cell 1 4,growx");
+		
+		
+		lblFecha.setForeground(new Color(0, 102, 255));
+		lblFecha.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		panelData.add(lblFecha, "cell 1 5,alignx right,aligny center");
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		panelData.add(scrollPane, "cell 0 6 2 1,grow");
+		panelAlert.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
+	//	panelAlert.setPreferredSize(new Dimension(600, 10000));
+		scrollPane.setViewportView(panelAlert);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		panelData.add(btnCancelar, "cell 0 8");
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createUser();
+				if(checkCodes()) {
+					
+					if(comboBox.getSelectedIndex() == 0) {
+					
+						if(enabledBomb) {
+							sql.DailyBomb.updateData(bombDaily);
+						}
+						if(enabledCompresor) {
+							sql.DailyCompresor.updateData(compresorDaily);
+						}
+						if(enabledPulmon) {
+							sql.DailyPulmon.updateData(pulmonDaily);
+						}
+						if(enabledBoard) {
+							sql.DailyBoard.updateData(boardDaily);
+						}
+						
+						CreateMantenanceRegister.CreateDailyRegister(bombDaily, compresorDaily, pulmonDaily, boardDaily, user);
+					
+					}else if (comboBox.getSelectedIndex() == 1) {
+					
+						if(enabledBomb) {
+							sql.WeeklyBomb.updateData(bombWeekly);
+						}
+						if(enabledCompresor) {
+							sql.WeeklyCompresor.updateData(compresorWeekly);
+						}
+						if(enabledBoard) {
+							sql.Weekly_board.updateData(boardWeekly);
+						}
+						CreateMantenanceRegister.CreateWeeklyRegister(bombWeekly, compresorWeekly, boardWeekly, user);
+					
+					}else if(comboBox.getSelectedIndex() == 2) {
+					
+						if(enabledBomb) {
+							sql.MonthlyBomb.updateData(bombMonthly);
+						}
+						if(enabledCompresor) {
+							sql.MonthlyCompresor.updateData(compresorMonthly);
+						}
+						if(enabledBoard) {
+							sql.MonthyBoard.updateData(boardMonthly);
+						}
+						CreateMantenanceRegister.CreateMonthlyRegister(bombMonthly, compresorMonthly, boardMonthly, user);
+					}
+					JOptionPane.showMessageDialog(getContentPane(), "Se ha creado satisfactoriamente el registro del mantenimiento", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					JOptionPane.showMessageDialog(getContentPane(), "Debe suministrar un coldigo para los equipos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+				}
+				
+				
+				MainFrame.loadAlerts();
+			}
+		});
+		panelData.add(btnAceptar, "cell 1 8,alignx right");
+		
+	}
+
+	//end constructor 2
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
 	private void cleanAlerts() {
 		panelAlert.removeAll();
 		panelAlert.revalidate();
@@ -505,13 +688,13 @@ public class Sheet extends JFrame {
 			return false;
 		}
 		//
-		if(enabledBomb && comboBox.getSelectedIndex() == 2 && bombMonthly.getCode() =="") {
+		if(enabledBomb && comboBox.getSelectedIndex() == 2 && bombMonthly.getCode() == "") {
 			return false;
 		}
-		if(enabledCompresor && comboBox.getSelectedIndex() == 2 && compresorMonthly.getCode() =="") {
+		if(enabledCompresor && comboBox.getSelectedIndex() == 2 && compresorMonthly.getCode() == "") {
 			return false;
 		}
-		if(enabledBoard && comboBox.getSelectedIndex() == 2 && boardMonthly.getCode() =="") {
+		if(enabledBoard && comboBox.getSelectedIndex() == 2 && boardMonthly.getCode() == "") {
 			return false;
 		}
 		

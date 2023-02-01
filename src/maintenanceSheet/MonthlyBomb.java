@@ -66,7 +66,7 @@ public class MonthlyBomb extends JPanel {
 		textCode.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				Sheet.setMonthlyBoardCode(textCode.getText());
+				Sheet.setMonthlyBombCode(textCode.getText());
 			}
 		});
 		textCode.setColumns(10);

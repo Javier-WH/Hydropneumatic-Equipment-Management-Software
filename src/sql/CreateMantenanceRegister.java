@@ -6,8 +6,14 @@ import java.sql.SQLException;
 import java.util.Random;
 
 import actors.BoardDailyMantenance;
+import actors.BoardMonthlyMantenance;
+import actors.BoardWeeklyMantenance;
 import actors.BombDailyMantenance;
+import actors.BombMonthlyMantenance;
+import actors.BombWeeklyMantenance;
 import actors.CompresorDailyMantenance;
+import actors.CompresorMonthlyMantenance;
+import actors.CompresorWeeklyMantenance;
 import actors.PulmonDailyMantenance;
 import actors.User;
 
@@ -80,13 +86,14 @@ public class CreateMantenanceRegister {
 			stBoard.setString(6, board.getVTTEC());
 			stBoard.execute();
 			
-			String SQLuser = "INSERT INTO user_registered_daily_mantenance (register, mantenance_boss, operator, control_number, equioament) VALUES(?, ?, ?, ?, ?)";
+			String SQLuser = "INSERT INTO user_registered_daily_mantenance (register, mantenance_boss, operator, control_number, equioament, type) VALUES(?, ?, ?, ?, ?, ?)";
 			PreparedStatement stUser = connection.prepareStatement(SQLuser);
 			stUser.setString(1, register);
 			stUser.setString(2, user.getMantenanceBoss());
 			stUser.setString(3, user.getOperator());
 			stUser.setString(4, user.getControlNumber());
 			stUser.setString(5, user.getEquipament());
+			stUser.setString(6, "1");
 			stUser.execute();
 			
 			
@@ -99,5 +106,86 @@ public class CreateMantenanceRegister {
 		
 		
 	}
+
+	public static void CreateWeeklyRegister(BombWeeklyMantenance bomb, CompresorWeeklyMantenance compresor, BoardWeeklyMantenance board, User user) {
+
+		Random rand = new Random();
+		int n = rand.nextInt(10000);
+		String register = String.valueOf(n);
+		
+		Connection connection = SQLConnection.getConection();
+		
+		try {
+			
+			String SQL = "INSERT INTO registered_weekly_mantenance (register, bombCode, compresorCode, boardCode, VTETS, LRPPAC, LEPP, ITDVE, MCE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement st = connection.prepareStatement(SQL);
+			st.setString(1, register);
+			st.setString(2, bomb.getCode());
+			st.setString(3, compresor.getCode());
+			st.setString(4, board.getCode());
+			st.setString(5,bomb.getVTETS());
+			st.setString(6, bomb.getLRPPAC());
+			st.setString(7, board.getLEPP());
+			st.setString(8, compresor.getITDVE());
+			st.setString(9, compresor.getMCE());
+			st.execute();
+			
+			String SQLuser = "INSERT INTO user_registered_daily_mantenance (register, mantenance_boss, operator, control_number, equioament, type) VALUES(?, ?, ?, ?, ?, ?)";
+			PreparedStatement stUser = connection.prepareStatement(SQLuser);
+			stUser.setString(1, register);
+			stUser.setString(2, user.getMantenanceBoss());
+			stUser.setString(3, user.getOperator());
+			stUser.setString(4, user.getControlNumber());
+			stUser.setString(5, user.getEquipament());
+			stUser.setString(6, "2");
+			stUser.execute();
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	
+	public static void CreateMonthlyRegister(BombMonthlyMantenance bomb, CompresorMonthlyMantenance compresor, BoardMonthlyMantenance board, User user) {
+		
+		Random rand = new Random();
+		int n = rand.nextInt(10000);
+		String register = String.valueOf(n);
+		
+		Connection connection = SQLConnection.getConection();
+		
+		try {
+			
+			String SQL ="INSERT INTO registered_monthly_mantenance (register, bombCode, compresorCode, boardCode, APTAB, VCS, VTCT, VNA) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			
+			PreparedStatement st = connection.prepareStatement(SQL);
+			st.setString(1, register);
+			st.setString(2, bomb.getCode());
+			st.setString(3, compresor.getCode());
+			st.setString(4, board.getCode());
+			st.setString(5, bomb.getAPTAB());
+			st.setString(6, board.getVCS());
+			st.setString(7, compresor.getVTCT());
+			st.setString(8, compresor.getVNA());
+			st.execute();
+			
+			String SQLuser = "INSERT INTO user_registered_daily_mantenance (register, mantenance_boss, operator, control_number, equioament, type) VALUES(?, ?, ?, ?, ?, ?)";
+			PreparedStatement stUser = connection.prepareStatement(SQLuser);
+			stUser.setString(1, register);
+			stUser.setString(2, user.getMantenanceBoss());
+			stUser.setString(3, user.getOperator());
+			stUser.setString(4, user.getControlNumber());
+			stUser.setString(5, user.getEquipament());
+			stUser.setString(6, "3");
+			stUser.execute();
+			
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+	}
+
 
 }

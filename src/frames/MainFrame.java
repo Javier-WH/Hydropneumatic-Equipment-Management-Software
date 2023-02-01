@@ -40,6 +40,7 @@ public class MainFrame extends JFrame {
 	private ListEquipament listFrame = new ListEquipament();
 	private Selection selectionFrame = new Selection();
 	private Sheet maintenance = new Sheet();
+	private RegisterList registers = new RegisterList();
 	private static JPanel panel = new JPanel();
 	private static int altertCounter = 0;
 	private static JLabel lblAlertMessage = new JLabel("Alertas Pendientes");
@@ -52,6 +53,7 @@ public class MainFrame extends JFrame {
 		listFrame.setVisible(false);
 		selectionFrame.dispose();
 		maintenance.dispose();
+		registers.dispose();
 		
 	}
 
@@ -121,13 +123,20 @@ public class MainFrame extends JFrame {
 		btnList.setBackground(new Color(0, 102, 204));
 		panelMenu.add(btnList, "cell 0 2,grow");
 		
-		JButton btnCalendar = new JButton("Cronograma");
-		btnCalendar.setIcon(new ImageIcon(MainFrame.class.getResource("/img/calendar.png")));
-		btnCalendar.setHorizontalAlignment(SwingConstants.LEFT);
-		btnCalendar.setForeground(Color.WHITE);
-		btnCalendar.setFont(new Font("Verdana", Font.BOLD, 16));
-		btnCalendar.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnCalendar, "cell 0 3,grow");
+		JButton btnReport = new JButton("Reportes");
+		btnReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeAllFrames();
+				registers.setLocationRelativeTo(getContentPane());
+				registers.setVisible(true);
+			}
+		});
+		btnReport.setIcon(new ImageIcon(MainFrame.class.getResource("/img/reports.png")));
+		btnReport.setHorizontalAlignment(SwingConstants.LEFT);
+		btnReport.setForeground(Color.WHITE);
+		btnReport.setFont(new Font("Verdana", Font.BOLD, 16));
+		btnReport.setBackground(new Color(0, 102, 204));
+		panelMenu.add(btnReport, "cell 0 3,grow");
 		
 		JButton btnConfig = new JButton("Configuración");
 		btnConfig.setIcon(new ImageIcon(MainFrame.class.getResource("/img/options.png")));
@@ -136,14 +145,6 @@ public class MainFrame extends JFrame {
 		btnConfig.setFont(new Font("Verdana", Font.BOLD, 16));
 		btnConfig.setBackground(new Color(0, 102, 204));
 		panelMenu.add(btnConfig, "cell 0 4,grow");
-		
-		JButton btnReport = new JButton("Reportes");
-		btnReport.setIcon(new ImageIcon(MainFrame.class.getResource("/img/reports.png")));
-		btnReport.setHorizontalAlignment(SwingConstants.LEFT);
-		btnReport.setForeground(Color.WHITE);
-		btnReport.setFont(new Font("Verdana", Font.BOLD, 16));
-		btnReport.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnReport, "cell 0 5,grow");
 		
 		JButton btnExit = new JButton("Salir");
 		btnExit.setIcon(new ImageIcon(MainFrame.class.getResource("/img/exit.png")));
