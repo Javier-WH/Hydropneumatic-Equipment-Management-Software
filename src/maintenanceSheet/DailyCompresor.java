@@ -171,6 +171,7 @@ public class DailyCompresor extends JPanel {
 				lblCode.setEnabled(chckbxHabilitar.isSelected());
 				textCode.setText("");
 				textCode.setEnabled(chckbxHabilitar.isSelected());
+				Sheet.setDailyCompresorCode("");
 			}
 		});
 

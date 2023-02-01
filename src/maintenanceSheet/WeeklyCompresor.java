@@ -9,9 +9,14 @@ import java.awt.Font;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JToggleButton;
+
+import auxiliar.GetFormatedDate;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class WeeklyCompresor extends JPanel {
 	private JTextField textCode;
@@ -41,6 +46,15 @@ public class WeeklyCompresor extends JPanel {
 		add(lbl1, "cell 0 2,grow");
 		
 		JCheckBox chckbx1 = new JCheckBox("");
+		chckbx1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(chckbx1.isSelected()) {
+					Sheet.setWeeklyCompresorITDVE(new GetFormatedDate().getDate());
+				}else {
+					Sheet.setWeeklyCompresorITDVE("");
+				}
+			}
+		});
 		chckbx1.setBackground(Color.WHITE);
 		add(chckbx1, "cell 2 2");
 		
@@ -50,6 +64,15 @@ public class WeeklyCompresor extends JPanel {
 		add(lbl2, "cell 0 3,grow");
 		
 		JCheckBox chckbx2 = new JCheckBox("");
+		chckbx2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(chckbx2.isSelected()) {
+					Sheet.setWeeklyCompresorMCE(new GetFormatedDate().getDate());
+				}else {
+					Sheet.setWeeklyCompresorMCE("");
+				}
+			}
+		});
 		chckbx2.setBackground(Color.WHITE);
 		add(chckbx2, "cell 2 3");
 		
@@ -58,6 +81,12 @@ public class WeeklyCompresor extends JPanel {
 		add(lblCode, "cell 0 5,alignx right");
 		
 		textCode = new JTextField();
+		textCode.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Sheet.setWeeklyCompresorCode(textCode.getText());
+			}
+		});
 		textCode.setColumns(10);
 		add(textCode, "cell 2 5 6 1,growx");
 
@@ -75,6 +104,7 @@ public class WeeklyCompresor extends JPanel {
 				lblCode.setEnabled(chckbxHabilitar.isSelected());
 				textCode.setText("");
 				textCode.setEnabled(chckbxHabilitar.isSelected());
+				Sheet.setWeeklyCompresorCode("");
 			}
 		});
 	}

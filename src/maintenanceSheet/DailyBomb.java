@@ -216,6 +216,7 @@ public class DailyBomb extends JPanel {
 					textCode.setText("");
 					textCode.setEnabled(chckbxHabilitar.isSelected());
 					Sheet.setEnableBomb(chckbxHabilitar.isSelected());
+					Sheet.setDailyBombICode("");
 			}
 		});
 

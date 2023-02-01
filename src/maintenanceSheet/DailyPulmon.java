@@ -151,6 +151,7 @@ public class DailyPulmon extends JPanel {
 				lblCode.setEnabled(chckbxHabilitar.isSelected());
 				textCode.setText("");
 				textCode.setEnabled(chckbxHabilitar.isSelected());
+				Sheet.setDailyPulmonCode("");
 				
 			}
 		});

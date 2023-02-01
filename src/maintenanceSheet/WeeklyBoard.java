@@ -9,9 +9,14 @@ import java.awt.Font;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JToggleButton;
+
+import auxiliar.GetFormatedDate;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class WeeklyBoard extends JPanel {
 	private JTextField textCode;
@@ -41,6 +46,15 @@ public class WeeklyBoard extends JPanel {
 		add(lbl1, "cell 0 2,grow");
 		
 		JCheckBox chckbx1 = new JCheckBox("");
+		chckbx1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(chckbx1.isSelected()) {
+					Sheet.setWeeklyBoardLEPP(new GetFormatedDate().getDate());
+				}else {
+					Sheet.setWeeklyBoardLEPP("");
+				}
+			}
+		});
 		chckbx1.setBackground(Color.WHITE);
 		add(chckbx1, "cell 2 2");
 		
@@ -49,6 +63,12 @@ public class WeeklyBoard extends JPanel {
 		add(lblCode, "cell 0 3,alignx right");
 		
 		textCode = new JTextField();
+		textCode.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Sheet.setWeeklyBoardCode(textCode.getText());
+			}
+		});
 		textCode.setColumns(10);
 		add(textCode, "cell 2 3 6 1,growx");
 
@@ -62,6 +82,7 @@ public class WeeklyBoard extends JPanel {
 				lblCode.setEnabled(chckbxHabilitar.isSelected());
 				textCode.setText("");
 				textCode.setEnabled(chckbxHabilitar.isSelected());
+				Sheet.setWeeklyBoardCode("");
 			}
 		});
 	}

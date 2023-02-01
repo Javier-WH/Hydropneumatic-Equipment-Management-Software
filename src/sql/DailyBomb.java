@@ -7,6 +7,13 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
+import actors.BoardDailyMantenance;
+import actors.BombDailyMantenance;
+import actors.CompresorDailyMantenance;
+import actors.PulmonDailyMantenance;
+
 /*
  * VFB = Validar funcionamiento de la bomba
  * IADRE = Inspección auditiva para determinar ruidos extraños
@@ -52,5 +59,43 @@ public class DailyBomb {
 
 		return true;
 	}
+	/////////////////////////////
+	
+	public static boolean updateData(BombDailyMantenance bomb) {
+
+		
+
+		Connection connection = SQLConnection.getConection();
+		
+		String id = GetEquipamentID.byCode(bomb.getCode());
+				
+		try {
+
+			String SQL = "UPDATE daily_bomb SET VFB =?, IADRE =?, IVMPAB =?, ITDVE =?, IVDFTA =?, MCEM =?, ITDVPC =? WHERE bombID =?";
+
+			PreparedStatement st = connection.prepareStatement(SQL);
+			st.setString(1, bomb.getVFB());
+			st.setString(2, bomb.getIADRE());
+			st.setString(3, bomb.getIVMPAB());
+			st.setString(4, bomb.getITDVE());
+			st.setString(5, bomb.getIVDFTA());
+			st.setString(6, bomb.getMCEM());
+			st.setString(7, bomb.getITDVPC());
+			st.setString(8, id);
+			st.execute();
+			st.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}finally {
+			//SQLConnection.resetConection();
+		}
+
+		return true;
+	}
+	
+	
+	
 
 }

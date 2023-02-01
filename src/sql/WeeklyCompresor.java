@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import actors.CompresorWeeklyMantenance;
+
 /*
  * ITDVE = Inspección táctil para determinar vibraciones excesivas
  * MCE = Medición de consumo eléctrico 
@@ -43,7 +45,33 @@ public class WeeklyCompresor {
 
 		return true;
 	}
+	///
 	
+	public static boolean updateData(CompresorWeeklyMantenance compresor) {
+
+		Connection connection = SQLConnection.getConection();
+		String id = GetEquipamentID.byCode(compresor.getCode());
+
+		try {
+
+			String SQL = "UPDATE weekly_compresor SET ITDVE = ?, MCE = ? WHERE compresorID = ?";
+
+			PreparedStatement st = connection.prepareStatement(SQL);
+			st.setString(1, compresor.getITDVE());
+			st.setString(2, compresor.getMCE());
+			st.setString(3, id);
+			st.execute();
+			st.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}finally {
+			//SQLConnection.resetConection();
+		}
+
+		return true;
+	}
 	
 	
 	

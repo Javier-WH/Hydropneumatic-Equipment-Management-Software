@@ -5,7 +5,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import net.miginfocom.swing.MigLayout;
+import sql.CreateMantenanceRegister;
+import sql.GetEquipamentById;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
@@ -20,6 +25,8 @@ import actors.CompresorDailyMantenance;
 import actors.CompresorMonthlyMantenance;
 import actors.CompresorWeeklyMantenance;
 import actors.PulmonDailyMantenance;
+import actors.User;
+import frames.MainFrame;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -37,13 +44,13 @@ import java.awt.Toolkit;
 
 public class Sheet extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JPanel panelAlert = new JPanel();
+	private static JPanel contentPane;
+	private static JTextField textBoss;
+	private static JTextField textOperator;
+	private static JTextField textControlNumber;
+	private static JPanel panelAlert = new JPanel();
 	@SuppressWarnings("rawtypes")
-	private JComboBox comboBox = new JComboBox();
+	private static JComboBox comboBox = new JComboBox();
 	private JLabel lblFecha = new JLabel("");
 	private static JLabel lblEquipaments = new JLabel("Bomba Monobloc, Compresor, Tablero de control, Pulmon Hitroneumatico");
 	private static boolean enabledBomb = false;
@@ -66,6 +73,10 @@ public class Sheet extends JFrame {
 	private static BombMonthlyMantenance bombMonthly = new BombMonthlyMantenance();
 	private static CompresorMonthlyMantenance compresorMonthly = new CompresorMonthlyMantenance();
 	private static BoardMonthlyMantenance boardMonthly = new BoardMonthlyMantenance();
+	
+	//
+	
+	private static User user = new User();
 	
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -103,33 +114,33 @@ public class Sheet extends JFrame {
 		lblJefeDeMantenimiento.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		panelData.add(lblJefeDeMantenimiento, "cell 0 1,alignx left");
 		
-		textField = new JTextField();
-		textField.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 102, 255)));
-		textField.setForeground(new Color(0, 102, 255));
-		panelData.add(textField, "cell 1 1,growx");
-		textField.setColumns(10);
+		textBoss = new JTextField();
+		textBoss.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 102, 255)));
+		textBoss.setForeground(new Color(0, 102, 255));
+		panelData.add(textBoss, "cell 1 1,growx");
+		textBoss.setColumns(10);
 		
 		JLabel lblOperador = new JLabel("Operador:");
 		lblOperador.setForeground(new Color(0, 102, 255));
 		lblOperador.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		panelData.add(lblOperador, "cell 0 2,alignx left");
 		
-		textField_1 = new JTextField();
-		textField_1.setForeground(new Color(0, 102, 255));
-		textField_1.setColumns(10);
-		textField_1.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 102, 255)));
-		panelData.add(textField_1, "cell 1 2,growx");
+		textOperator = new JTextField();
+		textOperator.setForeground(new Color(0, 102, 255));
+		textOperator.setColumns(10);
+		textOperator.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 102, 255)));
+		panelData.add(textOperator, "cell 1 2,growx");
 		
 		JLabel lblNmeroDeControl = new JLabel("Número de Control:");
 		lblNmeroDeControl.setForeground(new Color(0, 102, 255));
 		lblNmeroDeControl.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		panelData.add(lblNmeroDeControl, "cell 0 3,alignx left");
 		
-		textField_2 = new JTextField();
-		textField_2.setForeground(new Color(0, 102, 255));
-		textField_2.setColumns(10);
-		textField_2.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 102, 255)));
-		panelData.add(textField_2, "cell 1 3,growx");
+		textControlNumber = new JTextField();
+		textControlNumber.setForeground(new Color(0, 102, 255));
+		textControlNumber.setColumns(10);
+		textControlNumber.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 102, 255)));
+		panelData.add(textControlNumber, "cell 1 3,growx");
 		
 		JLabel lblFrecuencia = new JLabel("Frecuencia:");
 		lblFrecuencia.setForeground(new Color(0, 102, 255));
@@ -171,7 +182,57 @@ public class Sheet extends JFrame {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(bombDaily.getCode());
+				createUser();
+				if(checkCodes()) {
+					
+					if(comboBox.getSelectedIndex() == 0) {
+					
+						if(enabledBomb) {
+							sql.DailyBomb.updateData(bombDaily);
+						}
+						if(enabledCompresor) {
+							sql.DailyCompresor.updateData(compresorDaily);
+						}
+						if(enabledPulmon) {
+							sql.DailyPulmon.updateData(pulmonDaily);
+						}
+						if(enabledBoard) {
+							sql.DailyBoard.updateData(boardDaily);
+						}
+						
+						CreateMantenanceRegister.CreateDailyRegister(bombDaily, compresorDaily, pulmonDaily, boardDaily, user);
+					
+					}else if (comboBox.getSelectedIndex() == 1) {
+					
+						if(enabledBomb) {
+							sql.WeeklyBomb.updateData(bombWeekly);
+						}
+						if(enabledCompresor) {
+							sql.WeeklyCompresor.updateData(compresorWeekly);
+						}
+						if(enabledBoard) {
+							sql.Weekly_board.updateData(boardWeekly);
+						}
+					
+					}else if(comboBox.getSelectedIndex() == 2) {
+					
+						if(enabledBomb) {
+							sql.MonthlyBomb.updateData(bombMonthly);
+						}
+						if(enabledCompresor) {
+							sql.MonthlyCompresor.updateData(compresorMonthly);
+						}
+						if(enabledBoard) {
+							sql.MonthyBoard.updateData(boardMonthly);
+						}
+					
+					}
+				}else {
+					JOptionPane.showMessageDialog(getContentPane(), "Debe suministrar un coldigo para los equipos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+				}
+				
+				
+				MainFrame.loadAlerts();
 			}
 		});
 		panelData.add(btnAceptar, "cell 1 8,alignx right");
@@ -418,8 +479,52 @@ public class Sheet extends JFrame {
 		boardMonthly.setCode(code);
 	}
 	
+	///
+	private static boolean checkCodes() {
+		
+		if(enabledBomb && comboBox.getSelectedIndex() == 0 && bombDaily.getCode() =="") {
+			return false;
+		}
+		if(enabledCompresor && comboBox.getSelectedIndex() == 0 && compresorDaily.getCode() =="") {
+			return false;
+		}
+		if(enabledPulmon && comboBox.getSelectedIndex() == 0 && pulmonDaily.getCode() =="") {
+			return false;
+		}
+		if(enabledBoard && comboBox.getSelectedIndex() == 0 && boardDaily.getCode() =="") {
+			return false;
+		}
+		//
+		if(enabledBomb && comboBox.getSelectedIndex() == 1 && bombWeekly.getCode() =="") {
+			return false;
+		}
+		if(enabledCompresor && comboBox.getSelectedIndex() == 1 && compresorWeekly.getCode() =="") {
+			return false;
+		}
+		if(enabledBoard && comboBox.getSelectedIndex() == 1 && boardWeekly.getCode() =="") {
+			return false;
+		}
+		//
+		if(enabledBomb && comboBox.getSelectedIndex() == 2 && bombMonthly.getCode() =="") {
+			return false;
+		}
+		if(enabledCompresor && comboBox.getSelectedIndex() == 2 && compresorMonthly.getCode() =="") {
+			return false;
+		}
+		if(enabledBoard && comboBox.getSelectedIndex() == 2 && boardMonthly.getCode() =="") {
+			return false;
+		}
+		
+		return true;
+	}
 	
+	private static void createUser() {
+		
+		user.setEquipament(lblEquipaments.getText());
+		user.setMantenanceBoss(textBoss.getText());
+		user.setOperator(textOperator.getText());
+		user.setControlNumber(textControlNumber.getText());
 	
-	
+	}
 	
 }

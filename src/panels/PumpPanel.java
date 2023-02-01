@@ -7,6 +7,7 @@ import javax.swing.border.LineBorder;
 
 import actors.WaterPump;
 import frames.ListEquipament;
+import frames.MainFrame;
 import frames.RegisterCompresorFrame;
 import frames.RegisterControlBoard;
 import frames.RegisterFrame;
@@ -153,7 +154,8 @@ public class PumpPanel extends JPanel {
 				
 				if(opt == JOptionPane.YES_OPTION) {
 					DeleteEquipament.delete(waterPump.getId());
-					ListEquipament.loadList();					
+					ListEquipament.loadList();	
+					MainFrame.loadAlerts();
 				}
 			}
 		});

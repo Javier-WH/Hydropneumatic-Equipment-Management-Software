@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import actors.BoardDailyMantenance;
+
 public class DailyBoard {
 
 	
@@ -37,6 +39,38 @@ public class DailyBoard {
 		}
 		return true;
 	}
+	//////////////////
+	
+
+	public static boolean updateData(BoardDailyMantenance board) {
+
+	
+		Connection connection = SQLConnection.getConection();
+		String id = GetEquipamentID.byCode(board.getCode());
+
+		try {
+
+			String SQL = "UPDATE daily_board SET MV = ?, MA = ?, VTTEC = ? WHERE boardID =? ";
+
+			PreparedStatement st = connection.prepareStatement(SQL);
+			st.setString(1, board.getMV());
+			st.setString(2, board.getMA());
+			st.setString(3, board.getVTTEC());
+			st.setString(4, id);
+			st.execute();
+			st.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}finally {
+			//SQLConnection.resetConection();
+		}
+		return true;
+	}
+	
+	
+	
 	
 	
 	

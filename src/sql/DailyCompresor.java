@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import actors.CompresorDailyMantenance;
+
 
 /*
  * VFC = Validar el funcionamiento del compresor
@@ -47,7 +49,37 @@ public class DailyCompresor {
 		}
 		return true;
 	}
+
+	///////////////
+	public static boolean updateData(CompresorDailyMantenance compresor) {
+
 	
+
+		Connection connection = SQLConnection.getConection();
+		String id = GetEquipamentID.byCode(compresor.getCode());
+
+		try {
+
+			String SQL = "UPDATE daily_compresor SET VFC = ?, VFA = ?, IADRE = ?, AAJ = ?, VFP = ? WHERE compresorID = ? ";
+
+			PreparedStatement st = connection.prepareStatement(SQL);
+			st.setString(1, compresor.getVFC());
+			st.setString(2, compresor.getVFA());
+			st.setString(3, compresor.getIADRE());
+			st.setString(4, compresor.getAAJ());
+			st.setString(5, compresor.getVFP());
+			st.setString(6, id);
+			st.execute();
+			st.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}finally {
+			//SQLConnection.resetConection();
+		}
+		return true;
+	}
 	
 	
 }

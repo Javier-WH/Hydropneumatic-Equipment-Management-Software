@@ -124,6 +124,7 @@ public class DailyBoard extends JPanel {
 				lblCode.setEnabled(chckbxHabilitar.isSelected());
 				textCode.setText("");
 				textCode.setEnabled(chckbxHabilitar.isSelected());
+				Sheet.setDailyBoardCode("");
 			}
 		});
 	}
