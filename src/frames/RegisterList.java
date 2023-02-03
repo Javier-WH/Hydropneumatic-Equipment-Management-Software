@@ -29,11 +29,13 @@ import java.awt.Container;
 @SuppressWarnings("serial")
 public class RegisterList extends JDialog {
 private static JPanel ListPanel = new JPanel();
+@SuppressWarnings("rawtypes")
 private static JComboBox comboBox = new JComboBox();
 private static int counter = 0;
 private static JLabel lblCounter = new JLabel("New label");
 private static Container panel = null;
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public RegisterList() {
 		setResizable(false);
 		setAlwaysOnTop(true);

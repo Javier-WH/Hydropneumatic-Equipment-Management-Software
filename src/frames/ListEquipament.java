@@ -3,13 +3,10 @@ package frames;
 import javax.swing.JDialog;
 
 import sql.GetEquipmentList;
-import sql.SQLConnection;
-
 import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JScrollPane;
-
 import actors.WaterPump;
 import panels.PumpPanel;
 import javax.swing.JPanel;

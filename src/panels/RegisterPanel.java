@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 
 import actors.User;
 import frames.ReportDaily;
+import frames.ReportMonthly;
+import frames.ReportWeekly;
 
 import javax.swing.JLabel;
 
@@ -17,6 +19,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+@SuppressWarnings("serial")
 public class RegisterPanel extends JPanel {
 
 
@@ -32,34 +35,36 @@ public class RegisterPanel extends JPanel {
 		
 		JLabel lblRegistro = new JLabel("65564");
 		lblRegistro.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRegistro.setBounds(241, 11, 58, 14);
+		lblRegistro.setBounds(263, 11, 504, 14);
 		add(lblRegistro);
 		
-		JLabel lblFrecuencia1 = new JLabel("Frecuencia");
-		lblFrecuencia1.setBounds(173, 36, 58, 14);
+		JLabel lblFrecuencia1 = new JLabel("Frecuencia:");
+		lblFrecuencia1.setBounds(173, 36, 68, 14);
 		add(lblFrecuencia1);
 		
 		JLabel lblFrecuencia = new JLabel("Diario");
 		lblFrecuencia.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblFrecuencia.setBounds(239, 36, 58, 14);
+		lblFrecuencia.setBounds(267, 36, 554, 14);
 		add(lblFrecuencia);
 		
 		JLabel lblOperador = new JLabel("Operador:");
-		lblOperador.setBounds(173, 61, 58, 14);
+		lblOperador.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblOperador.setBounds(263, 61, 554, 14);
 		add(lblOperador);
 		
-		JLabel lblRegistro_1_1 = new JLabel("Juan Perez");
-		lblRegistro_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRegistro_1_1.setBounds(241, 61, 282, 14);
+		JLabel lblRegistro_1_1 = new JLabel("Operador:");
+		lblRegistro_1_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblRegistro_1_1.setBounds(173, 61, 68, 14);
 		add(lblRegistro_1_1);
 		
-		JLabel lblRegistro_1_2 = new JLabel(" <Bomba Monobloc> <Compresor> <Tablero de control>  <Pulmón Hidroneumático> ");
-		lblRegistro_1_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRegistro_1_2.setBounds(241, 86, 548, 14);
+		JLabel lblRegistro_1_2 = new JLabel("Equipos:");
+		lblRegistro_1_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblRegistro_1_2.setBounds(173, 86, 52, 14);
 		add(lblRegistro_1_2);
 		
 		JLabel lblEquipos = new JLabel("Equipos:");
-		lblEquipos.setBounds(173, 86, 58, 14);
+		lblEquipos.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblEquipos.setBounds(263, 86, 554, 14);
 		add(lblEquipos);
 		JLabel lblBackGround = new JLabel("");
 		lblBackGround.setBounds(0, 0, 840, 120);
@@ -83,13 +88,25 @@ public class RegisterPanel extends JPanel {
 			default:
 			break;
 		}
+		
+		
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//System.out.println(user.getType());
-				ReportDaily RD = new ReportDaily(register,user);
-				RD.setLocationRelativeTo(panel);
-				RD.setVisible(true);
+				if(user.getType().equals("1")) {					
+					ReportDaily RD = new ReportDaily(register,user);
+					RD.setLocationRelativeTo(panel);
+					RD.setVisible(true);
+				}else if(user.getType().equals("2")) {
+					ReportWeekly RW = new ReportWeekly(register,user);
+					RW.setLocationRelativeTo(panel);
+					RW.setVisible(true);
+				}else if(user.getType().equals("3")) {
+					ReportMonthly RM = new ReportMonthly(register, user);
+					RM.setLocationRelativeTo(panel);
+					RM.setVisible(true);
+					
+				}
 				
 			}
 		});

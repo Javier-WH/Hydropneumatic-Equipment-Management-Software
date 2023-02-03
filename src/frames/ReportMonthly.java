@@ -32,7 +32,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 
 @SuppressWarnings("serial")
-public class ReportDaily extends JFrame implements Printable {
+public class ReportMonthly extends JFrame implements Printable {
 
 	private JPanel contentPane;
 	private static JPanel panel = new JPanel();
@@ -40,24 +40,6 @@ public class ReportDaily extends JFrame implements Printable {
 	private static JLabel date2 = new JLabel("");
 	private static JLabel date3 = new JLabel("");
 	private static JLabel date4 = new JLabel("");
-	private static JLabel date5 = new JLabel("");
-	private static JLabel date6 = new JLabel("");
-	private static JLabel date7 = new JLabel("");
-	private static JLabel date8 = new JLabel("");
-	private static JLabel date9 = new JLabel("");
-	private static JLabel date10 = new JLabel("");
-	private static JLabel date11 = new JLabel("");
-	private static JLabel date12 = new JLabel("");
-	private static JLabel date13 = new JLabel("");
-	private static JLabel date14 = new JLabel("");
-	private static JLabel date15 = new JLabel("");
-	private static JLabel date16 = new JLabel("");
-	private static JLabel date17 = new JLabel("");
-	private static JLabel date18 = new JLabel("");
-	private static JLabel date19 = new JLabel("");
-	private static JLabel date20 = new JLabel("");
-	private static JLabel date21 = new JLabel("");
-	private static JLabel date22 = new JLabel("");
 	
 	private static JLabel lblEquipaments = new JLabel("");
 	private static JLabel lblBoss = new JLabel("");
@@ -78,11 +60,11 @@ public class ReportDaily extends JFrame implements Printable {
 	    return PAGE_EXISTS;
 	  }
 
-	public ReportDaily(String register, User user) {
+	public ReportMonthly(String register, User user) {
 		setResizable(false);
 		setAlwaysOnTop(true);
 		setTitle("Reporte");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(ReportDaily.class.getResource("/img/icono.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ReportMonthly.class.getResource("/img/icono.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 720, 686);
 		contentPane = new JPanel();
@@ -127,42 +109,24 @@ public class ReportDaily extends JFrame implements Printable {
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
 				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
+				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("160dlu", false), Sizes.constant("160dlu", false)), 0),
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
 				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("2px", false), Sizes.constant("2px", false)), 0),
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("max(37dlu;default)"),
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("default:grow"),}));
@@ -236,7 +200,7 @@ public class ReportDaily extends JFrame implements Printable {
 		lblFrecuencia_1.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
 		panel.add(lblFrecuencia_1, "2, 16");
 		
-		JLabel lblNewLabel_2 = new JLabel("Aplicar agua jabonosa en uniones para determinar fugas de aire");
+		JLabel lblNewLabel_2 = new JLabel("Verificar el nivel de aceite solo para los dispositivos que permitan hacerlo");
 		lblNewLabel_2.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
 		panel.add(lblNewLabel_2, "4, 16");
 		
@@ -248,7 +212,7 @@ public class ReportDaily extends JFrame implements Printable {
 		lblFrecuencia_1_1.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
 		panel.add(lblFrecuencia_1_1, "2, 18");
 		
-		JLabel lblNewLabel_2_1 = new JLabel("Inspección auditiva para determinar ruidos extraños");
+		JLabel lblNewLabel_2_1 = new JLabel("Verificar tensión de correa de trasmisión");
 		lblNewLabel_2_1.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
 		panel.add(lblNewLabel_2_1, "4, 18");
 		
@@ -256,11 +220,11 @@ public class ReportDaily extends JFrame implements Printable {
 		date2.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
 		panel.add(date2, "5, 18");
 		
-		JLabel lblFrecuencia_1_2 = new JLabel("BANCADA COMPRESOR");
-		lblFrecuencia_1_2.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_1_2, "2, 20");
+		JLabel lblFrecuencia_8 = new JLabel("BOMBA");
+		lblFrecuencia_8.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
+		panel.add(lblFrecuencia_8, "2, 20");
 		
-		JLabel lblNewLabel_2_2 = new JLabel("Inspección visual para verificar fugas de aceite");
+		JLabel lblNewLabel_2_2 = new JLabel("Ajustar pernos y tornillos de anclaje de la base");
 		lblNewLabel_2_2.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
 		panel.add(lblNewLabel_2_2, "4, 20");
 		
@@ -268,11 +232,11 @@ public class ReportDaily extends JFrame implements Printable {
 		date3.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
 		panel.add(date3, "5, 20");
 		
-		JLabel lblFrecuencia_1_3 = new JLabel("BANCADA COMPRESOR");
-		lblFrecuencia_1_3.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_1_3, "2, 22");
+		JLabel lblFrecuencia_16_3 = new JLabel("TABLERO DE CONTROL");
+		lblFrecuencia_16_3.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
+		panel.add(lblFrecuencia_16_3, "2, 22");
 		
-		JLabel lblNewLabel_2_3 = new JLabel("Verificar Funcionmamiento del compresor");
+		JLabel lblNewLabel_2_3 = new JLabel("Verficar que no haya cables sulfatados");
 		lblNewLabel_2_3.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
 		panel.add(lblNewLabel_2_3, "4, 22");
 		
@@ -280,230 +244,14 @@ public class ReportDaily extends JFrame implements Printable {
 		date4.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
 		panel.add(date4, "5, 22");
 		
-		JLabel lblFrecuencia_1_4 = new JLabel("BANCADA COMPRESOR");
-		lblFrecuencia_1_4.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_1_4, "2, 24");
-		
-		JLabel lblNewLabel_2_4 = new JLabel("Verificar funcionamiento del Presostato");
-		lblNewLabel_2_4.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_4, "4, 24");
-		
-	
-		date5.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date5, "5, 24");
-		
-		JLabel lblFrecuencia_1_5 = new JLabel("BANCADA COMPRESOR");
-		lblFrecuencia_1_5.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_1_5, "2, 26");
-		
-		JLabel lblNewLabel_2_5 = new JLabel("Verificar manómetro del pulmón al activarse el compresor");
-		lblNewLabel_2_5.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_5, "4, 26");
-		
-		
-		date6.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date6, "5, 26");
-		
-		JLabel lblFrecuencia_1_6 = new JLabel("BANCADA COMPRESOR");
-		lblFrecuencia_1_6.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_1_6, "2, 28");
-		
-		JLabel lblNewLabel_2_6 = new JLabel("Medición del consumo Eléctrico");
-		lblNewLabel_2_6.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_6, "4, 28");
-		
-	
-		date7.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date7, "5, 28");
-		
-		JLabel lblFrecuencia_8 = new JLabel("BOMBA");
-		lblFrecuencia_8.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_8, "2, 30");
-		
-		JLabel lblNewLabel_2_7 = new JLabel("Inspección auditiva para determinar ruidos extraños");
-		lblNewLabel_2_7.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_7, "4, 30");
-		
-
-		date8.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date8, "5, 30");
-		
-		JLabel lblFrecuencia_8_1 = new JLabel("BOMBA");
-		lblFrecuencia_8_1.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_8_1, "2, 32");
-		
-		JLabel lblNewLabel_2_8 = new JLabel("Inspección de tubería de succión para verificar que no haya pérdida de ceba");
-		lblNewLabel_2_8.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_8, "4, 32");
-		
-
-		date9.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date9, "5, 32");
-		
-		JLabel lblFrecuencia_8_2 = new JLabel("BOMBA");
-		lblFrecuencia_8_2.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_8_2, "2, 34");
-		
-		JLabel lblNewLabel_2_9 = new JLabel("Inspección táctil para determinar vibraciones excesivas");
-		lblNewLabel_2_9.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_9, "4, 34");
-		
-		
-		date10.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date10, "5, 34");
-		
-		JLabel lblFrecuencia_8_3 = new JLabel("BOMBA");
-		lblFrecuencia_8_3.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_8_3, "2, 36");
-		
-		JLabel lblNewLabel_2_10 = new JLabel("Inspección visual del manómetro de presión al activarse la bomba");
-		lblNewLabel_2_10.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_10, "4, 36");
-		
-		
-		date11.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date11, "5, 36");
-		
-		JLabel lblFrecuencia_8_4 = new JLabel("BOMBA");
-		lblFrecuencia_8_4.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_8_4, "2, 38");
-		
-		JLabel lblNewLabel_2_11 = new JLabel("Inspección visual para detectar fugas en las tuberias de agua");
-		lblNewLabel_2_11.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_11, "4, 38");
-		
-		
-		date12.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date12, "5, 38");
-		
-		JLabel lblFrecuencia_8_5 = new JLabel("BOMBA");
-		lblFrecuencia_8_5.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_8_5, "2, 40");
-		
-		JLabel lblNewLabel_2_12 = new JLabel("Medición consumo eléctrico");
-		lblNewLabel_2_12.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_12, "4, 40");
-		
-	
-		date13.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date13, "5, 40");
-		
-		JLabel lblFrecuencia_8_6 = new JLabel("BOMBA");
-		lblFrecuencia_8_6.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_8_6, "2, 42");
-		
-		JLabel lblNewLabel_2_13 = new JLabel("Validar el funcionamiento de la bomba");
-		lblNewLabel_2_13.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_13, "4, 42");
-		
-		
-		date14.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date14, "5, 42");
-		
-		JLabel lblFrecuencia_8_7 = new JLabel("BOMBA");
-		lblFrecuencia_8_7.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_8_7, "2, 44");
-		
-		JLabel lblNewLabel_2_14 = new JLabel("Validar a través del tacto termperatura externa de tubería de succión");
-		lblNewLabel_2_14.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_14, "4, 44");
-		
-		
-		date15.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date15, "5, 44");
-		
-		JLabel lblFrecuencia_16 = new JLabel("PULMÓN HIDRONEUMÁTICO");
-		lblFrecuencia_16.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_16, "2, 46, left, default");
-		
-		JLabel lblNewLabel_2_14_1 = new JLabel("Medición de presión alta cuando está apagada la bomba");
-		lblNewLabel_2_14_1.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_14_1, "4, 46");
-		
-	
-		date16.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date16, "5, 46");
-		
-		JLabel lblFrecuencia_16_1 = new JLabel("PULMÓN HIDRONEUMÁTICO");
-		lblFrecuencia_16_1.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_16_1, "2, 48");
-		
-		JLabel lblNewLabel_2_14_2 = new JLabel("Medición de presión baja cuando está activa la bomba");
-		lblNewLabel_2_14_2.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_14_2, "4, 48");
-		
-		
-		date17.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date17, "5, 48");
-		
-		JLabel lblFrecuencia_16_2 = new JLabel("PULMÓN HIDRONEUMÁTICO");
-		lblFrecuencia_16_2.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_16_2, "2, 50");
-		
-		JLabel lblNewLabel_2_14_3 = new JLabel("Verificar nivel de agua");
-		lblNewLabel_2_14_3.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_14_3, "4, 50");
-		
-		
-		date18.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date18, "5, 50");
-		
-		JLabel lblFrecuencia_16_2_1 = new JLabel("PULMÓN HIDRONEUMÁTICO");
-		lblFrecuencia_16_2_1.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_16_2_1, "2, 52");
-		
-		JLabel lblNewLabel_2_14_4 = new JLabel("Verificar funcionamiento del manómetro");
-		lblNewLabel_2_14_4.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_14_4, "4, 52, fill, default");
-		
-		
-		date19.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date19, "5, 52");
-		
-		JLabel lblFrecuencia_16_3 = new JLabel("TABLERO DE CONTROL");
-		lblFrecuencia_16_3.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_16_3, "2, 54");
-		
-		JLabel lblNewLabel_2_14_5 = new JLabel("Medición del amperaje");
-		lblNewLabel_2_14_5.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_14_5, "4, 54");
-		
-	
-		date20.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date20, "5, 54");
-		
-		JLabel lblFrecuencia_16_3_1 = new JLabel("TABLERO DE CONTROL");
-		lblFrecuencia_16_3_1.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_16_3_1, "2, 56");
-		
-		JLabel lblNewLabel_2_14_6 = new JLabel("Medición del voltaje");
-		lblNewLabel_2_14_6.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_14_6, "4, 56");
-		
-	
-		date21.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date21, "5, 56");
-		
-		JLabel lblFrecuencia_16_3_2 = new JLabel("TABLERO DE CONTROL");
-		lblFrecuencia_16_3_2.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblFrecuencia_16_3_2, "2, 58");
-		
-		JLabel lblNewLabel_2_14_7 = new JLabel("Verificar a través del tacto temperatura la de los elementos de control");
-		lblNewLabel_2_14_7.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
-		panel.add(lblNewLabel_2_14_7, "4, 58");
-		
-		
-		date22.setFont(new Font("Arial Narrow", Font.PLAIN, 11));
-		panel.add(date22, "5, 58");
-		
 		JTextPane textObservations = new JTextPane();
 		textObservations.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Observaciones", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		textObservations.setEditable(false);
-		panel.add(textObservations, "2, 60, 4, 1, fill, fill");
+		panel.add(textObservations, "2, 42, 4, 1, fill, fill");
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
-		panel.add(panel_1, "2, 62, 4, 1, fill, fill");
+		panel.add(panel_1, "2, 44, 4, 1, fill, fill");
 		panel_1.setLayout(null);
 		
 		JLabel lblNewLabel_3 = new JLabel("Recibido  por:");
@@ -528,7 +276,7 @@ public class ReportDaily extends JFrame implements Printable {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				  PrinterJob job = PrinterJob.getPrinterJob();
-				    job.setPrintable(new ReportDaily(register, user));
+				    job.setPrintable(new ReportMonthly(register, user));
 				    if (job.printDialog()) {
 				      try {
 				        job.print();
@@ -548,32 +296,15 @@ public class ReportDaily extends JFrame implements Printable {
 		lblBoss.setText(user.getMantenanceBoss());
 		lblOperator.setText(user.getOperator());
 		lblControlNumber.setText(user.getControlNumber());
-		lblFrecuency.setText("Diaria");
+		lblFrecuency.setText("Mensual");
 		
 
-		ArrayList<String> list = GetRegistered.getDaily(register);
+		ArrayList<String> list = GetRegistered.getMonthly(register);
 		date1.setText(list.get(0));
 		date2.setText(list.get(1));
 		date3.setText(list.get(2));
 		date4.setText(list.get(3));
-		date5.setText(list.get(4));
-		date6.setText(list.get(5));
-		date7.setText(list.get(6));
-		date8.setText(list.get(7));
-		date9.setText(list.get(8));
-		date10.setText(list.get(9));
-		date11.setText(list.get(10));
-		date12.setText(list.get(11));
-		date13.setText(list.get(12));
-		date14.setText(list.get(13));
-		date15.setText(list.get(14));
-		date16.setText(list.get(15));
-		date17.setText(list.get(16));
-		date18.setText(list.get(17));
-		date19.setText(list.get(18));
-		date20.setText(list.get(19));
-		date21.setText(list.get(20));
-		date22.setText(list.get(21));
+		
 	}
 	
 

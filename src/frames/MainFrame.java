@@ -4,20 +4,15 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
 import net.miginfocom.swing.MigLayout;
 import panels.AlertPanel;
-import sql.SQLConnection;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
-
 import actors.Alert;
 import auxiliar.CalculateDailyAlerts;
 import maintenanceSheet.Sheet;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
@@ -29,6 +24,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import java.awt.Frame;
+
 
 
 
@@ -43,6 +40,7 @@ public class MainFrame extends JFrame {
 	private Sheet maintenance = new Sheet(new Alert("void"));
 	private RegisterList registers = new RegisterList();
 	private ConfigFrame configFrame = new ConfigFrame();
+	private CorrectiveMantenance correctiveFrame = new CorrectiveMantenance();
 	private static JPanel panel = new JPanel();
 	private static int altertCounter = 0;
 	private static JLabel lblAlertMessage = new JLabel("Alertas Pendientes");
@@ -57,6 +55,7 @@ public class MainFrame extends JFrame {
 		maintenance.dispose();
 		registers.dispose();
 		configFrame.dispose();
+		correctiveFrame.dispose();
 		
 	}
 
@@ -65,14 +64,14 @@ public class MainFrame extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/img/icono.png")));
 		setTitle("Hydropneumatic Equipment Management Software");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1056, 600);
+		setSize(1168, 600);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelMenu = new JPanel();
 		panelMenu.setBackground(Color.WHITE);
 		getContentPane().add(panelMenu, BorderLayout.WEST);
-		panelMenu.setLayout(new MigLayout("", "[236.00]", "[][][][][][][][]"));
+		panelMenu.setLayout(new MigLayout("", "[296.00]", "[][][][][][][][50.00][]"));
 		
 		JButton btnRegister = new JButton("Registrar Equipo");
 		btnRegister.addActionListener(new ActionListener() {
@@ -93,7 +92,7 @@ public class MainFrame extends JFrame {
 		btnRegister.setBackground(new Color(0, 102, 204));
 		panelMenu.add(btnRegister, "cell 0 0,growx");
 		
-		JButton btnMaintenance = new JButton("Mantenimiento");
+		JButton btnMaintenance = new JButton("Mantenimiento Preventivo");
 		btnMaintenance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeAllFrames();
@@ -103,12 +102,21 @@ public class MainFrame extends JFrame {
 				
 			}
 		});
-		btnMaintenance.setIcon(new ImageIcon(MainFrame.class.getResource("/img/wrench.png")));
+		btnMaintenance.setIcon(new ImageIcon(MainFrame.class.getResource("/img/calendar.png")));
 		btnMaintenance.setHorizontalAlignment(SwingConstants.LEFT);
 		btnMaintenance.setForeground(Color.WHITE);
 		btnMaintenance.setFont(new Font("Verdana", Font.BOLD, 16));
 		btnMaintenance.setBackground(new Color(0, 102, 204));
 		panelMenu.add(btnMaintenance, "cell 0 1,growx");
+		
+		JButton btnReport = new JButton("Registro Mantenimiento Preventivo");
+		btnReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeAllFrames();
+				registers.setLocationRelativeTo(getContentPane());
+				registers.setVisible(true);
+			}
+		});
 		
 		JButton btnList = new JButton("Equipos registrados");
 		btnList.addActionListener(new ActionListener() {
@@ -120,27 +128,41 @@ public class MainFrame extends JFrame {
 				listFrame.setVisible(true);
 			}
 		});
+		
+		JButton btnMantenimientoCorrectivo = new JButton("Mantenimiento Correctivo");
+		btnMantenimientoCorrectivo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeAllFrames();
+				correctiveFrame.setLocationRelativeTo(getContentPane());
+				correctiveFrame.setVisible(true);
+				
+			}
+		});
+		btnMantenimientoCorrectivo.setIcon(new ImageIcon(MainFrame.class.getResource("/img/wrench.png")));
+		btnMantenimientoCorrectivo.setHorizontalAlignment(SwingConstants.LEFT);
+		btnMantenimientoCorrectivo.setForeground(Color.WHITE);
+		btnMantenimientoCorrectivo.setFont(new Font("Verdana", Font.BOLD, 16));
+		btnMantenimientoCorrectivo.setBackground(new Color(0, 102, 204));
+		panelMenu.add(btnMantenimientoCorrectivo, "cell 0 2,grow");
 		btnList.setIcon(new ImageIcon(MainFrame.class.getResource("/img/list.png")));
 		btnList.setHorizontalAlignment(SwingConstants.LEFT);
 		btnList.setForeground(Color.WHITE);
 		btnList.setFont(new Font("Verdana", Font.BOLD, 16));
 		btnList.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnList, "cell 0 2,grow");
-		
-		JButton btnReport = new JButton("Reportes");
-		btnReport.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				closeAllFrames();
-				registers.setLocationRelativeTo(getContentPane());
-				registers.setVisible(true);
-			}
-		});
+		panelMenu.add(btnList, "cell 0 3,grow");
 		btnReport.setIcon(new ImageIcon(MainFrame.class.getResource("/img/reports.png")));
 		btnReport.setHorizontalAlignment(SwingConstants.LEFT);
 		btnReport.setForeground(Color.WHITE);
 		btnReport.setFont(new Font("Verdana", Font.BOLD, 16));
 		btnReport.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnReport, "cell 0 3,grow");
+		panelMenu.add(btnReport, "cell 0 4,alignx left,growy");
+		
+		JButton btnExit = new JButton("Salir");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		
 		JButton btnConfig = new JButton("Configuración");
 		btnConfig.addActionListener(new ActionListener() {
@@ -151,25 +173,29 @@ public class MainFrame extends JFrame {
 				
 			}
 		});
+		
+		JButton btnReport_1 = new JButton("Registro Mantenimiento Preventivo");
+		btnReport_1.setIcon(new ImageIcon(MainFrame.class.getResource("/img/search.png")));
+		btnReport_1.setHorizontalAlignment(SwingConstants.LEFT);
+		btnReport_1.setForeground(Color.WHITE);
+		btnReport_1.setFont(new Font("Verdana", Font.BOLD, 16));
+		btnReport_1.setBackground(new Color(0, 102, 204));
+		panelMenu.add(btnReport_1, "cell 0 5,grow");
 		btnConfig.setIcon(new ImageIcon(MainFrame.class.getResource("/img/options.png")));
 		btnConfig.setHorizontalAlignment(SwingConstants.LEFT);
 		btnConfig.setForeground(Color.WHITE);
 		btnConfig.setFont(new Font("Verdana", Font.BOLD, 16));
 		btnConfig.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnConfig, "cell 0 4,grow");
+		panelMenu.add(btnConfig, "cell 0 6,grow");
 		
-		JButton btnExit = new JButton("Salir");
-		btnExit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
+		JLabel lblNewLabel = new JLabel("");
+		panelMenu.add(lblNewLabel, "cell 0 7");
 		btnExit.setIcon(new ImageIcon(MainFrame.class.getResource("/img/exit.png")));
 		btnExit.setHorizontalAlignment(SwingConstants.LEFT);
 		btnExit.setForeground(Color.WHITE);
 		btnExit.setFont(new Font("Verdana", Font.BOLD, 16));
 		btnExit.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnExit, "cell 0 6,grow");
+		panelMenu.add(btnExit, "cell 0 8,grow");
 		
 		JPanel panelWarning = new JPanel();
 		panelWarning.setBackground(Color.WHITE);

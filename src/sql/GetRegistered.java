@@ -6,10 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+
 
 public class GetRegistered {
 	
+	private static Connection connection = SQLConnection.getConection();
 
 	public static ArrayList<String> getDaily(String register){
 		
@@ -17,7 +18,6 @@ public class GetRegistered {
 		String gg = "No realizado";
 		
 		
-		Connection connection = SQLConnection.getConection();
 		
 		
 			String SQLcompresor = "SELECT * FROM  compresor_registered_daily_mantenance WHERE register = ?";
@@ -40,7 +40,7 @@ public class GetRegistered {
 				
 				PreparedStatement stBoard = connection.prepareStatement(SQLboard);
 				stBoard.setString(1, register);
-				ResultSet rsBoard =stPulmon.executeQuery();
+				ResultSet rsBoard =stBoard.executeQuery();
 				
 				if(rsCompresor.next()) {
 					String AAJ = rsCompresor.getString("AAJ");
@@ -123,6 +123,83 @@ public class GetRegistered {
 		
 		
 		return list;
+	}
+	///
+	
+	
+	public static ArrayList<String> getWeekly(String register){
+		
+		ArrayList<String> list = new ArrayList<String>();
+		String gg = "No realizado";
+		
+		String SQL = "SELECT * FROM  registered_weekly_mantenance WHERE register = ?";
+		
+		try {
+			PreparedStatement st = connection.prepareStatement(SQL);
+			st.setString(1,register);
+			ResultSet rs = st.executeQuery();
+			
+			if(rs.next()) {
+				String ITDVE = rs.getString("ITDVE");
+				String LRPPAC = rs.getString("LRPPAC");
+				String LEPP = rs.getString("LEPP");
+				
+
+				list.add(ITDVE.length() > 0 ? ITDVE: gg);
+				list.add(LRPPAC.length() > 0 ? LRPPAC: gg);
+				list.add(LEPP.length() > 0 ? LEPP: gg);
+				
+			
+			}else {
+				ArrayList<String>placeholders = new ArrayList<>(Arrays.asList(gg, gg, gg));
+				list.addAll(placeholders);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	
+	}
+///
+	
+public static ArrayList<String> getMonthly(String register){
+		
+		ArrayList<String> list = new ArrayList<String>();
+		String gg = "No realizado";
+		
+		String SQL = "SELECT * FROM  registered_monthly_mantenance WHERE register = ?";
+		
+		try {
+			PreparedStatement st = connection.prepareStatement(SQL);
+			st.setString(1,register);
+			ResultSet rs = st.executeQuery();
+			
+			if(rs.next()) {
+				String VNA = rs.getString("VNA");
+				String VTCT = rs.getString("VTCT");
+				String APTAB = rs.getString("APTAB");
+				String VCS = rs.getString("VCS");
+				
+
+				list.add(VNA.length() > 0 ? VNA: gg);
+				list.add(VTCT.length() > 0 ? VTCT: gg);
+				list.add(APTAB.length() > 0 ? APTAB: gg);
+				list.add(VCS.length() > 0 ? VCS: gg);
+				
+
+			}else {
+				ArrayList<String>placeholders = new ArrayList<>(Arrays.asList(gg, gg, gg, gg));
+				list.addAll(placeholders);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	
 	}
 	
 }
