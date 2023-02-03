@@ -94,7 +94,7 @@ public class ListEquipament extends JDialog {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			SQLConnection.resetConection();
+			//SQLConnection.resetConection();
 		}
 	}
 }
