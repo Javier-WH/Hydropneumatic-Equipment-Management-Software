@@ -4,9 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
-
 import actors.Alert;
-
+import maintenanceSheet.Sheet;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -29,7 +28,11 @@ public class AlertPanel extends JPanel {
 		panel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println(alert.getId());
+				
+				Sheet sheet = new Sheet(alert);
+				sheet.setLocationRelativeTo(null);
+				sheet.setVisible(true);
+				
 			}
 		});
 		panel.setBorder(new LineBorder(new Color(255, 255, 255)));

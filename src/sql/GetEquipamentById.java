@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import actors.WaterPump;
+
 public class GetEquipamentById {
 
 	public static ResultSet getById(String id) {
@@ -23,5 +25,8 @@ public class GetEquipamentById {
 		}
 		
 	}
+	////
+	
+
 	
 }

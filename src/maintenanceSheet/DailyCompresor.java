@@ -20,7 +20,7 @@ import java.awt.event.KeyEvent;
 
 public class DailyCompresor extends JPanel {
 	private JCheckBox chckbx1;
-	private JTextField textCode;
+	private static JTextField textCode = new JTextField();
 
 
 	public DailyCompresor() {
@@ -138,7 +138,7 @@ public class DailyCompresor extends JPanel {
 		lblCode.setForeground(new Color(0, 102, 255));
 		add(lblCode, "cell 0 7,alignx right");
 		
-		textCode = new JTextField();
+
 		textCode.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -177,4 +177,7 @@ public class DailyCompresor extends JPanel {
 
 	}
 
+	public static void setTextcode(String code) {
+		textCode.setText(code);
+	}
 }

@@ -21,15 +21,17 @@ public class Main {
 		
 
 		
-	CreateTables.createPump();
-		
+	//CreateTables.createPump();
+	
+		if(CreateTables.createTables()) {
+			mainFrame.setVisible(true);			
+		}
 		
 		
 
 		
 
 		
-		mainFrame.setVisible(true);
 
 	}
 

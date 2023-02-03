@@ -19,7 +19,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class MonthlyBoard extends JPanel {
-	private JTextField textCode;
+	private static JTextField textCode = new JTextField();
 
 
 	public MonthlyBoard() {
@@ -62,7 +62,7 @@ public class MonthlyBoard extends JPanel {
 		lblCode.setForeground(new Color(0, 102, 255));
 		add(lblCode, "cell 0 4,alignx right");
 		
-		textCode = new JTextField();
+
 		textCode.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -88,4 +88,7 @@ public class MonthlyBoard extends JPanel {
 
 	}
 
+	public static void setTextcode(String code) {
+		textCode.setText(code);
+	}
 }

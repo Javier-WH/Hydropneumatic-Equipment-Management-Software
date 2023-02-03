@@ -1,19 +1,27 @@
 package panels;
 
 import javax.swing.JPanel;
+
+import actors.User;
+import frames.ReportDaily;
+
 import javax.swing.JLabel;
 
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class RegisterPanel extends JPanel {
 
 
-	public RegisterPanel() {
+	public RegisterPanel(String register, User user, Container panel) {
+	
 		setBackground(Color.WHITE);
 		setLayout(null);
 		
@@ -27,14 +35,14 @@ public class RegisterPanel extends JPanel {
 		lblRegistro.setBounds(241, 11, 58, 14);
 		add(lblRegistro);
 		
-		JLabel lblFrecuencia = new JLabel("Frecuencia");
-		lblFrecuencia.setBounds(173, 36, 58, 14);
-		add(lblFrecuencia);
+		JLabel lblFrecuencia1 = new JLabel("Frecuencia");
+		lblFrecuencia1.setBounds(173, 36, 58, 14);
+		add(lblFrecuencia1);
 		
-		JLabel lblRegistro_1 = new JLabel("Diario");
-		lblRegistro_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRegistro_1.setBounds(239, 36, 58, 14);
-		add(lblRegistro_1);
+		JLabel lblFrecuencia = new JLabel("Diario");
+		lblFrecuencia.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblFrecuencia.setBounds(239, 36, 58, 14);
+		add(lblFrecuencia);
 		
 		JLabel lblOperador = new JLabel("Operador:");
 		lblOperador.setBounds(173, 61, 58, 14);
@@ -57,7 +65,35 @@ public class RegisterPanel extends JPanel {
 		lblBackGround.setBounds(0, 0, 840, 120);
 		ImageIcon backgroundIcon = new ImageIcon(new ImageIcon("src/img/register.png").getImage().getScaledInstance(lblBackGround.getWidth(), lblBackGround.getHeight(), Image.SCALE_SMOOTH));
 		lblBackGround.setIcon(backgroundIcon);
-		add(lblBackGround);
+		add(lblBackGround);	
+		lblRegistro.setText(register);
+		lblOperador.setText(user.getOperator());
+		lblEquipos.setText(user.getEquipament());
+		
+		switch (Integer.parseInt(user.getType())) {
+			case 1:
+				lblFrecuencia.setText("Diario");
+			break;
+			case 2:
+				lblFrecuencia.setText("Semanal");
+			break;
+			case 3:
+				lblFrecuencia.setText("Mensual");
+			break;
+			default:
+			break;
+		}
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//System.out.println(user.getType());
+				ReportDaily RD = new ReportDaily(register,user);
+				RD.setLocationRelativeTo(panel);
+				RD.setVisible(true);
+				
+			}
+		});
+		
 		
 		
 		

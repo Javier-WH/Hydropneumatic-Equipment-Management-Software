@@ -19,7 +19,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class DailyBoard extends JPanel {
-	private JTextField textCode;
+	private static JTextField textCode = new JTextField("");
 
 
 	public DailyBoard() {
@@ -98,7 +98,7 @@ public class DailyBoard extends JPanel {
 		lblCode.setForeground(new Color(0, 102, 255));
 		add(lblCode, "cell 0 5,alignx right");
 		
-		textCode = new JTextField();
+
 		textCode.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -127,6 +127,10 @@ public class DailyBoard extends JPanel {
 				Sheet.setDailyBoardCode("");
 			}
 		});
+	}
+	
+	public static void setTextcode(String code) {
+		textCode.setText(code);
 	}
 
 }

@@ -19,7 +19,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class MonthlyCompresor extends JPanel {
-	private JTextField textCode;
+	private static JTextField textCode = new JTextField();
 
 
 	public MonthlyCompresor() {
@@ -80,7 +80,7 @@ public class MonthlyCompresor extends JPanel {
 		lblCode.setForeground(new Color(0, 102, 255));
 		add(lblCode, "cell 0 5,alignx right");
 		
-		textCode = new JTextField();
+
 		textCode.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -107,5 +107,7 @@ public class MonthlyCompresor extends JPanel {
 			}
 		});
 	}
-
+	public static void setTextcode(String code) {
+		textCode.setText(code);
+	}
 }

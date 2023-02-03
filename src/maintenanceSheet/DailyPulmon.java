@@ -19,7 +19,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class DailyPulmon extends JPanel {
-	private JTextField textCode;
+	private static JTextField textCode = new JTextField();
 
 
 	public DailyPulmon() {
@@ -122,7 +122,7 @@ public class DailyPulmon extends JPanel {
 		lblCode.setForeground(new Color(0, 102, 255));
 		add(lblCode, "cell 0 6,alignx right");
 		
-		textCode = new JTextField();
+
 		textCode.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -156,5 +156,7 @@ public class DailyPulmon extends JPanel {
 			}
 		});
 	}
-
+	public static void setTextcode(String code) {
+		textCode.setText(code);
+	}
 }

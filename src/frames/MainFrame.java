@@ -36,11 +36,13 @@ import javax.swing.JLabel;
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 //Frames
+
 	private RegisterFrame registerFrame  = new RegisterFrame();
 	private ListEquipament listFrame = new ListEquipament();
 	private Selection selectionFrame = new Selection();
-	private Sheet maintenance = new Sheet();
+	private Sheet maintenance = new Sheet(new Alert("void"));
 	private RegisterList registers = new RegisterList();
+	private ConfigFrame configFrame = new ConfigFrame();
 	private static JPanel panel = new JPanel();
 	private static int altertCounter = 0;
 	private static JLabel lblAlertMessage = new JLabel("Alertas Pendientes");
@@ -49,11 +51,12 @@ public class MainFrame extends JFrame {
 	//close all frames
 	private void closeAllFrames() {
 		
-		registerFrame.setVisible(false);
-		listFrame.setVisible(false);
+		registerFrame.dispose();
+		listFrame.dispose();
 		selectionFrame.dispose();
 		maintenance.dispose();
 		registers.dispose();
+		configFrame.dispose();
 		
 	}
 
@@ -94,6 +97,7 @@ public class MainFrame extends JFrame {
 		btnMaintenance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeAllFrames();
+				maintenance = new Sheet(new Alert("void"));
 				maintenance.setLocationRelativeTo(getContentPane());
 				maintenance.setVisible(true);
 				
@@ -139,6 +143,14 @@ public class MainFrame extends JFrame {
 		panelMenu.add(btnReport, "cell 0 3,grow");
 		
 		JButton btnConfig = new JButton("Configuración");
+		btnConfig.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeAllFrames();
+				configFrame.setLocationRelativeTo(getContentPane());
+				configFrame.setVisible(true);
+				
+			}
+		});
 		btnConfig.setIcon(new ImageIcon(MainFrame.class.getResource("/img/options.png")));
 		btnConfig.setHorizontalAlignment(SwingConstants.LEFT);
 		btnConfig.setForeground(Color.WHITE);
@@ -147,6 +159,11 @@ public class MainFrame extends JFrame {
 		panelMenu.add(btnConfig, "cell 0 4,grow");
 		
 		JButton btnExit = new JButton("Salir");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnExit.setIcon(new ImageIcon(MainFrame.class.getResource("/img/exit.png")));
 		btnExit.setHorizontalAlignment(SwingConstants.LEFT);
 		btnExit.setForeground(Color.WHITE);

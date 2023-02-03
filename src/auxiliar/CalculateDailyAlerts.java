@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import actors.Alert;
+import sql.ConfigManager;
 import sql.GetEquipamentById;
 import sql.ReadDailyAlert;
 import sql.ReadMonthlyAlert;
@@ -17,13 +18,24 @@ public class CalculateDailyAlerts {
 	public static ArrayList<Alert> getAlertList(){
 		dailyAlerts.clear();
 		
-		getDailyAlerts();
-		getWeeklyAlerts();
+		ArrayList<String> config = ConfigManager.getConfig();
+		
+		if(config.get(0).equals("1")) {
+			getDailyAlerts();			
+		}
+		if(config.get(1).equals("1")) {
+			getWeeklyAlerts();			
+		}
+		if(config.get(0).equals("1")) {
+			getMonthlyAlerts();						
+		}
+		
+		
 		
 		return dailyAlerts;
 	}
 	
-	private static void addAlert(String alertText, String equipamentID) {
+	private static void addAlert(String alertText, String equipamentID, String frecuency, String type) {
 		ResultSet rsEquipament = GetEquipamentById.getById(equipamentID);
 		try {
 			rsEquipament.next();
@@ -37,6 +49,8 @@ public class CalculateDailyAlerts {
 			alert.setFunction(rsEquipament.getString("function"));
 			alert.setPictureAddress(rsEquipament.getString("picture"));
 			alert.setId(equipamentID);
+			alert.setFrecuency(frecuency);
+			alert.setType(type);
 			
 			dailyAlerts.add(alert);
 			
@@ -68,33 +82,33 @@ public class CalculateDailyAlerts {
 				String ITDVPC = rsDailyBomb.getString("ITDVPC"); //Inspección de tuberia de succion para verificar que no haya pérdida de cebaInspección de tuberia de succion para verificar que no haya pérdida de ceba
 			
 				if(Calculator.needAlert(VFB)) {
-					addAlert("Validar el funcionamiento de la bomba", id);
+					addAlert("Validar el funcionamiento de la bomba", id, "1", "1");
 				}
 				if(Calculator.needAlert(IADRE)) {
-					addAlert("Inspección auditiva para determinar ruidos extraños", id);
+					addAlert("Inspección auditiva para determinar ruidos extraños", id, "1", "1");
 				}
 			
 				if(Calculator.needAlert(IVMPAB)) {
-					addAlert("Inspección visual del manómetro de presión al activarse la bomba", id);
+					addAlert("Inspección visual del manómetro de presión al activarse la bomba", id, "1", "1");
 				}
 				
 				if(Calculator.needAlert(ITDVE)) {
-					addAlert("Inspección táctil para determinar vibraciones excesivas", id);
+					addAlert("Inspección táctil para determinar vibraciones excesivas", id, "1", "1");
 				}
 				
 				if(Calculator.needAlert(IVDFTA)) {
-					addAlert("Inspección visual para detectar fugas en las tuberías de agua", id);
+					addAlert("Inspección visual para detectar fugas en las tuberías de agua", id, "1", "1");
 				}
 				
 				if(Calculator.needAlert(IVDFTA)) {
-					addAlert("Inspección visual para detectar fugas en las tuberías de agua", id);
+					addAlert("Inspección visual para detectar fugas en las tuberías de agua", id, "1", "1");
 				}
 				
 				if(Calculator.needAlert(MCEM)) {
-					addAlert("Medición consumo eléctrico del motor", id);
+					addAlert("Medición consumo eléctrico del motor", id, "1", "1");
 				}
 				if(Calculator.needAlert(ITDVPC)) {
-					addAlert("Inspección de tuberia de succion para verificar que no haya pérdida de cebaInspección de tuberia de succion para verificar que no haya pérdida de ceba", id);
+					addAlert("Inspección de tuberia de succion para verificar que no haya pérdida de cebaInspección de tuberia de succion para verificar que no haya pérdida de ceba", id, "1", "1");
 				}
 			
 			}//end while
@@ -109,23 +123,23 @@ public class CalculateDailyAlerts {
 				String VFP = rsDailyCompresor.getString("VFP");// Verificar funcionamiento de presostato
 			
 				if(Calculator.needAlert(VFC)) {
-					addAlert("Validar el funcionamiento del compresor", id);
+					addAlert("Validar el funcionamiento del compresor", id, "1", "2");
 				}
 				
 				if(Calculator.needAlert(VFA)) {
-					addAlert("Verificar fugas de aceite", id);
+					addAlert("Verificar fugas de aceite", id, "1", "2");
 				}
 				
 				if(Calculator.needAlert(IADRE)) {
-					addAlert("Inspección auditiva para determinar ruidos extraños", id);
+					addAlert("Inspección auditiva para determinar ruidos extraños", id, "1", "2");
 				}
 				
 				if(Calculator.needAlert(AAJ)) {
-					addAlert("Aplicar agua jabonosa en uniones para determinar fugas de aire", id);
+					addAlert("Aplicar agua jabonosa en uniones para determinar fugas de aire", id, "1", "2");
 				}
 				
 				if(Calculator.needAlert(VFP)) {
-					addAlert("Verificar funcionamiento de presostato", id);
+					addAlert("Verificar funcionamiento de presostato", id, "1", "2");
 				}
 				
 			}
@@ -138,13 +152,13 @@ public class CalculateDailyAlerts {
 				String VTTEC = rsDailyBoard.getString("VTTEC"); // Verificar a través del tacto temperatura de los elementos de control
 				
 				if(Calculator.needAlert(MV)) {
-					addAlert("Medición voltaje", id);
+					addAlert("Medición voltaje", id, "1", "3");
 				}
 				if(Calculator.needAlert(MA)) {
-					addAlert("Medición amperaje", id);
+					addAlert("Medición amperaje", id, "1", "3");
 				}
 				if(Calculator.needAlert(VTTEC)) {
-					addAlert("Verificar a través del tacto temperatura de los elementos de control", id);
+					addAlert("Verificar a través del tacto temperatura de los elementos de control", id, "1", "3");
 				}
 		
 			}
@@ -159,16 +173,16 @@ public class CalculateDailyAlerts {
 				String MPACAB = rsDailyPulmon.getString("MPACAB");// Medición de presión alta cuando apaga la bomba
 				
 				if(Calculator.needAlert(VNA)) {
-					addAlert("Verificar el nivel del agua", id);
+					addAlert("Verificar el nivel del agua", id, "1", "4");
 				}
 				if(Calculator.needAlert(VFM)) {
-					addAlert("Verificar funcionamiento del manómetro", id);
+					addAlert("Verificar funcionamiento del manómetro", id, "1", "4");
 				}
 				if(Calculator.needAlert(MPBCAB)) {
-					addAlert("Medición de presión baja cuando activa la bomba", id);
+					addAlert("Medición de presión baja cuando activa la bomba", id, "1", "4");
 				}
 				if(Calculator.needAlert(MPACAB)) {
-					addAlert("Medición de presión alta cuando apaga la bomba", id);
+					addAlert("Medición de presión alta cuando apaga la bomba", id, "1", "4");
 				}
 				
 			}
@@ -198,10 +212,10 @@ public class CalculateDailyAlerts {
 				String LRPPAC =  rsWeeklyBomb.getString("LRPPAC"); // Limpieza para retirar partículas de polvo y agentes contaminantes
 				
 				if(Calculator.needWeeklyAlert(VTETS)) {
-					addAlert("Validar a través del tacto temperatura externa de tubería de succión.", id);
+					addAlert("Validar a través del tacto temperatura externa de tubería de succión.", id, "2", "1");
 				}
 				if(Calculator.needWeeklyAlert(LRPPAC)) {
-					addAlert("Limpieza para retirar partículas de polvo y agentes contaminantes.", id);
+					addAlert("Limpieza para retirar partículas de polvo y agentes contaminantes.", id, "2", "1");
 				}
 			}
 			
@@ -211,11 +225,11 @@ public class CalculateDailyAlerts {
 				String MCE = rsWeeklyCompresor.getString("MCE"); // Medición de consumo eléctrico 
 				
 				if(Calculator.needWeeklyAlert(ITDVE)) {
-					addAlert("Inspección táctil para determinar vibraciones excesivas.", id);
+					addAlert("Inspección táctil para determinar vibraciones excesivas.", id, "2", "2");
 				}
 				
 				if(Calculator.needWeeklyAlert(MCE)) {
-					addAlert("Medición de consumo eléctrico ", id);
+					addAlert("Medición de consumo eléctrico ", id, "2", "2");
 				}
 				
 			}
@@ -225,7 +239,7 @@ public class CalculateDailyAlerts {
 				String LEPP = rsWeeklyBoard.getString("LEPP");  // Limpieza para eliminar partículas de polvo y agentes contaminantes
 				
 				if(Calculator.needWeeklyAlert(LEPP)) {
-					addAlert("Limpieza para eliminar partículas de polvo y agentes contaminantes.", id);
+					addAlert("Limpieza para eliminar partículas de polvo y agentes contaminantes.", id, "2", "3");
 				}
 				
 			}
@@ -251,7 +265,7 @@ public class CalculateDailyAlerts {
 				String APTAB = rsMonthlyBomb.getString("APTAB"); // Ajustar pernos y tornillos de anclaje de la base
 				
 				if(Calculator.needMonthlyAlert(APTAB)) {
-					addAlert("Ajustar pernos y tornillos de anclaje de la base", id);
+					addAlert("Ajustar pernos y tornillos de anclaje de la base", id, "3", "1");
 				}
 			}
 			
@@ -261,10 +275,10 @@ public class CalculateDailyAlerts {
 				String VNA = rsMonthlyCompresor.getString("VNA");  // Verificar nivel de aceite
 				
 				if(Calculator.needMonthlyAlert(VTCT)) {
-					addAlert("Verificar tensión de correa de transmisión", id);
+					addAlert("Verificar tensión de correa de transmisión", id, "3", "2");
 				}
 				if(Calculator.needMonthlyAlert(VNA)) {
-					addAlert("Verificar nivel de aceite", id);
+					addAlert("Verificar nivel de aceite", id, "3", "2");
 				}
 			}
 			
@@ -273,7 +287,7 @@ public class CalculateDailyAlerts {
 				String VCS = rsMonthlyBoard.getString("VCS"); // Verificar que no haya cables sulfatados
 				
 				if(Calculator.needMonthlyAlert(VCS)) {
-					addAlert("Verificar que no haya cables sulfatados", id);
+					addAlert("Verificar que no haya cables sulfatados", id, "3", "3");
 				}
 			}
 			
