@@ -24,7 +24,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import java.awt.Frame;
 
 
 
@@ -41,6 +40,7 @@ public class MainFrame extends JFrame {
 	private RegisterList registers = new RegisterList();
 	private ConfigFrame configFrame = new ConfigFrame();
 	private CorrectiveMantenance correctiveFrame = new CorrectiveMantenance();
+	private CorrectiveMantenanceList correctiveList = new CorrectiveMantenanceList();
 	private static JPanel panel = new JPanel();
 	private static int altertCounter = 0;
 	private static JLabel lblAlertMessage = new JLabel("Alertas Pendientes");
@@ -56,6 +56,7 @@ public class MainFrame extends JFrame {
 		registers.dispose();
 		configFrame.dispose();
 		correctiveFrame.dispose();
+		correctiveList.dispose();
 		
 	}
 
@@ -71,7 +72,7 @@ public class MainFrame extends JFrame {
 		JPanel panelMenu = new JPanel();
 		panelMenu.setBackground(Color.WHITE);
 		getContentPane().add(panelMenu, BorderLayout.WEST);
-		panelMenu.setLayout(new MigLayout("", "[296.00]", "[][][][][][][][50.00][]"));
+		panelMenu.setLayout(new MigLayout("", "[296.00]", "[][][][][][][][][50.00][]"));
 		
 		JButton btnRegister = new JButton("Registrar Equipo");
 		btnRegister.addActionListener(new ActionListener() {
@@ -109,6 +110,13 @@ public class MainFrame extends JFrame {
 		btnMaintenance.setBackground(new Color(0, 102, 204));
 		panelMenu.add(btnMaintenance, "cell 0 1,growx");
 		
+		JButton btnExit = new JButton("Salir");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		
 		JButton btnReport = new JButton("Registro Mantenimiento Preventivo");
 		btnReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -117,17 +125,12 @@ public class MainFrame extends JFrame {
 				registers.setVisible(true);
 			}
 		});
-		
-		JButton btnList = new JButton("Equipos registrados");
-		btnList.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				closeAllFrames();
-				listFrame.setLocationRelativeTo(getContentPane());
-				ListEquipament.loadList();
-				listFrame.setVisible(true);
-			}
-		});
+		btnReport.setIcon(new ImageIcon(MainFrame.class.getResource("/img/reports.png")));
+		btnReport.setHorizontalAlignment(SwingConstants.LEFT);
+		btnReport.setForeground(Color.WHITE);
+		btnReport.setFont(new Font("Verdana", Font.BOLD, 16));
+		btnReport.setBackground(new Color(0, 102, 204));
+		panelMenu.add(btnReport, "cell 0 2,alignx left,growy");
 		
 		JButton btnMantenimientoCorrectivo = new JButton("Mantenimiento Correctivo");
 		btnMantenimientoCorrectivo.addActionListener(new ActionListener() {
@@ -143,26 +146,40 @@ public class MainFrame extends JFrame {
 		btnMantenimientoCorrectivo.setForeground(Color.WHITE);
 		btnMantenimientoCorrectivo.setFont(new Font("Verdana", Font.BOLD, 16));
 		btnMantenimientoCorrectivo.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnMantenimientoCorrectivo, "cell 0 2,grow");
+		panelMenu.add(btnMantenimientoCorrectivo, "cell 0 3,grow");
+		
+		JButton btnReport_1 = new JButton("Registro Mantenimiento Correctivo");
+		btnReport_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeAllFrames();
+				correctiveList.setLocationRelativeTo(getContentPane());
+				correctiveList.setVisible(true);
+				
+			}
+		});
+		btnReport_1.setIcon(new ImageIcon(MainFrame.class.getResource("/img/search.png")));
+		btnReport_1.setHorizontalAlignment(SwingConstants.LEFT);
+		btnReport_1.setForeground(Color.WHITE);
+		btnReport_1.setFont(new Font("Verdana", Font.BOLD, 16));
+		btnReport_1.setBackground(new Color(0, 102, 204));
+		panelMenu.add(btnReport_1, "cell 0 4,grow");
+		
+		JButton btnList = new JButton("Equipos registrados");
+		btnList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				closeAllFrames();
+				listFrame.setLocationRelativeTo(getContentPane());
+				ListEquipament.loadList();
+				listFrame.setVisible(true);
+			}
+		});
 		btnList.setIcon(new ImageIcon(MainFrame.class.getResource("/img/list.png")));
 		btnList.setHorizontalAlignment(SwingConstants.LEFT);
 		btnList.setForeground(Color.WHITE);
 		btnList.setFont(new Font("Verdana", Font.BOLD, 16));
 		btnList.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnList, "cell 0 3,grow");
-		btnReport.setIcon(new ImageIcon(MainFrame.class.getResource("/img/reports.png")));
-		btnReport.setHorizontalAlignment(SwingConstants.LEFT);
-		btnReport.setForeground(Color.WHITE);
-		btnReport.setFont(new Font("Verdana", Font.BOLD, 16));
-		btnReport.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnReport, "cell 0 4,alignx left,growy");
-		
-		JButton btnExit = new JButton("Salir");
-		btnExit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
+		panelMenu.add(btnList, "cell 0 5,grow");
 		
 		JButton btnConfig = new JButton("Configuración");
 		btnConfig.addActionListener(new ActionListener() {
@@ -173,14 +190,6 @@ public class MainFrame extends JFrame {
 				
 			}
 		});
-		
-		JButton btnReport_1 = new JButton("Registro Mantenimiento Preventivo");
-		btnReport_1.setIcon(new ImageIcon(MainFrame.class.getResource("/img/search.png")));
-		btnReport_1.setHorizontalAlignment(SwingConstants.LEFT);
-		btnReport_1.setForeground(Color.WHITE);
-		btnReport_1.setFont(new Font("Verdana", Font.BOLD, 16));
-		btnReport_1.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnReport_1, "cell 0 5,grow");
 		btnConfig.setIcon(new ImageIcon(MainFrame.class.getResource("/img/options.png")));
 		btnConfig.setHorizontalAlignment(SwingConstants.LEFT);
 		btnConfig.setForeground(Color.WHITE);
@@ -189,13 +198,13 @@ public class MainFrame extends JFrame {
 		panelMenu.add(btnConfig, "cell 0 6,grow");
 		
 		JLabel lblNewLabel = new JLabel("");
-		panelMenu.add(lblNewLabel, "cell 0 7");
+		panelMenu.add(lblNewLabel, "flowx,cell 0 8");
 		btnExit.setIcon(new ImageIcon(MainFrame.class.getResource("/img/exit.png")));
 		btnExit.setHorizontalAlignment(SwingConstants.LEFT);
 		btnExit.setForeground(Color.WHITE);
 		btnExit.setFont(new Font("Verdana", Font.BOLD, 16));
 		btnExit.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnExit, "cell 0 8,grow");
+		panelMenu.add(btnExit, "cell 0 9,grow");
 		
 		JPanel panelWarning = new JPanel();
 		panelWarning.setBackground(Color.WHITE);

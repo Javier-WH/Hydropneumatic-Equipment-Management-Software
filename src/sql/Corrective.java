@@ -2,7 +2,10 @@ package sql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import actors.CorrectiveMantenanceActor;
 
@@ -33,6 +36,43 @@ public class Corrective {
 
 			e.printStackTrace();
 		}
+	}
+	
+	////
+	
+	public static ArrayList<CorrectiveMantenanceActor> getCorrectiveObjects() {
+		
+		String SQL = "SELECT * FROM correctiveMantenance ORDER BY ID DESC";
+		ArrayList<CorrectiveMantenanceActor> list = new ArrayList<CorrectiveMantenanceActor>();
+		
+		try {
+			Statement st = connection.createStatement();
+			ResultSet rs = st.executeQuery(SQL);
+			
+			while (rs.next()) {
+				CorrectiveMantenanceActor actor = new CorrectiveMantenanceActor();
+				actor.setC_cambio_aceite1(rs.getString("C-cambioAceite1"));
+				actor.setC_cambio_aceite2(rs.getString("C-cambioAceite2"));
+				actor.setC_cambio_correa1(rs.getString("C-cambioCorrea1"));
+				actor.setC_cambio_correa2(rs.getString("C-cambioCorrea2"));
+				actor.setB_cambio_sellos1(rs.getString("B-cambioSellos1"));
+				actor.setB_cambio_sellos2(rs.getString("B-cambioSellos2"));
+				actor.setB_cambio_rodamientos1(rs.getString("B-cambioRodamientos1"));
+				actor.setB_cambio_rodamientos2(rs.getString("B-cambioRodamientos2"));
+				actor.setB_cambio_impulsor1(rs.getString("B-cambioImpulsor1"));
+				actor.setB_cambio_impulsor2(rs.getString("B-cambioImpulsor2"));
+				actor.setT_cambio_bobina1(rs.getString("T-cambioBobina1"));
+				actor.setT_cambio_bobina2(rs.getString("T-cambioBobina2"));
+				
+				list.add(actor);
+			}
+		
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 		
 	}
+	
 }

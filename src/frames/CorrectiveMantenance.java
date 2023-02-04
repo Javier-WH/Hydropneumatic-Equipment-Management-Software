@@ -364,7 +364,7 @@ public class CorrectiveMantenance extends JDialog {
 				
 				if(areValidDates) {
 					Corrective.save(CM);
-					
+					CorrectiveMantenanceList.fillList();
 				}else {
 					JOptionPane.showMessageDialog(getContentPane(), "Debe suministrar fechas validas", "advertencia", JOptionPane.WARNING_MESSAGE);
 				}
