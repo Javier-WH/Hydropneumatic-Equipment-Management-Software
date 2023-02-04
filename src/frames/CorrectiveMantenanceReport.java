@@ -154,12 +154,14 @@ public class CorrectiveMantenanceReport extends JDialog implements Printable{
 		lblCambioDeAceite.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
 		
 		JFormattedTextField dateA1 = new JFormattedTextField();
+		dateA1.setForeground(new Color(0, 102, 255));
 		dateA1.setBackground(Color.WHITE);
 		dateA1.setEditable(false);
 		dateA1.setBorder(null);
 		panel.add(dateA1, "6, 8");
 		
 		JFormattedTextField dateB1 = new JFormattedTextField();
+		dateB1.setForeground(new Color(0, 102, 255));
 		dateB1.setBackground(Color.WHITE);
 		dateB1.setEditable(false);
 		dateB1.setBorder(null);
@@ -181,12 +183,14 @@ public class CorrectiveMantenanceReport extends JDialog implements Printable{
 		lblCambioDeCorrea.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
 		
 		JFormattedTextField dateA2 = new JFormattedTextField();
+		dateA2.setForeground(new Color(0, 102, 255));
 		dateA2.setBackground(Color.WHITE);
 		dateA2.setEditable(false);
 		dateA2.setBorder(null);
 		panel.add(dateA2, "6, 10");
 		
 		JFormattedTextField dateB2 = new JFormattedTextField();
+		dateB2.setForeground(new Color(0, 102, 255));
 		dateB2.setBackground(Color.WHITE);
 		dateB2.setEditable(false);
 		dateB2.setBorder(null);
@@ -208,12 +212,14 @@ public class CorrectiveMantenanceReport extends JDialog implements Printable{
 		lblCambioDeSellos.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
 		
 		JFormattedTextField dateA3 = new JFormattedTextField();
+		dateA3.setForeground(new Color(0, 102, 255));
 		dateA3.setBackground(Color.WHITE);
 		dateA3.setEditable(false);
 		dateA3.setBorder(null);
 		panel.add(dateA3, "6, 12");
 		
 		JFormattedTextField dateB3 = new JFormattedTextField();
+		dateB3.setForeground(new Color(0, 102, 255));
 		dateB3.setBackground(Color.WHITE);
 		dateB3.setEditable(false);
 		dateB3.setBorder(null);
@@ -235,12 +241,14 @@ public class CorrectiveMantenanceReport extends JDialog implements Printable{
 		lblCambioDeRodamientos.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
 		
 		JFormattedTextField dateA4 = new JFormattedTextField();
+		dateA4.setForeground(new Color(0, 102, 255));
 		dateA4.setBackground(Color.WHITE);
 		dateA4.setEditable(false);
 		dateA4.setBorder(null);
 		panel.add(dateA4, "6, 14");
 		
 		JFormattedTextField dateB4 = new JFormattedTextField();
+		dateB4.setForeground(new Color(0, 102, 255));
 		dateB4.setBackground(Color.WHITE);
 		dateB4.setEditable(false);
 		dateB4.setBorder(null);
@@ -262,12 +270,14 @@ public class CorrectiveMantenanceReport extends JDialog implements Printable{
 		lblCambioDeImpulsor.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
 		
 		JFormattedTextField dateA5 = new JFormattedTextField();
+		dateA5.setForeground(new Color(0, 102, 255));
 		dateA5.setBackground(Color.WHITE);
 		dateA5.setEditable(false);
 		dateA5.setBorder(null);
 		panel.add(dateA5, "6, 16");
 		
 		JFormattedTextField dateB5 = new JFormattedTextField();
+		dateB5.setForeground(new Color(0, 102, 255));
 		dateB5.setBackground(Color.WHITE);
 		dateB5.setEditable(false);
 		dateB5.setBorder(null);
@@ -289,12 +299,14 @@ public class CorrectiveMantenanceReport extends JDialog implements Printable{
 		lblCambioDeBobinas.setFont(new Font("Arial Narrow", Font.PLAIN, 12));
 		
 		JFormattedTextField dateA6 = new JFormattedTextField();
+		dateA6.setForeground(new Color(0, 102, 255));
 		dateA6.setBackground(Color.WHITE);
 		dateA6.setEditable(false);
 		dateA6.setBorder(null);
 		panel.add(dateA6, "6, 18");
 		
 		JFormattedTextField dateB6 = new JFormattedTextField();
+		dateB6.setForeground(new Color(0, 102, 255));
 		dateB6.setBackground(Color.WHITE);
 		dateB6.setEditable(false);
 		dateB6.setBorder(null);

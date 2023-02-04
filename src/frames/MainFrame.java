@@ -41,6 +41,7 @@ public class MainFrame extends JFrame {
 	private ConfigFrame configFrame = new ConfigFrame();
 	private CorrectiveMantenance correctiveFrame = new CorrectiveMantenance();
 	private CorrectiveMantenanceList correctiveList = new CorrectiveMantenanceList();
+	private Parameters parametersFrame = new Parameters();
 	private static JPanel panel = new JPanel();
 	private static int altertCounter = 0;
 	private static JLabel lblAlertMessage = new JLabel("Alertas Pendientes");
@@ -57,6 +58,7 @@ public class MainFrame extends JFrame {
 		configFrame.dispose();
 		correctiveFrame.dispose();
 		correctiveList.dispose();
+		parametersFrame.dispose();
 		
 	}
 
@@ -190,12 +192,27 @@ public class MainFrame extends JFrame {
 				
 			}
 		});
+		
+		JButton btnReport_2 = new JButton("Medición de parametros");
+		btnReport_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeAllFrames();
+				parametersFrame.setLocationRelativeTo(getContentPane());
+				parametersFrame.setVisible(true);
+			}
+		});
+		btnReport_2.setIcon(new ImageIcon(MainFrame.class.getResource("/img/reports.png")));
+		btnReport_2.setHorizontalAlignment(SwingConstants.LEFT);
+		btnReport_2.setForeground(Color.WHITE);
+		btnReport_2.setFont(new Font("Verdana", Font.BOLD, 16));
+		btnReport_2.setBackground(new Color(0, 102, 204));
+		panelMenu.add(btnReport_2, "cell 0 6,growx,aligny center");
 		btnConfig.setIcon(new ImageIcon(MainFrame.class.getResource("/img/options.png")));
 		btnConfig.setHorizontalAlignment(SwingConstants.LEFT);
 		btnConfig.setForeground(Color.WHITE);
 		btnConfig.setFont(new Font("Verdana", Font.BOLD, 16));
 		btnConfig.setBackground(new Color(0, 102, 204));
-		panelMenu.add(btnConfig, "cell 0 6,grow");
+		panelMenu.add(btnConfig, "cell 0 7,grow");
 		
 		JLabel lblNewLabel = new JLabel("");
 		panelMenu.add(lblNewLabel, "flowx,cell 0 8");
