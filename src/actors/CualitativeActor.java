@@ -10,6 +10,14 @@ public class CualitativeActor extends Mesure{
 	private String Bfugas = "";
 	private String Bvibraciones = "";
 	private String Cvibraciones = "";
+	private String documentDate = "";
+	
+	public String getDocumentDate() {
+		return documentDate;
+	}
+	public void setDocumentDate(String documentDate) {
+		this.documentDate = documentDate;
+	}
 	public String getBtactoTuveriaSuccion() {
 		return BtactoTuveriaSuccion;
 	}

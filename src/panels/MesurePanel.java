@@ -3,6 +3,7 @@ package panels;
 import javax.swing.JPanel;
 
 import actors.Mesure;
+import frames.Cualitative;
 import frames.Cuantitative;
 
 import java.awt.Image;
@@ -26,7 +27,14 @@ public class MesurePanel extends JPanel {
 					Cuantitative c = new Cuantitative(mesure.getId());
 					c.setLocationRelativeTo(panel);
 					c.setVisible(true);					
+				}else if(mesure.getMesureType().equals("2")) {
+					
+					Cualitative c =  new Cualitative(mesure.getId());
+					c.setLocationRelativeTo(panel);
+					c.setVisible(true);	
+					
 				}
+				
 			}
 		});
 		setLayout(null);

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import actors.CualitativeActor;
 import actors.CuantitativeActor;
 import actors.Mesure;
 
@@ -123,4 +124,106 @@ public class MesureList {
 		}	
 	
 	}
+
+	public static void saveCualitativeMesure(CualitativeActor data) {
+		
+		String SQL = "REPLACE  INTO mesuresList ( "
+				+ "type,"
+				+ "boss, "
+				+ "operator, "
+				+ "controlNumber, "
+				+ "observations, "
+				+ "date, "
+				+ "BtactoTuberiaSuccion,"
+				+ "TfuncionamientoAutomaticos, "
+				+ "TtemperaturaEquipos, "
+				+ "Bruidos, "
+				+ "Cruidos, "
+				+ "Bfugas, "
+				+ "Bvibraciones, "
+				+ "Cvibraciones, "
+				+ "dates ) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+		
+		try {
+			PreparedStatement st = connection.prepareStatement(SQL);
+			st.setString(1, data.getMesureType());
+			st.setString(2, data.getUser().getMantenanceBoss());
+			st.setString(3, data.getUser().getOperator());
+			st.setString(4, data.getUser().getControlNumber());
+			st.setString(5, data.getObservations());
+			st.setString(6, data.getDate());
+			st.setString(7, data.getBtactoTuveriaSuccion());
+			st.setString(8, data.getTfuncionamientoAutomaticos());
+			st.setString(9, data.getTtemperaturaEquipos());
+			st.setString(10, data.getBruidos());
+			st.setString(11, data.getCruidos());
+			st.setString(12, data.getBfugas());
+			st.setString(13, data.getBvibraciones());
+			st.setString(14, data.getCvibraciones());
+			st.setString(15, data.getDocumentDate());
+			st.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static CualitativeActor getCualitativeByid(String id){
+		
+		String SQL = "SELECT * FROM mesuresList WHERE id = ?";
+		
+		CualitativeActor data = new CualitativeActor();
+		
+		try {
+			PreparedStatement st = connection.prepareStatement(SQL);
+			st.setString(1, id);
+			ResultSet rs = st.executeQuery();
+			
+			if(rs.next()) {
+				data.setId(rs.getString("id"));
+				data.setMesureType(rs.getString("type"));
+				data.getUser().setMantenanceBoss(rs.getString("boss"));
+				data.getUser().setOperator(rs.getString("operator"));
+				data.getUser().setControlNumber(rs.getString("controlNumber"));
+				data.setObservations(rs.getString("observations"));
+				data.setDate(rs.getString("date"));
+				data.setDocumentDate(rs.getString("dates"));
+				data.setBtactoTuveriaSuccion(rs.getString("BtactoTuberiaSuccion"));
+				data.setTfuncionamientoAutomaticos(rs.getString("TfuncionamientoAutomaticos"));
+				data.setTtemperaturaEquipos(rs.getString("TtemperaturaEquipos"));
+				data.setBruidos(rs.getString("Bruidos"));
+				data.setCruidos(rs.getString("Cruidos"));
+				data.setBfugas(rs.getString("Bfugas"));
+				data.setBvibraciones(rs.getString("Bvibraciones"));
+				data.setCvibraciones(rs.getString("Cvibraciones"));
+
+			}
+			
+			return data;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}	
+	
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+

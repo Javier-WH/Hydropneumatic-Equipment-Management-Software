@@ -1,16 +1,13 @@
 package frames;
-import java.awt.BorderLayout;
+
 import java.awt.Container;
 import java.awt.Dimension;
-
 import javax.swing.JDialog;
 import java.awt.Toolkit;
 import javax.swing.JScrollPane;
-
 import actors.Mesure;
 import panels.MesurePanel;
 import sql.MesureList;
-
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -25,6 +22,7 @@ import javax.swing.BoxLayout;
 public class Parameters extends JDialog {
 	private static JPanel listPanel = new JPanel();
 	private static Cuantitative cuantitativePanel = new Cuantitative();
+	private static Cualitative cualitativePanel = new Cualitative();
 	private static int elementsCounter = 0;
 	private static Container panel = null;
 
@@ -66,6 +64,12 @@ public class Parameters extends JDialog {
 		getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Agregar Registro Cualitativo");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cualitativePanel.setLocationRelativeTo(getContentPane());
+				cualitativePanel.setVisible(true);
+			}
+		});
 		btnNewButton_1_1.setBounds(547, 40, 227, 23);
 		getContentPane().add(btnNewButton_1_1);
 
