@@ -201,7 +201,7 @@ public class MainFrame extends JFrame {
 				parametersFrame.setVisible(true);
 			}
 		});
-		btnReport_2.setIcon(new ImageIcon(MainFrame.class.getResource("/img/reports.png")));
+		btnReport_2.setIcon(new ImageIcon(MainFrame.class.getResource("/img/lista-del-portapapeles.png")));
 		btnReport_2.setHorizontalAlignment(SwingConstants.LEFT);
 		btnReport_2.setForeground(Color.WHITE);
 		btnReport_2.setFont(new Font("Verdana", Font.BOLD, 16));
@@ -252,7 +252,7 @@ public class MainFrame extends JFrame {
 		panelMessage.setLayout(new MigLayout("", "[119.00px][250.00][][][][][][201.00][311.00][381.00]", "[41.00px]"));
 		
 	
-		lblAlertMessage.setForeground(new Color(139, 0, 0));
+		lblAlertMessage.setForeground(new Color(0, 102, 255));
 		lblAlertMessage.setFont(new Font("Vrinda", Font.ITALIC, 16));
 		lblAlertMessage.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelMessage.add(lblAlertMessage, "cell 9 0,alignx right,aligny center");

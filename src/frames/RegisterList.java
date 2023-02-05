@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Container;
+import javax.swing.border.LineBorder;
 
 
 
@@ -51,6 +52,7 @@ private static Container panel = null;
 		scrollPane.setViewportView(ListPanel);
 		
 		ListPanel.setLayout(new BoxLayout(ListPanel, BoxLayout.PAGE_AXIS));
+		comboBox.setBorder(new LineBorder(new Color(0, 102, 255)));
 		comboBox.setBackground(Color.WHITE);
 		comboBox.setForeground(new Color(0, 102, 255));
 		

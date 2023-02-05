@@ -30,6 +30,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class ReportWeekly extends JFrame implements Printable {
@@ -67,7 +68,7 @@ public class ReportWeekly extends JFrame implements Printable {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 720, 686);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(153, 153, 153));
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -258,7 +259,9 @@ public class ReportWeekly extends JFrame implements Printable {
 		lblNewLabel_3_2.setBounds(402, 3, 134, 42);
 		panel_1.add(lblNewLabel_3_2);
 		
-		JButton btnNewButton = new JButton("Imprimir");
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(ReportWeekly.class.getResource("/img/imprimir.png")));
+		btnNewButton.setBackground(new Color(0, 102, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				  PrinterJob job = PrinterJob.getPrinterJob();
@@ -274,8 +277,15 @@ public class ReportWeekly extends JFrame implements Printable {
 		btnNewButton.setBounds(608, 39, 89, 55);
 		contentPane.add(btnNewButton);
 		
-		JButton btnCerrar = new JButton("Cerrar");
+		JButton btnCerrar = new JButton("");
+		btnCerrar.setBackground(new Color(0, 102, 255));
+		btnCerrar.setIcon(new ImageIcon(ReportWeekly.class.getResource("/img/puerta-cerrada.png")));
 		btnCerrar.setBounds(608, 575, 89, 55);
+		btnCerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		contentPane.add(btnCerrar);
 		
 		lblEquipaments.setText(user.getEquipament());
@@ -289,6 +299,12 @@ public class ReportWeekly extends JFrame implements Printable {
 		date1.setText(list.get(0));
 		date2.setText(list.get(1));
 		date3.setText(list.get(2));
+		
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setOpaque(true);
+		lblNewLabel_4.setBackground(new Color(0, 102, 255));
+		lblNewLabel_4.setBounds(600, 0, 1, 643);
+		contentPane.add(lblNewLabel_4);
 		
 	}
 }

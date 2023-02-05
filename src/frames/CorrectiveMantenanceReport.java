@@ -34,6 +34,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 
 
 
@@ -59,7 +60,7 @@ public class CorrectiveMantenanceReport extends JDialog implements Printable{
 	
 	
 	public CorrectiveMantenanceReport(CorrectiveMantenanceActor correctiveData ) {
-		getContentPane().setBackground(Color.LIGHT_GRAY);
+		getContentPane().setBackground(Color.WHITE);
 		setResizable(false);
 		setAlwaysOnTop(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(CorrectiveMantenanceReport.class.getResource("/img/icono.png")));
@@ -318,6 +319,9 @@ public class CorrectiveMantenanceReport extends JDialog implements Printable{
 		range6.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		JButton btnPrint = new JButton("Imprimir");
+		btnPrint.setIcon(new ImageIcon(CorrectiveMantenanceReport.class.getResource("/img/imprimir.png")));
+		btnPrint.setForeground(Color.WHITE);
+		btnPrint.setBackground(new Color(0, 102, 255));
 		btnPrint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				  PrinterJob job = PrinterJob.getPrinterJob();
@@ -330,16 +334,19 @@ public class CorrectiveMantenanceReport extends JDialog implements Printable{
 				    }
 			}
 		});
-		btnPrint.setBounds(487, 292, 89, 23);
+		btnPrint.setBounds(489, 292, 125, 41);
 		getContentPane().add(btnPrint);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setIcon(new ImageIcon(CorrectiveMantenanceReport.class.getResource("/img/puerta-cerrada.png")));
+		btnCancelar.setBackground(new Color(0, 102, 255));
+		btnCancelar.setForeground(Color.WHITE);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		btnCancelar.setBounds(59, 292, 89, 23);
+		btnCancelar.setBounds(59, 292, 125, 41);
 		getContentPane().add(btnCancelar);
 		
 

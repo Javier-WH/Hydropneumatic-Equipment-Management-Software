@@ -26,6 +26,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 
 
@@ -43,7 +44,7 @@ public class CorrectiveMantenance extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(CorrectiveMantenance.class.getResource("/img/icono.png")));
 		setTitle("Mantenimiento Correctivo");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setSize(952, 364);
+		setSize(952, 386);
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("10px", true), Sizes.constant("10px", true)), 0),
 				ColumnSpec.decode("max(100dlu;default)"),
@@ -264,11 +265,49 @@ public class CorrectiveMantenance extends JDialog {
 		InstallFormater(dateB5);
 		InstallFormater(dateB6);
 		
+		JButton btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnCerrar.setIcon(new ImageIcon(CorrectiveMantenance.class.getResource("/img/puerta-cerrada.png")));
+		btnCerrar.setForeground(Color.WHITE);
+		btnCerrar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnCerrar.setBackground(new Color(0, 102, 255));
+		getContentPane().add(btnCerrar, "2, 24, fill, fill");
+		
 		JButton btnNewButton = new JButton("Registrar");
+		btnNewButton.setIcon(new ImageIcon(CorrectiveMantenance.class.getResource("/img/add.png")));
 		btnNewButton.setBackground(new Color(0, 102, 255));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton.setForeground(Color.WHITE);
-		getContentPane().add(btnNewButton, "10, 24");
+		getContentPane().add(btnNewButton, "10, 24, fill, fill");
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CorrectiveMantenanceActor  CM = new CorrectiveMantenanceActor();
+				CM.setC_cambio_aceite1(dateA1.getText());
+				CM.setC_cambio_aceite2(dateB1.getText());
+				CM.setC_cambio_correa1(dateA2.getText());
+				CM.setC_cambio_correa2(dateB2.getText());
+				CM.setB_cambio_sellos1(dateA3.getText());
+				CM.setB_cambio_sellos2(dateB3.getText());
+				CM.setB_cambio_rodamientos1(dateA4.getText());
+				CM.setB_cambio_rodamientos2(dateB4.getText());
+				CM.setB_cambio_impulsor1(dateA5.getText());
+				CM.setB_cambio_impulsor2(dateB5.getText());
+				CM.setT_cambio_bobina1(dateA6.getText());
+				CM.setT_cambio_bobina2(dateB6.getText());
+				
+				if(areValidDates) {
+					Corrective.save(CM);
+					CorrectiveMantenanceList.fillList();
+				}else {
+					JOptionPane.showMessageDialog(getContentPane(), "Debe suministrar fechas validas", "advertencia", JOptionPane.WARNING_MESSAGE);
+				}
+			}
+		});
 		
 		dateA1.addKeyListener(new KeyAdapter() {
 			@Override
@@ -343,31 +382,6 @@ public class CorrectiveMantenance extends JDialog {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				range6.setText(calculateRange(dateA6.getText(), dateB6.getText()));
-			}
-		});
-		
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CorrectiveMantenanceActor  CM = new CorrectiveMantenanceActor();
-				CM.setC_cambio_aceite1(dateA1.getText());
-				CM.setC_cambio_aceite2(dateB1.getText());
-				CM.setC_cambio_correa1(dateA2.getText());
-				CM.setC_cambio_correa2(dateB2.getText());
-				CM.setB_cambio_sellos1(dateA3.getText());
-				CM.setB_cambio_sellos2(dateB3.getText());
-				CM.setB_cambio_rodamientos1(dateA4.getText());
-				CM.setB_cambio_rodamientos2(dateB4.getText());
-				CM.setB_cambio_impulsor1(dateA5.getText());
-				CM.setB_cambio_impulsor2(dateB5.getText());
-				CM.setT_cambio_bobina1(dateA6.getText());
-				CM.setT_cambio_bobina2(dateB6.getText());
-				
-				if(areValidDates) {
-					Corrective.save(CM);
-					CorrectiveMantenanceList.fillList();
-				}else {
-					JOptionPane.showMessageDialog(getContentPane(), "Debe suministrar fechas validas", "advertencia", JOptionPane.WARNING_MESSAGE);
-				}
 			}
 		});
 		

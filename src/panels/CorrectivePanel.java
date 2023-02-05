@@ -14,6 +14,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Cursor;
 
 public class CorrectivePanel extends JPanel {
 
@@ -21,6 +22,7 @@ public class CorrectivePanel extends JPanel {
 	 * Create the panel.
 	 */
 	public CorrectivePanel(CorrectiveMantenanceActor corrective, Container panel) {
+		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

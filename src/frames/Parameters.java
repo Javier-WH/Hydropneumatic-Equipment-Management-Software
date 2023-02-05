@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 
 
@@ -27,6 +29,7 @@ public class Parameters extends JDialog {
 	private static Container panel = null;
 
 	public Parameters() {
+		getContentPane().setBackground(Color.WHITE);
 		panel = getContentPane();
 		setResizable(false);
 		setAlwaysOnTop(true);
@@ -35,24 +38,32 @@ public class Parameters extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setSize(800, 744);
 		getContentPane().setLayout(null);
+		listPanel.setBackground(Color.WHITE);
 		
 
 		listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.PAGE_AXIS));
 		JScrollPane scrollPane = new JScrollPane(listPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(10, 106, 764, 558);
+		scrollPane.setBackground(Color.WHITE);
+		scrollPane.setBounds(10, 106, 764, 532);
 		getContentPane().add(scrollPane);
 		
 		
 		JButton btnNewButton = new JButton("Cerrar");
+		btnNewButton.setIcon(new ImageIcon(Parameters.class.getResource("/img/puerta-cerrada.png")));
+		btnNewButton.setForeground(Color.WHITE);
+		btnNewButton.setBackground(new Color(0, 102, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(685, 671, 89, 23);
+		btnNewButton.setBounds(663, 649, 111, 45);
 		getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Agregar Registro Cuantitativo");
+		btnNewButton_1.setIcon(new ImageIcon(Parameters.class.getResource("/img/lista-del-portapapeles.png")));
+		btnNewButton_1.setForeground(Color.WHITE);
+		btnNewButton_1.setBackground(new Color(0, 102, 255));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cuantitativePanel  = new Cuantitative();
@@ -60,17 +71,20 @@ public class Parameters extends JDialog {
 				cuantitativePanel.setVisible(true);
 			}
 		});
-		btnNewButton_1.setBounds(18, 40, 227, 23);
+		btnNewButton_1.setBounds(10, 25, 227, 47);
 		getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Agregar Registro Cualitativo");
+		btnNewButton_1_1.setIcon(new ImageIcon(Parameters.class.getResource("/img/lista-del-portapapeles.png")));
+		btnNewButton_1_1.setForeground(Color.WHITE);
+		btnNewButton_1_1.setBackground(new Color(0, 102, 255));
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cualitativePanel.setLocationRelativeTo(getContentPane());
 				cualitativePanel.setVisible(true);
 			}
 		});
-		btnNewButton_1_1.setBounds(547, 40, 227, 23);
+		btnNewButton_1_1.setBounds(547, 25, 227, 47);
 		getContentPane().add(btnNewButton_1_1);
 
 		fillListPanel();

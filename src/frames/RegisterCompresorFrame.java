@@ -213,12 +213,13 @@ public class RegisterCompresorFrame extends JDialog {
 			}
 			{
 				JButton btnRetorePicture = new JButton("Restaurar Imagen");
+				btnRetorePicture.setIcon(new ImageIcon(RegisterCompresorFrame.class.getResource("/img/tiempo-pasado.png")));
 				btnRetorePicture.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						putPlaceHolderPicture();
 					}
 				});
-				btnRetorePicture.setBounds(34, 310, 232, 23);
+				btnRetorePicture.setBounds(34, 302, 232, 37);
 				btnRetorePicture.setForeground(new Color(255, 255, 255));
 				btnRetorePicture.setBackground(SystemColor.textHighlight);
 				leftPanel.add(btnRetorePicture);

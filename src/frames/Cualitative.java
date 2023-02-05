@@ -32,6 +32,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.ImageIcon;
 
 
 
@@ -52,8 +53,8 @@ public class Cualitative extends JDialog implements Printable{
 	private static JFormattedTextField dateA;
 	private static JTextArea observetions;
 	private static JPanel panel;
-	private String idx = "0";
-	JButton btnImprimir;
+	private static String idx = "0";
+	private JButton btnImprimir;
 
 	
 	public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
@@ -69,6 +70,7 @@ public class Cualitative extends JDialog implements Printable{
 
 
 	public Cualitative() {
+		getContentPane().setBackground(Color.WHITE);
 		idx = "0";
 		setResizable(false);
 		setAlwaysOnTop(true);
@@ -106,21 +108,8 @@ public class Cualitative extends JDialog implements Printable{
 		chk8.setSelected(Boolean.parseBoolean(ca.getCvibraciones()));		
 		dateA.setText(ca.getDocumentDate());
 		
-		System.out.println(ca.getBtactoTuveriaSuccion());
 		
-		btnImprimir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-					PrinterJob job = PrinterJob.getPrinterJob();
-					job.setPrintable(new Cuantitative(id));
-					if (job.printDialog()) {
-						try {
-							job.print();
-						} catch (PrinterException e1) {
-						}
-					}					
-				}
-		});
+	
 		
 	}
 	
@@ -128,10 +117,10 @@ public class Cualitative extends JDialog implements Printable{
 	private void initComponents() {
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(10, 11, 764, 572);
+		panel.setBounds(4, 1, 764, 572);
 		getContentPane().add(panel);
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
+				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("1mm", true), Sizes.constant("1mm", true)), 0),
 				ColumnSpec.decode("default:grow"),
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),
@@ -142,7 +131,7 @@ public class Cualitative extends JDialog implements Printable{
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,},
 			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
+				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("1mm", false), Sizes.constant("1mm", false)), 0),
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
@@ -184,65 +173,65 @@ public class Cualitative extends JDialog implements Printable{
 		JLabel lblNewLabel = new JLabel("MEDICIÓN DE PARÁMETROS DE FUNCIONAMIENTO DEL SISTEMA HIDRONEUMÁTICO");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		panel.add(lblNewLabel, "2, 2, 7, 1");
+		panel.add(lblNewLabel, "2, 2, 7, 1, fill, default");
 		
 		JLabel lblNewLabel_2_4 = new JLabel("Equipos:");
-		panel.add(lblNewLabel_2_4, "2, 4");
+		panel.add(lblNewLabel_2_4, "2, 4, left, default");
 		lblNewLabel_2_4.setForeground(new Color(0, 102, 255));
 		
 		JLabel lblNewLabel_3 = new JLabel("Bomba hydrobloc, Compresor, Tablero de control, Pulmón Hidroneumático");
-		panel.add(lblNewLabel_3, "4, 4, 6, 1");
+		panel.add(lblNewLabel_3, "4, 4, 6, 1, fill, default");
 		lblNewLabel_3.setForeground(new Color(0, 102, 255));
 		
 		JLabel lblNewLabel_2_4_1 = new JLabel("Jefe de Mantenimiento:");
-		panel.add(lblNewLabel_2_4_1, "2, 6");
+		panel.add(lblNewLabel_2_4_1, "2, 6, left, default");
 		lblNewLabel_2_4_1.setForeground(new Color(0, 102, 255));
 		
 		textBoss = new JTextField();
-		panel.add(textBoss, "4, 6, 6, 1");
+		panel.add(textBoss, "4, 6, 6, 1, fill, default");
 		textBoss.setForeground(new Color(0, 102, 255));
 		textBoss.setColumns(10);
 		textBoss.setCaretColor(new Color(0, 102, 255));
 		textBoss.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 102, 255)));
 		
 		JLabel lblNewLabel_2_4_2 = new JLabel("Operador:");
-		panel.add(lblNewLabel_2_4_2, "2, 8");
+		panel.add(lblNewLabel_2_4_2, "2, 8, left, default");
 		lblNewLabel_2_4_2.setForeground(new Color(0, 102, 255));
 		
 		textOperator = new JTextField();
-		panel.add(textOperator, "4, 8, 6, 1");
+		panel.add(textOperator, "4, 8, 6, 1, fill, default");
 		textOperator.setForeground(new Color(0, 102, 255));
 		textOperator.setColumns(10);
 		textOperator.setCaretColor(new Color(0, 102, 255));
 		textOperator.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 102, 255)));
 		
 		JLabel lblNewLabel_2_4_3 = new JLabel("Número de Control:");
-		panel.add(lblNewLabel_2_4_3, "2, 10");
+		panel.add(lblNewLabel_2_4_3, "2, 10, left, default");
 		lblNewLabel_2_4_3.setForeground(new Color(0, 102, 255));
 		
 		textControlNumber = new JTextField();
-		panel.add(textControlNumber, "4, 10, 6, 1");
+		panel.add(textControlNumber, "4, 10, 6, 1, fill, default");
 		textControlNumber.setForeground(new Color(0, 102, 255));
 		textControlNumber.setColumns(10);
 		textControlNumber.setCaretColor(new Color(0, 102, 255));
 		textControlNumber.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 102, 255)));
 		
 		JLabel lblNewLabel_1 = new JLabel("EQUIPO");
-		panel.add(lblNewLabel_1, "2, 14, 2, 1");
+		panel.add(lblNewLabel_1, "2, 14, 2, 1, fill, fill");
 		lblNewLabel_1.setOpaque(true);
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_1.setBackground(new Color(0, 102, 255));
 		
 		JLabel lblNewLabel_1_1 = new JLabel("EVALUACIÓN");
-		panel.add(lblNewLabel_1_1, "4, 14, 2, 1");
+		panel.add(lblNewLabel_1_1, "4, 14, 2, 1, fill, fill");
 		lblNewLabel_1_1.setOpaque(true);
 		lblNewLabel_1_1.setForeground(Color.WHITE);
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_1_1.setBackground(new Color(0, 102, 255));
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("FECHA:");
-		panel.add(lblNewLabel_1_1_1, "6, 14, 2, 1, fill, default");
+		panel.add(lblNewLabel_1_1_1, "6, 14, 2, 1, fill, fill");
 		lblNewLabel_1_1_1.setOpaque(true);
 		lblNewLabel_1_1_1.setForeground(Color.WHITE);
 		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -256,7 +245,7 @@ public class Cualitative extends JDialog implements Printable{
 		panel.add(dateA, "8, 14, 2, 1, fill, fill");
 		
 		JLabel lblNewLabel_2_1 = new JLabel("BOMBA");
-		panel.add(lblNewLabel_2_1, "2, 16");
+		panel.add(lblNewLabel_2_1, "2, 16, left, default");
 		lblNewLabel_2_1.setForeground(new Color(0, 102, 204));
 		
 		JLabel lblNewLabel_2_3 = new JLabel("Validar a través del tacto la tubería de succión");
@@ -400,6 +389,9 @@ public class Cualitative extends JDialog implements Printable{
 		panel_1_2.add(lblNewLabel_5_2);
 		
 		JButton btnNewButton = new JButton("Registrar");
+		btnNewButton.setIcon(new ImageIcon(Cualitative.class.getResource("/img/add.png")));
+		btnNewButton.setForeground(Color.WHITE);
+		btnNewButton.setBackground(new Color(0, 102, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -423,22 +415,43 @@ public class Cualitative extends JDialog implements Printable{
 				Parameters.fillListPanel();
 			}
 		});
-		btnNewButton.setBounds(625, 608, 89, 23);
+		btnNewButton.setBounds(625, 598, 125, 41);
 		getContentPane().add(btnNewButton);
 		
 		JButton btnCerrar = new JButton("Cerrar");
+		btnCerrar.setForeground(Color.WHITE);
+		btnCerrar.setBackground(new Color(0, 102, 255));
+		btnCerrar.setIcon(new ImageIcon(Cualitative.class.getResource("/img/puerta-cerrada.png")));
 		btnCerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		btnCerrar.setBounds(31, 608, 89, 23);
+		btnCerrar.setBounds(31, 598, 125, 41);
 		getContentPane().add(btnCerrar);
 		
 		btnImprimir = new JButton("Imprimir");
-		btnImprimir.setBounds(319, 608, 89, 23);
+		btnImprimir.setBackground(new Color(0, 102, 255));
+		btnImprimir.setForeground(Color.WHITE);
+		btnImprimir.setIcon(new ImageIcon(Cualitative.class.getResource("/img/imprimir.png")));
+		btnImprimir.setBounds(319, 598, 125, 41);
 		getContentPane().add(btnImprimir);
 		/////////////
+		
+		btnImprimir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+					PrinterJob job = PrinterJob.getPrinterJob();
+					job.setPrintable(new Cualitative(idx));
+					if (job.printDialog()) {
+						try {
+							job.print();
+						} catch (PrinterException e1) {
+						}
+					}					
+				}
+		});
+
 
 		
 	}

@@ -30,6 +30,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class ReportDaily extends JFrame implements Printable {
@@ -86,7 +87,7 @@ public class ReportDaily extends JFrame implements Printable {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 720, 686);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(153, 153, 153));
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -524,7 +525,10 @@ public class ReportDaily extends JFrame implements Printable {
 		lblNewLabel_3_2.setBounds(402, 3, 134, 42);
 		panel_1.add(lblNewLabel_3_2);
 		
-		JButton btnNewButton = new JButton("Imprimir");
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(ReportDaily.class.getResource("/img/imprimir.png")));
+		btnNewButton.setForeground(Color.WHITE);
+		btnNewButton.setBackground(new Color(0, 102, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				  PrinterJob job = PrinterJob.getPrinterJob();
@@ -537,11 +541,18 @@ public class ReportDaily extends JFrame implements Printable {
 				    }
 			}
 		});
-		btnNewButton.setBounds(608, 39, 89, 55);
+		btnNewButton.setBounds(608, 39, 89, 75);
 		contentPane.add(btnNewButton);
 		
-		JButton btnCerrar = new JButton("Cerrar");
-		btnCerrar.setBounds(608, 575, 89, 55);
+		JButton btnCerrar = new JButton("");
+		btnCerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnCerrar.setIcon(new ImageIcon(ReportDaily.class.getResource("/img/puerta-cerrada.png")));
+		btnCerrar.setBackground(new Color(0, 102, 255));
+		btnCerrar.setBounds(608, 561, 89, 75);
 		contentPane.add(btnCerrar);
 		
 		lblEquipaments.setText(user.getEquipament());
@@ -574,8 +585,11 @@ public class ReportDaily extends JFrame implements Printable {
 		date20.setText(list.get(19));
 		date21.setText(list.get(20));
 		date22.setText(list.get(21));
+		
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setOpaque(true);
+		lblNewLabel_4.setBackground(new Color(0, 102, 255));
+		lblNewLabel_4.setBounds(600, -1, 1, 647);
+		contentPane.add(lblNewLabel_4);
 	}
-	
-
-	
 }

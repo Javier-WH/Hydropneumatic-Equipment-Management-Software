@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 
 
@@ -122,6 +123,7 @@ public class Cuantitative extends JDialog implements Printable {
 
 
 	public Cuantitative() {
+		getContentPane().setBackground(Color.WHITE);
 		idx= "0";
 		setResizable(false);
 		setAlwaysOnTop(true);
@@ -1007,21 +1009,30 @@ public class Cuantitative extends JDialog implements Printable {
 		lblNewLabel_5_2.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 102, 255)));
 		lblNewLabel_5_2.setBounds(10, 0, 168, 57);
 		panel_1_2.add(lblNewLabel_5_2);
+		btnNewButton.setIcon(new ImageIcon(Cuantitative.class.getResource("/img/add.png")));
+		btnNewButton.setForeground(Color.WHITE);
+		btnNewButton.setBackground(new Color(0, 102, 255));
 		
 
-		btnNewButton.setBounds(824, 529, 89, 23);
+		btnNewButton.setBounds(824, 529, 125, 41);
 		getContentPane().add(btnNewButton);
 		
 		JButton btnCerrar = new JButton("cerrar");
+		btnCerrar.setIcon(new ImageIcon(Cuantitative.class.getResource("/img/puerta-cerrada.png")));
+		btnCerrar.setBackground(new Color(0, 102, 255));
+		btnCerrar.setForeground(Color.WHITE);
 		btnCerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		btnCerrar.setBounds(56, 529, 89, 23);
+		btnCerrar.setBounds(56, 529, 125, 41);
 		getContentPane().add(btnCerrar);
 		
 		JButton btnImprimir = new JButton("Imprimir");
+		btnImprimir.setIcon(new ImageIcon(Cuantitative.class.getResource("/img/imprimir.png")));
+		btnImprimir.setForeground(Color.WHITE);
+		btnImprimir.setBackground(new Color(0, 102, 255));
 		btnImprimir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!idx.equals("0")) {
@@ -1037,7 +1048,7 @@ public class Cuantitative extends JDialog implements Printable {
 				
 			}
 		});
-		btnImprimir.setBounds(435, 529, 89, 23);
+		btnImprimir.setBounds(435, 529, 125, 41);
 		getContentPane().add(btnImprimir);
 		
 		btnNewButton.addActionListener(new ActionListener() {

@@ -18,51 +18,61 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Cursor;
 
 @SuppressWarnings("serial")
 public class RegisterPanel extends JPanel {
 
 
 	public RegisterPanel(String register, User user, Container panel) {
+		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	
 		setBackground(Color.WHITE);
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Registro:");
+		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBounds(173, 11, 58, 14);
 		add(lblNewLabel);
 		setMaximumSize(new Dimension(1500,120));
 		
 		JLabel lblRegistro = new JLabel("65564");
+		lblRegistro.setForeground(Color.WHITE);
 		lblRegistro.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblRegistro.setBounds(263, 11, 504, 14);
 		add(lblRegistro);
 		
 		JLabel lblFrecuencia1 = new JLabel("Frecuencia:");
+		lblFrecuencia1.setForeground(Color.WHITE);
 		lblFrecuencia1.setBounds(173, 36, 68, 14);
 		add(lblFrecuencia1);
 		
 		JLabel lblFrecuencia = new JLabel("Diario");
+		lblFrecuencia.setForeground(Color.WHITE);
 		lblFrecuencia.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblFrecuencia.setBounds(267, 36, 554, 14);
 		add(lblFrecuencia);
 		
 		JLabel lblOperador = new JLabel("Operador:");
+		lblOperador.setForeground(Color.WHITE);
 		lblOperador.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblOperador.setBounds(263, 61, 554, 14);
 		add(lblOperador);
 		
 		JLabel lblRegistro_1_1 = new JLabel("Operador:");
+		lblRegistro_1_1.setForeground(Color.WHITE);
 		lblRegistro_1_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblRegistro_1_1.setBounds(173, 61, 68, 14);
 		add(lblRegistro_1_1);
 		
 		JLabel lblRegistro_1_2 = new JLabel("Equipos:");
+		lblRegistro_1_2.setForeground(Color.WHITE);
 		lblRegistro_1_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblRegistro_1_2.setBounds(173, 86, 52, 14);
 		add(lblRegistro_1_2);
 		
 		JLabel lblEquipos = new JLabel("Equipos:");
+		lblEquipos.setForeground(Color.WHITE);
 		lblEquipos.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblEquipos.setBounds(263, 86, 554, 14);
 		add(lblEquipos);

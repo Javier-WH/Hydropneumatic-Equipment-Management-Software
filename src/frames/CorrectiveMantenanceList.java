@@ -44,7 +44,9 @@ public class CorrectiveMantenanceList extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		
 		JLabel lblNewLabel = new JLabel("REGISTROS DE MANTENIMIENTO CORRECTIVO");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel.setForeground(new Color(0, 102, 255));
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblNewLabel, BorderLayout.NORTH);
 		listPanel.setBackground(Color.WHITE);
